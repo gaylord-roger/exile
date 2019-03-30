@@ -73,9 +73,10 @@ Pour chaque site, allez dans la fonctionnalité "ASP" puis modifiez la ligne "De
 
 # DNS local
 Ouvrez le fichier "C:\Windows\System32\drivers\etc\hosts" en tant qu'administrateur et ajoutez ces 2 lignes à la fin :
- - 127.0.0.1	www.monexile.lan
- - 127.0.0.1	s03.monexile.lan
-
+```
+127.0.0.1	www.monexile.lan
+127.0.0.1	s03.monexile.lan
+```
 Pour accéder à votre serveur depuis une autre machine sur votre réseau local, ouvrez le fichier hosts de la machine et remplacez "127.0.0.1" par l'adresse IP de votre serveur web. Vous devrez également ouvrir le port 80 du parefeu sur le serveur web.
 
 A partir de ce moment, vous pouvez vous connecter à votre serveur sur http://www.monexile.lan
