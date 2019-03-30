@@ -1,11 +1,5 @@
 # Exile
 Dans ce guide, nous allons installer Exile sur une nouvelle installation Windows serveur. Vous aurez votre propre serveur pour tester et jouer en local.
-
-# Prérequis
- - Windows Serveur
- - IIS
- - Postgresql
- - Serveur SMTP
  
 # Serveur SMTP
 Vous avez besoin d'un relais pour envoyer les emails d'inscriptions, modification de mot de passe oublié, et les notifications du jeu.
@@ -15,13 +9,11 @@ Vous pouvez utiliser le relais SMTP de votre FAI, installer un hMailServer ou po
 Configurez votre serveur mail dans le fichier C:\Exile\web-nexus\lib\Email.asp
 
 # Postgresql
-Installez la dernière version de postgresql (11) depuis https://www.postgresql.org/
+Installez la dernière version de postgresql (v11) depuis https://www.postgresql.org/
 
-Laissez toutes les options d'installation cochée puis finissez l'installation.
+Laissez toutes les options d'installation cochées puis finissez l'installation.
 
 StackBuilder va se lancer, installez les pilotes pgsqlODBC (32 bits) : nous avons besoin des pilotes ODBC 32 bits pour nous connecter à postgresql depuis ASP et les scripts de mise à jour.
-
-Redémarrez le serveur
 
 Alternative : vous pouvez installer postgresql sur une installation linux, vous devrez cependant installer les pilotes pgsqlODBC sur le serveur web et modifier toutes les entrées référençant le serveur par le nom ou l'adresse IP de votre postgresql
 
