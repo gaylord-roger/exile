@@ -4,15 +4,13 @@ Dans ce guide, nous allons installer Exile sur une nouvelle installation Windows
 # Préparation
 Commencez par récupérer le repository sur le serveur web. Vous pouvez le faire de 2 manières :
 * Depuis le bouton vert "Clone or download" de Github, vous téléchargerez un zip de la dernière version
-* Depuis git avec la commande `git clone https://github.com/gaylord-roger/exile.git C:/Exile`
+* Avec **[git](https://git-scm.com/) avec la commande `git clone https://github.com/gaylord-roger/exile.git C:/Exile`
 
 Pour la suite de la procédure d'installation, on considèrera que vous avez tout récupéré dans C:\Exile
 
 ## Serveur SMTP (optionnel)
-Vous avez besoin d'un relais pour envoyer les emails d'inscriptions, modification de mot de passe oublié, et les notifications du jeu.
-
-Vous pouvez utiliser le relais SMTP de votre FAI, installer un hMailServer, postfix ou tout autre serveur mail.
-
+Vous avez besoin d'un relais pour envoyer les emails d'inscriptions, modification de mot de passe oublié, et les notifications du jeu.  
+Vous pouvez utiliser le relais SMTP de votre FAI, installer un hMailServer, postfix ou tout autre serveur mail.  
 Configurez votre serveur mail dans le fichier "C:\Exile\web-nexus\lib\Email.asp"
 
 ## Postgresql
