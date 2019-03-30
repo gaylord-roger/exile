@@ -23,10 +23,16 @@ Redémarrez le serveur
 Alternative : vous pouvez installer postgresql sur une installation linux, vous devrez cependant installer les pilotes pgsqlODBC sur le serveur web et modifier toutes les entrées référençant le serveur par le nom ou l'adresse IP de votre postgresql
 
 # Repository
-Récupérer le repository sur le serveur, pour la suite de la procédure d'installation, on considèrera que vous avez tout copié dans C:\Exile
+Vous pouvez récupérer le repository sur le serveur web de 2 manières :
+* Depuis le bouton vert "Clone or download" de Github, vous téléchargerez un zip de la dernière version
+* Depuis git avec la commande `git clone https://github.com/gaylord-roger/exile.git C:/Exile`
+
+Pour la suite de la procédure d'installation, on considèrera que vous avez tout récupéré dans C:\Exile
 
 # COM+
-Installez les objets COM+ 32 bits en exécutant `c:\Exile\libs\reg.bat`. Des boites de dialogue Windows apparaîtront, cliquez sur ok.
+Le site et les scripts nécessitent l'installation d'objets COM+ 32bits gérant les templates et les combats.
+
+Installez les objets COM+ en exécutant `c:\Exile\libs\reg.bat`. Des boites de dialogue Windows apparaîtront, cliquez sur ok.
 
 # Base de données
 Pour restaurer la base de données, exécutez la commande `"C:\Program Files\PostgreSQL\11\bin\psql" -h localhost -p 5432 -U postgres -f "C:\exile\db\exile.sql"`
