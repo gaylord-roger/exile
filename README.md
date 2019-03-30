@@ -2,8 +2,7 @@
 Dans ce guide, nous allons installer Exile sur une nouvelle installation Windows serveur. Vous aurez votre propre serveur pour tester et jouer en local.
 
 # Préparation
-## Repository
-Commencez par récupérer le repository sur le serveur web de 2 manières :
+Commencez par récupérer le repository sur le serveur web. Vous pouvez le faire de 2 manières :
 * Depuis le bouton vert "Clone or download" de Github, vous téléchargerez un zip de la dernière version
 * Depuis git avec la commande `git clone https://github.com/gaylord-roger/exile.git C:/Exile`
 
