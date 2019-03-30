@@ -1,0 +1,59 @@
+<script>
+var costs=new Array('{cost_lvl_0:n}','{cost_lvl_1:n}','{cost_lvl_2:n}','{cost_lvl_3:n}');
+
+function updateCost(obj)
+{	
+	var selected = obj.selectedIndex;
+	document.getElementById("cost").innerHTML = costs[selected];
+}
+
+</script><div id="intelligence">
+
+<div id="spynation">
+<table class="default" width="650">
+<tr class="title"><td>Espionner une nation</td></tr>
+<tr class="item">
+	<td><div class=indent>
+	Espionner une nation vous permettra de recueillir des informations concernant le nombre et la position des planètes lui appartenant.<br />
+	Différentes qualités de service vous sont proposées, car bien entendu, plus vous paierez cher, et plus les espions recrutés seront efficaces et discrets.</p>
+	</div></td>
+</tr>
+<tr>
+	<td>
+	<dl class=spy>
+		<dt>Novice</dt><dd>Cet espion a 10% de chance de se faire repérer par la nation que vous espionnez,<br/>aura 100 - (nombre de planètes déjà espionnées)*10 % de chance de trouver une planète et s'arrêtera à 5 planètes.</dd>
+		<dt>Initié</dt><dd>Cet espion a 4% de chance de se faire repérer par la nation que vous espionnez,<br/>aura 100 - (nombre de planètes déjà espionnées)*5 % de chance de trouver une planète et s'arrêtera à 15 planètes.</dd>
+		<dt>Agent</dt><dd>Cet espion a 1% de chance de se faire repérer par la nation que vous espionnez,<br/> espionnera avec succès la plupart des planètes et s'arrêtera à 20 planètes.</dd>
+		<dt>Taupe</dt><dd>Cet espion s'infiltrera au sein des hautes instances de la nation pour en connaître tous les secrets (recherches en cours, nombre exact et positions des planètes...).<br/>
+		Cette mission lui prendra plus de temps et le risque de se faire repérer est assez élevé.</dd>
+	</dl>
+	</td>
+</tr>
+<tr>
+	<td align=center>
+	<form method="post" action="?a=spy">
+	Espionner <input type="text" name="nation_name" value="" size="" maxlength="" size="14" maxlength="12"> avec <select name="level" onchange="updateCost(this);">
+		<option value="0">Novice</option>
+		<option value="1">Initié</option>
+		<option value="2">Agent</option>
+		<option value="3">Taupe</option>
+	</select> (<img src="{PATH_IMAGES}/interface/credits.gif" class="res" title="Crédits" width=16 height=16><span id="cost">{cost_lvl_0:n}</span>)
+	</td>
+</tr>
+<tr>
+	<td align=center>
+	<input type="submit" value="Espionner la nation">
+	</td>
+</tr>
+</form>
+[[message]]
+<tr><td class="error">
+[[unexpected_error]]Erreur inattendue.[/unexpected_error]]
+[[not_enough_credits]]Vous n'avez pas assez de crédits.[/not_enough_credits]]
+[[player_not_found]]Cette nation n'existe pas.[/player_not_found]]
+[[own_planet]]Vous n'avez pas besoin de vous espionner.[/own_planet]]
+[[spying]]L'espionnage a déjà commencé, vous recevrez un rapport très prochainement.[/spying]]
+</td></tr>
+[/message]]
+</table>
+</div>

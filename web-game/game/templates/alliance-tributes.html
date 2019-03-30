@@ -1,0 +1,90 @@
+<table width=750 cellpadding=0 cellspacing=0>
+<tr>
+<td align=center>
+	[[nav]]
+	<div>
+	<ul class="htabs">
+		[[cat1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Tributs perçus</a></li>[/cat1]]
+		[[cat2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Tributs envoyés</a></li>[/cat2]]
+		[[cat3]]<li[[selected]] class="active"[/selected]]><a href="?cat=3">Nouveau tribut</a></li>[/cat3]]
+	</ul>
+	</div>
+	[/nav]]
+	<div>
+
+[[tributes_sent]]
+<table class="default" width="100%">
+<tr class="title"><td colspan="4">Nos tributs</td></tr>
+<tr class="header">
+<td><a href="?cat={cat}&col=1[[r1]]&r=1[/r1]]">Alliance</a></td>
+<td><a href="?cat={cat}&col=2[[r2]]&r=1[/r2]]">Créé le</a></td>
+<td><a href="?cat={cat}&col=3[[r3]]&r=1[/r3]]">Somme</a></td>
+[[cancel]]<td>Annuler</td>[/cancel]]
+</tr>
+[[item]]
+<tr><td>{place}. <a href="alliance.asp?tag={tag}">[{tag}] {name}</a></td>
+<td>{created:dd mmm yyyy hh:mm:ss}</td>
+<td align="right"><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n}</td>
+[[cancel]]<td><a href="?cat={cat}&a=cancel&tag={tag}">Annuler</a></td>[/cancel]]
+</tr>
+[/item]]
+[[none]]
+<tr><td colspan=4 align=center>Aucun</td></tr>
+[/none]]
+[[message]]<tr><td colspan=5 class="error">
+[[norights]]Vous n'êtes pas en droit de faire une telle demande[/norights]]
+[[unknown]]Aucune alliance avec un tel tag n'a été trouvé[/unknown]]
+</td></tr>
+[/message]]
+</table>
+[/tributes_sent]]
+
+[[tributes_received]]
+<table class="default" width="100%">
+<tr class="title"><td colspan="4">Nos tributs perçus</td></tr>
+<tr class="header">
+<td><a href="?cat={cat}&col=1[[r1]]&r=1[/r1]]">Alliance</a></td>
+<td><a href="?cat={cat}&col=2[[r2]]&r=1[/r2]]">Créé le</a></td>
+<td><a href="?cat={cat}&col=3[[r3]]&r=1[/r3]]">Somme</a></td>
+<td>Prochain versement</td>
+</tr>
+[[item]]
+<tr><td>{place}. <a href="alliance.asp?tag={tag}">[{tag}] {name}</a></td>
+<td>{created:dd mmm yyyy hh:mm:ss}</td>
+<td align="right"><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n}</td>
+<td>{next_transfer:dd mmm yyyy hh:mm:ss}</td>
+</tr>
+[/item]]
+[[none]]
+<tr><td colspan=4 align=center>Aucun</td></tr>
+[/none]]
+</table>
+[/tributes_received]]
+
+[[new]]
+<form action="?cat={cat}&a=new" method="post">
+<table class="default" width="100%">
+<tr class="title"><td colspan=2>Créer un virement automatique</td></tr>
+<tr><td colspan=2>Veuillez indiquer le tag de l'alliance à laquelle envoyer les crédits chaque jour.</td></tr>
+<tr><td>Alliance (tag)</td><td><input type="text" name="tag" value="{tag:html}" maxlength=4></td></tr>
+<tr><td>Crédits</td><td><input type="text" name="credits" value="{credits:html}" maxlength=10> crédits</td></tr>
+<tr><td colspan=2 align=center><input type="submit" name="submit" value="Envoyer"></td></tr>
+[[message]]<tr><td colspan=2 class="error">
+[[ok]]Tribut automatique créé[/ok]]
+[[norights]]Vous n'êtes pas en droit de faire une telle demande[/norights]]
+[[unknown]]Aucune alliance avec un tel tag n'a été trouvée[/unknown]]
+[[already_exists]]Nous avons déjà un versement automatique avec cette alliance, annuler celui existant et recommencez.[/already_exists]]
+</td></tr>
+[/message]]
+</table>
+</form>
+
+</td>
+</table>
+[/new]]
+
+</div>
+
+</td>
+</tr>
+</table>

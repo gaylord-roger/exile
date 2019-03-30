@@ -1,0 +1,89 @@
+<div id="market">
+[[sell]]
+<script>
+	var ore_q = 0;
+	var hydrocarbon_q = 0;
+	var max_ore = Math.floor({ore_max}/1000);
+	var max_hydrocarbon = Math.floor({hydrocarbon_max}/1000);
+
+	function updateprices()
+	{
+		var q = getval("ore");
+
+		if(q > max_ore) { q=max_ore; setval("ore", max_ore); }
+		if(q != ore_q)
+		{
+			var p = {ore_price} + Math.floor(q / 10);
+			if(p > 2*{ore_price}) p = 2*{ore_price};
+
+			var obj = document.getElementById("ore_price");
+			if(obj != null) obj.innerHTML = p;
+			document.getElementById("ore_totalprice").innerHTML = q*p;
+			ore_q = q;
+		}
+
+
+		var q = getval("hydrocarbon");
+
+		if(q > max_hydrocarbon) { q=max_hydrocarbon; setval("hydrocarbon", max_hydrocarbon); }
+		if(q != hydrocarbon_q)
+		{
+			var p = {hydrocarbon_price} + Math.floor(q / 10);
+			if(p > 2*{hydrocarbon_price}) p = 2*{hydrocarbon_price};
+
+			var obj = document.getElementById("hydrocarbon_price");
+			if(obj != null) obj.innerHTML = p;
+			document.getElementById("hydrocarbon_totalprice").innerHTML = q*p;
+			hydrocarbon_q = q;
+		}
+
+		window.setTimeout("updateprices()", 100);
+	}
+</script>
+
+<form method="post" action="market.asp">
+
+<table class="default">
+<tr class="title"><td colspan=4>Vente de ressources</td></tr>
+<tr class="header"><td>Ressource</td><td>Prix/1000</td><td>Quantité (par 1000)</td><td width=100>Total</td></tr>
+
+<input type="hidden" name="action" value="sell">
+<tr>
+	<td><img src="{PATH_IMAGES}/interface/ore.gif" class="icon" title="Minerai" width=16 height=16> Minerai</td>
+	<td><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="ore_price">{ore_price}</span></td>
+	<td><input type="text" id=ore name="ore" value="{ore}" size=6 maxlength=7> <a href="javascript:setval('ore', Math.floor({ore_max}/1000))">max</a></td>
+	<td align=right><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="ore_totalprice">0</span></td>
+</tr>
+<tr>
+	<td><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class="icon" title="Hydrocarbure" width=16 height=16> Hydrocarbure</td>
+	<td><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="hydrocarbon_price">{hydrocarbon_price}</span></td>
+	<td><input type="text" id=hydrocarbon name="hydrocarbon" value="{hydrocarbon}" size=6 maxlength=7> <a href="javascript:setval('hydrocarbon', Math.floor({hydrocarbon_max}/1000))">max</a></td>
+	<td align=right><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="hydrocarbon_totalprice">0</span></td>
+</tr>
+<tr>
+	<td colspan=4 align="center"><input type="submit" value="Mise en vente"></td>
+</tr>
+</table>
+</form>
+<script>updateprices();</script>
+[/sell]]
+[[selling]]
+<table class="default">
+<tr class="title"><td colspan=4>Vente de ressources (le marchand est en route)</td></tr>
+<tr class="header"><td>Ressource</td><td>Prix/1000</td><td>Quantité (par 1000)</td><td width=100>Total</td></tr>
+
+<tr>
+	<td><img src="{PATH_IMAGES}/interface/ore.gif" class="icon" title="Minerai" width=16 height=16> Minerai</td>
+	<td><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="ore_price">{ore_price}</span></td>
+	<td>{ore}</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="ore_totalprice">{ore_total}</span></td>
+</tr>
+<tr>
+	<td><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class="icon" title="Hydrocarbure" width=16 height=16> Hydrocarbure</td>
+	<td><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="hydrocarbon_price">{hydrocarbon_price}</span></td>
+	<td>{hydrocarbon}</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <span id="hydrocarbon_totalprice">{hydrocarbon_total}</span></td>
+</tr>
+</table>
+[/selling]]
+</div>

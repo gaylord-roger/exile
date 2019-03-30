@@ -1,0 +1,28 @@
+<script language="JScript" runat="server">
+
+function Application_OnStart() {
+	Application("users") = 0;
+	Application("guests") = 0;
+	Application("cs_nexus") = "DSN=exile_nexus";
+}
+
+function Session_OnStart() {
+	Session.LCID = 1036;
+
+	Application.lock();
+	Session("user") = {id:0, isLogged:false, privileges:{}};
+	Application("guests")++;
+	Application.unlock();
+}
+
+function Session_OnEnd() {
+	Application.lock();
+	Application("guests")--;
+	if(Session("user").isLogged) {
+		Application("users")--;
+		Application('connect-' + Session('user').authID) = null;
+	}
+	Application.unlock();
+}
+
+</script>

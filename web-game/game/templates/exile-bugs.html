@@ -1,0 +1,49 @@
+<style>
+#bugs
+{
+	text-align:left;
+}
+
+#bugs div.title
+{
+	background: url('/images/interface/grad50.gif') repeat-x;
+	background-color: #3c3c3c; 
+	border: #222 1px solid;
+	margin: 2px 2px;
+	padding:5px 10px;
+	font-weight: bold;
+}
+
+#bugs div.description
+{
+    font-size: 10px;
+	background: url('/images/interface/grad100.gif') repeat-x;
+	background-color: #3c3c3c;
+	border: #222 1px solid;
+	margin: 2px 2px;
+	padding:5px 10px;
+}
+
+</style>
+
+<div id="bugs">
+<div class="title">Rapporter un bug ou une idée/suggestion</div>
+<div class="description">
+<form method="post" action="?">
+<p align=center>
+<table>
+<tr><td>Type</td><td align=left><select name="type"><option value="bug">Bug</option><option value="idea">Idée, suggestion</option></select></td></tr>
+<tr><td colspan=2>Description</td></tr>
+<tr><td colspan=2 align=center><textarea name="description" cols=50 rows=10></textarea></td></tr>
+</table>
+</p>
+</form>
+</div>
+
+[[entry]]
+<div class="title">[[bug]]BUG[/bug]][[idea]]IDEE[/idea]]: {title} par {author}</div>
+<div class="description">
+{description}
+</div>
+[/entry]]
+</div>

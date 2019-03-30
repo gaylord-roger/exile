@@ -1,0 +1,248 @@
+<script>
+var leader = 0;
+var treasurer = 1;
+var ambassador = 2;
+var recruiter = 3;
+var officer = 4;
+var member = 10;
+var novice = 100;
+
+var menulinks=new Array();
+var activeSection = '';
+var selectedmenu='';
+var sectionmenu='';
+var lastmenulvl=1;
+var lastmenuname='';
+var lastmenuhidden='';
+
+function setTitle(title){
+	if(title.indexOf("<") > -1)
+		document.title = title.substring(0,title.indexOf("<"));
+	else
+		document.title = title;
+}
+
+function putMenu(url,name,label,lvl,x,popup,extended)
+{
+	if(name==activeSection) setTitle('Exile - ' + label);
+
+	[[comment]]<!-- add sections terminators -->[/comment]]
+	while(lastmenulvl > lvl) {
+		document.write('<div id="menu_'+lastmenuname+'_'+lastmenulvl+'" class="lvl'+lastmenulvl+'last'+lastmenuhidden+'"></div>');
+		menulinks.push(new Array(lastmenuname+'_'+lastmenulvl,lastmenulvl,true));
+		lastmenulvl--;
+	}
+
+	lastmenulvl = lvl;
+	lastmenuname = name;
+
+	if(lvl==0) return;
+
+	var selected = (name == selectedmenu)?" selected":"";
+	var hidden = (extended || (lvl < 3) || (sectionmenu != "" && name.indexOf(sectionmenu)==0))?"":" hidden";
+	lastmenuhidden = hidden;
+
+	x = false;
+
+	if(!x)
+	{
+		var target=popup?" target=_blank":"";
+
+		if(lvl==1)
+			document.write('<a href="'+url+'" class="menu lvl1"><img src="{PATH_IMAGES}/menu/expand.gif" class="menuExpand">'+label+'</a>');
+		else
+		{
+			document.write('<a href="'+url+'"'+target+' id="menu_'+name+'" class="menu lvl' + lvl + selected + hidden + '"><span class=dot>&middot;</span>'+label+'</a>');
+			menulinks.push(new Array(name,lvl,false));
+		}
+	}
+	else
+	{
+		url = "return display('" + url + (url.indexOf('?') > -1?"&":"?") + "xml=1');";
+
+		if(lvl==1)
+			document.write('<a href="#" onclick="'+url+'" class="menu lvl1"><img src="{PATH_IMAGES}/menu/expand.gif" class="menuExpand">'+label+'</a>');
+		else
+		{
+			document.write('<a href="#" onclick="'+url+'" id="menu_'+name+'" class="menu lvl' + lvl + selected + hidden + '"><span class=dot>&middot;</span>'+label+'</a>');
+			menulinks.push(new Array(name,lvl,false));
+		}
+	}
+}
+
+// update selected menu link
+function setSelectedMenu(name)
+{
+	selectedmenu = name;
+
+	if(name.indexOf("_") == -1)
+	{
+		sectionmenu = "";
+		activeSection = name;
+	}
+	else
+	{
+		sectionmenu = name.split("_")[0] + "_";
+		activeSection = name.split("_")[0];
+	}
+
+	var link,linkname,selected,hidden;
+
+	for(var i=0; i<menulinks.length;i++)
+	{
+		linkname = menulinks[i][0];
+		link = document.getElementById('menu_'+linkname);
+		selected = (selectedmenu == linkname)?" selected":"";
+		hidden = (menulinks[i][1] < 3 || (sectionmenu != "" && linkname.indexOf(sectionmenu)==0))?"":" hidden";
+
+		if(!menulinks[i][2])
+			link.className = "menu lvl" + menulinks[i][1] + selected + hidden;
+		else
+			link.className = "lvl" + menulinks[i][1] + 'last' + hidden;
+	}
+}
+
+function setMailsCount(nb){ $('mailscount').innerHTML = (nb>0?'('+nb+')':''); }
+function setReportsCount(nb){ $('reportscount').innerHTML = (nb>0?'('+nb+')':''); }
+
+setSelectedMenu({selectedmenu:quote});
+</script>
+
+<script>
+[[comment]]<!-- empire -->[/comment]]
+
+putMenu("/game/overview.asp","empire","[[orientation1]][/orientation1]][[orientation2]][/orientation2]][[orientation3]][/orientation3]]Empire",1);
+putMenu("/game/overview.asp","overview","Vue d'ensemble",2);
+putMenu("/game/upkeep.asp","upkeep","Coût d'entretien",2);
+putMenu("/game/commanders.asp","commanders","Commandants",2);
+putMenu("/game/planets.asp","planets","Planètes",2);
+putMenu("/game/market-sell.asp","market","Marchands",2);
+
+putMenu("/game/market-buy.asp","merchants_buy","Achat",3);
+putMenu("/game/market-sell.asp","merchants_sell","Vente",3);
+
+putMenu("/game/fleets.asp","fleets","Flottes",2);
+
+putMenu("/game/fleets.asp","fleets_fleets","Flottes",3);
+putMenu("/game/fleets-orbiting.asp","fleets_orbiting","Amis/Ennemis en orbite",3);
+putMenu("/game/fleets-standby.asp","fleets_standby","Vaisseaux en attente",3);
+
+putMenu("/game/research.asp","research","Recherche",2);
+[[tmp]]
+putMenu("/game/research-overview.asp","research_scientists","Vue d'ensemble",3);
+putMenu("/game/research.asp","research_researches","Recherches",3);
+[/tmp]]
+
+putMenu("/game/alliance.asp","alliance","Alliance",2);
+
+putMenu("/game/alliance.asp","alliance_overview","Vue d'ensemble",3);
+if({rank} == leader)
+	putMenu("/game/alliance-manage.asp","alliance_manage","Gestion",3);
+[[tmp]]
+putMenu("/game/alliance-chat.asp","alliance_chat","Salon",3);
+[/tmp]]
+putMenu("/game/alliance-members.asp","alliance_members","Membres",3);
+putMenu("/game/alliance-naps.asp","alliance_naps","PNA",3);
+putMenu("/game/alliance-wallet.asp","alliance_wallet","Portefeuille",3);
+if({rank} <= officer)
+	putMenu("/game/alliance-reports.asp","alliance_reports","Rapports",3);
+putMenu("/game/alliance-invitations.asp","alliance_invitations","Invitations",3);
+
+putMenu("/game/alliance-create.asp","noalliance_create","Création",3);
+putMenu("/game/alliance-invitations.asp","noalliance_invitations","Invitations",3);
+
+
+[[comment]]<!-- galaxy -->[/comment]]
+
+putMenu("/game/map.asp","map","Galaxie",1);
+putMenu("/game/map.asp?g={g}&s={s}","map","Carte spatiale",2);
+
+putMenu("/game/ranking-alliances.asp","ranking","Alliances",2);
+[[old]]
+putMenu("/game/ranking-players.asp","ranking","Classement",2);
+
+putMenu("/game/ranking-alliances.asp","ranking_alliances","par alliance",3);
+putMenu("/game/ranking-players.asp","ranking_players","par nation",3);
+putMenu("/game/ranking-galaxies.asp","ranking_galaxies","par galaxie",3);
+putMenu("/game/ranking-search.asp","ranking_search","rechercher",3);
+[/old]]
+
+[[comment]]<!-- planet -->[/comment]]
+
+putMenu("/game/planet.asp?planet={planetid}","planet","Planète ({g}.{s}.{p})",1);
+putMenu("/game/planet.asp?planet={planetid}","planet","Vue d'ensemble",2);
+putMenu("/game/production.asp?planet={planetid}","production","Production",2);
+putMenu("/game/buildings.asp?planet={planetid}","buildings","Infrastructures",2);
+putMenu("/game/shipyard.asp?planet={planetid}","shipyard","Chantier spatial",2);
+putMenu("/game/shipyard.asp?planet={planetid}&f=0","shipyard_all","Tous",3);
+putMenu("/game/shipyard.asp?planet={planetid}&f=1","shipyard_military","Militaire",3);
+putMenu("/game/shipyard.asp?planet={planetid}&f=2","shipyard_unarmed","Utilitaire",3);
+putMenu("/game/shipyard.asp?planet={planetid}&f=3","shipyard_upgrade","Upgrade",3);
+putMenu("/game/shipyard.asp?planet={planetid}&recycle=1","shipyard_recycle","Recyclage",3);
+putMenu("/game/training.asp?planet={planetid}","training","Entraînement",2);
+putMenu("/game/orbit.asp?planet={planetid}","orbit","Orbite",2);
+putMenu("/game/market-sell.asp?planet={planetid}","market","Marché",2);
+putMenu("/game/market-buy.asp?planet={planetid}","market_buy","Achat",3);
+putMenu("/game/market-sell.asp?planet={planetid}","market_sell","Vente",3);
+
+
+[[comment]]<!-- communication -->[/comment]]
+putMenu("/game/mails.asp","mails","Communication",1);
+putMenu("/game/nation.asp","nation","Infos nations",2);
+putMenu("/game/mails.asp","mails","Messagerie <span id=mailscount></span>",2);
+
+putMenu("/game/mails.asp","mails_inbox","Reçu",3);
+putMenu("/game/mails.asp?a=sent","mails_sent","Envoyé",3);
+putMenu("/game/mails.asp?a=new","mails_compose","Composer",3);
+putMenu("/game/mails.asp?a=ignorelist","mails_ignorelist","Nations ignorées",3);
+
+putMenu("/game/reports.asp","reports","Rapports <span id=reportscount></span>",2);
+putMenu("/game/chat.asp","chat","Salon",2);
+putMenu("/game/notes.asp","notes","Notes",2);
+
+[[comment]]<!-- mercenary services -->[/comment]]
+
+putMenu("/game/mercenary-intelligence.asp","intelligence","Mercenaires",1);
+putMenu("/game/mercenary-intelligence.asp","intelligence","Espionnage",2);
+
+
+[[dev]]
+<!-- dev -->
+putMenu("/game/exile-version.asp","admin","Admin",1);
+putMenu("/game/dev-log-errors.asp","log","Log",2);
+putMenu("/game/dev-log-errors.asp","log_errors","Erreurs ({new_error:n})",3,0,0,1);
+putMenu("/game/dev-log-notices.asp","log_notices","Notices ({new_notices:n})",3,0,0,1);
+putMenu("/game/dev-multi.asp","log_multi","Multi-comptes",3,0,0,1);
+
+putMenu("/game/dev-options.asp","player","Joueur",2);
+putMenu("/game/dev-options.asp","player_penalty","Options",3,0,0,1);
+putMenu("/game/dev-fleets.asp","player_fleets","Créer des flottes",3,0,0,1);
+putMenu("/game/dev-connections.asp","player_connections","Connexions",3,0,0,1);
+putMenu("/game/dev-multi-users.asp","player_multi","Multi-comptes",3,0,0,1);
+putMenu("/game/dev-expenses.asp","player_expenses","Dépenses",3,0,0,1);
+
+putMenu("/game/dev-playas.asp","playas","Jouer en tant que...",2);
+putMenu("/game/dev-stats.asp","stats","Statistiques",2);
+[/dev]]
+
+[[comment]]<!-- help -->[/comment]]
+
+putMenu("/game/help.asp","help","Aide",1);
+putMenu("/game/help.asp","help","Aide",2);
+putMenu("https://forum.exil.pw/","forum","Forum",2,0,1);
+
+[[comment]]<!-- account -->[/comment]]
+
+putMenu("/game/options.asp","options","Compte",1);
+putMenu("/game/options.asp","options","Options",2);
+putMenu("/logout.asp?sid={sessionid}","logout","Déconnexion",2);
+
+putMenu("","","",0);
+
+[[new_mail]]
+setMailsCount({new_mail});
+[/new_mail]]
+[[new_report]]
+setReportsCount({new_report});
+[/new_report]]
+</script>

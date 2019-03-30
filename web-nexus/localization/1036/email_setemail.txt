@@ -1,0 +1,10 @@
+Changement d'email pour votre compte exil.pw
+Bonjour %username%, vous avez récemment demandé un changement d'email vers celui-ci %email%.
+
+Afin de confirmer que vous avez bien reçu ce message, veuillez visiter la page suivante :
+http://www.exil.pw/account-options.asp?id=%userid%&email=%email%&key=%key%
+
+Si vous ne possédez pas de compte Exile, veuillez ignorer ce message.
+
+L'équipe d'Exile
+info@exil.pw

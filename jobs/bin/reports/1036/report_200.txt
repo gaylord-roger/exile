@@ -1,0 +1,2 @@
+Rapport de bataille
+Une bataille a eu lieu près de la planète %planetname% (%g%:%s%:%p%).

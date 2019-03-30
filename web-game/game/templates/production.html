@@ -1,0 +1,185 @@
+<script type="text/javascript" src='/scripts/third-party/tooltip.js?v=1'></script>
+<script>
+tipname = "hint";
+tipwidth = 450;
+tiptext = $("hinttext");
+</script>
+
+<table width="600">
+<tr>
+<td align="center">
+
+	[[nav]]
+	<div>
+	<ul class="htabs">
+		[[cat1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Vue d'ensemble</a></li>[/cat1]]
+		[[cat2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Fonctionnement</a></li>[/cat2]]
+		[[cat3]]<li[[selected]] class="active"[/selected]]><a href="?cat=3">Transfert d'énergie</a></li>[/cat3]]
+	</ul>
+	</div>
+	[/nav]]
+
+	[[overview]]
+	<div id="productionoverview">
+	<table width="100%" class=default>
+	<tr class=title><td colspan=3>Abondance</td></tr>
+	<tr class=header><td>Elément</td><td>Minerai</td><td>Hydrocarbure</td></tr>
+	<tr><td width='50%'>Planète</td><td width='25%' align=right>{a_ore}%</td><td width='25%' align=right>{a_hydrocarbon}%</td></tr>
+	<tr class="clear"><td colspan=3>&nbsp;</td></tr>
+	</table>
+
+	<table width="100%" class=default>
+
+	<tr class=title><td colspan=4>Production</td></tr>
+	<tr><td width='50%'>Effectifs</td><td width='50%' colspan=3 nowrap>{workers:n} / {workers_required:n} requis, {production}%</td></tr>
+	<tr><td>Condition des installations</td><td colspan=3 nowrap>[[condition_excellent]]Excellente[/condition_excellent]][[condition_good]]Bonne[/condition_good]][[condition_fair]]Passable[/condition_fair]][[condition_bad]]Mauvaise[/condition_bad]][[condition_catastrophic]]Catastrophique[/condition_catastrophic]], [[repairing]]réparation en cours[/repairing]][[decaying]]en détérioration[/decaying]]</td></tr>
+	<tr><td>Estimation de la production </td><td colspan=3 nowrap>{final_production}%</td></tr>
+	<tr class="clear"><td colspan=4>&nbsp;</td></tr>
+
+
+	<tr class="header"><td>Elément</td><td>Minerai</td><td>Hydrocarbure</td><td>Energie</td></tr>
+
+	<tr class="category"><td colspan=4>Bâtiments</td></tr>
+	[[building]]
+	<script>
+	var description{id}={description:quote};
+	</script>
+
+	<tr class="item" align=right>
+	<td align="left"><a href="help.asp?cat=buildings#{id}" onMouseover="ddrivetip(description{id})" onMouseout="hideddrivetip()"><b>{name}</b></a> x{quantity}</td>
+	<td>{production_ore:n}</td>
+	<td>{production_hydrocarbon:n}</td>
+	<td>{production_energy:n}</td>
+	</tr>
+	[/building]]
+	[[subtotal]]
+	<tr class="item" align="right">
+	<td align="left">Sous total</td>
+	<td><img src="{PATH_IMAGES}/interface/ore.gif" class="icon" title="Minerai" width=16 height=16> {production_ore:n}</td>
+	<td><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class="icon" title="Hydrocarbure" width=16 height=16> {production_hydrocarbon:n}</td>
+	<td><img src="{PATH_IMAGES}/interface/energy.gif" class="icon" title="Energie" width=16 height=16> {production_energy:n}</td>
+	</tr>
+	[/subtotal]]
+	<tr class="clear"><td colspan="4">&nbsp;</td></tr>
+	[[bonus]]
+	<tr class="category"><td colspan="4">Bonus</td></tr>
+	[[item]]
+	<script>
+	var description2{id}={description:quote};
+	</script>
+	<tr class="item" align=right>
+	<td align="left">
+		[[building]]<a href="help.asp?cat=buildings#{id}" onMouseover="ddrivetip(description2{id})" onMouseout="hideddrivetip()"><b>{name}</b></a>[/building]]
+		[[commander]]<img src="{PATH_IMAGES}/interface/commander.gif" width=10 height=6 class="smallicon" title="Commandant"><a href="commanders.asp#{id}" title="Informations sur {name}"><b>{name}</b></a>[/commander]]
+		[[research]]<a href="help.asp?cat=research#{id}" onMouseover="ddrivetip(description2{id})" onMouseout="hideddrivetip()"><b>{name}</b></a> nv{level}[/research]]
+	</td>
+	<td>
+		<span class=[[ore_positive]]plus[/ore_positive]][[ore_negative]]minus[/ore_negative]]>{mod_production_ore}%</span>
+	</td>
+	<td>
+		<span class=[[hydrocarbon_positive]]plus[/hydrocarbon_positive]][[hydrocarbon_negative]]minus[/hydrocarbon_negative]]>{mod_production_hydrocarbon}%</span>
+	</td>
+	<td>
+		<span class=[[energy_positive]]plus[/energy_positive]][[energy_negative]]minus[/energy_negative]]>{mod_production_energy}%</span>
+	</td>
+	</tr>
+	[/item]]
+	<tr class="item" align="right">
+	<td align="left">Sous total</td>
+	<td><img src="{PATH_IMAGES}/interface/ore.gif" class="icon" title="Minerai" width=16 height=16> {production_ore:n}</td>
+	<td><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class="icon" title="Hydrocarbure" width=16 height=16> {production_hydrocarbon:n}</td>
+	<td><img src="{PATH_IMAGES}/interface/energy.gif" class="icon" title="Energie" width=16 height=16> {production_energy:n}</td>
+	</tr>
+	<tr class="clear"><td colspan=4>&nbsp;</td></tr>
+	[/bonus]]
+	<tr class="item" align="right">
+	<td align="left">Production totale</td>
+	<td><img src="{PATH_IMAGES}/interface/ore.gif" class="icon" title="Minerai" width=16 height=16> {production_ore:n}</td>
+	<td><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class="icon" title="Hydrocarbure" width=16 height=16> {production_hydrocarbon:n}</td>
+	<td><img src="{PATH_IMAGES}/interface/energy.gif" class="icon" title="Energie" width=16 height=16> {production_energy:n}</td>
+	</tr>
+	</table>
+	</div>
+	[/overview]]
+
+	[[manage]]
+	<div id="productionmanage">
+	<form method="post" action="?cat={cat}&a=submit">
+	<table width="100%" class="default">
+	<tr class="title"><td colspan="5">Consommation énergétique</td></tr>
+	<tr class="header"><td colspan="2">Bâtiment</td><td>Utilisation</td><td>Actif</td><td>Utilisation totale</td></tr>
+	[[building]]
+	<tr class="item[[not_all_enabled]]del[/not_all_enabled]]">
+		<td width="1%"><img src="{PATH_IMAGES}/buildings/{id}.jpg" title="{building}" class="building" width="64" height="64"></td>
+		<td>{building}</td>
+		<td><table class="clear" width="70">
+			<tr><td width="1%"><img src="{PATH_IMAGES}/interface/credits.gif" title="Coût de fonctionnement" width="16" height="16"></td><td align="right">{upkeep:n}</td></tr>
+			<tr><td width="1%"><img src="{PATH_IMAGES}/interface/energy_available.gif" title="Energie" width="12" height="12"></td><td align="right">{energy:n}</td></tr>
+			<tr><td width="1%"><img src="{PATH_IMAGES}/interface/workers.gif" title="Maintenance" width="16" height="16"></td><td align="right">{maintenance:n}</td></tr>
+		</table>
+		</td>
+		<td align="center"><select name="enabled{id}">[[enable]]<option value="{i}"[[selected]] selected[/selected]]>{i}</option>[/enable]]</select> / {quantity:n}</td>
+		<td><table class="clear" width="70">
+			<tr><td width="1%"><img src="{PATH_IMAGES}/interface/credits.gif" title="Coût de fonctionnement total" width="16" height="16"></td><td align="right">{upkeep_total:n}</td></tr>
+			<tr><td width="1%"><img src="{PATH_IMAGES}/interface/energy_available.gif" title="Energie totale" width="12" height="12"></td><td align="right">{energy_total:n}</td></tr>
+			<tr><td width="1%"><img src="{PATH_IMAGES}/interface/workers.gif" title="Maintenance totale" width="16" height="16"></td><td align="right">{maintenance_total:n}</td></tr>
+		</table>
+		</td></tr>
+	[/building]]
+	<tr><td colspan="5" align="center"><input type="submit" value="Valider changements"></td></tr>
+	</table>
+	</form>
+	</div>
+	[/manage]]
+
+	[[sendreceive]]
+	<div id="energytransfer">
+	<form method="post" action="?cat={cat}&a=submit">
+	<table class="default" width="100%">
+	<tr class="title"><td colspan="3">Energie reçue ({antennas_receive_used}/{antennas_receive_total})</td></tr>
+	<tr class="header"><td width="1%">Source</td><td>Energie</td><td>Reçue (perte)</td></tr>
+	[[receiving_none]]
+	<tr class="smallitem"><td align="center" colspan="3">Aucun lien énergétique établi.</td></tr>
+	[/receiving_none]]
+	[[receive_no_antenna]]
+	<tr class="smallitem"><td align="center" colspan="3">Aucun récepteur d'énergie construit sur la planète.</td></tr>
+	[/receive_no_antenna]]
+	[[cant_receive_when_sending]]
+	<tr class="smallitem"><td class="error" colspan="3">Impossible de recevoir quand de l'énergie est envoyée.</td></tr>
+	[/cant_receive_when_sending]]
+	[[received]]
+	<tr class="smallitem"><td align="center" nowrap><script>putplanet({planetid},{name:quote},{g},{s},{p},{rel});</script></td><td align="center">{energy:n}</td><td align="center">{effective_energy:n} (perte: {loss}%) <a href="?cat={cat}&a=cancel&from={planetid}">rompre</a></td></tr>
+	[/received]]
+	<tr class="clear"><td colspan="3">&nbsp;</td></tr>
+	<tr class="title"><td colspan="3">Energie envoyée ({antennas_send_used}/{antennas_send_total})</td></tr>
+	<tr class="header"><td>Cible</td><td>Energie</td><td>Reçue (perte)</td></tr>
+	[[send_no_antenna]]
+	<tr class="smallitem"><td align="center" colspan="3">Aucun émetteur d'énergie construit sur la planète.</td></tr>
+	[/send_no_antenna]]
+	[[cant_send_when_receiving]]
+	<tr class="smallitem"><td class="error" colspan="3">Impossible d'envoyer quand de l'énergie est reçue.</td></tr>
+	[/cant_send_when_receiving]]
+	[[sent]]
+	<tr class="smallitem">
+		<td align="center" nowrap><input type="checkbox" class="checkbox" name="enabled_{planetid}" value="1"[[enabled]] checked[/enabled]]><script>putplanet({planetid},{name:quote},{g},{s},{p},{rel});</script></td>
+		<td align="center"><input type="text" name="energy_{planetid}" value="{energy}" maxlength="6" size="6"></td>
+		<td align="center">{effective_energy:n} (perte: {loss}%) <a href="?cat={cat}&a=cancel&to={planetid}">retirer</a></td>
+	</tr>
+	[/sent]]
+	[[send]]
+	<tr class="smallitem">
+		<td align="center" nowrap><input type="text" name="to_g" maxlength="2" size="2" value="{g}">.<input type="text" maxlength="2" size="2" name="to_s" value="{s}">.<input type="text" maxlength="2" size="2" name="to_p" value="{p}"></td>
+		<td align="center"><input type="text" name="energy" maxlength="6" size="6" value="0"></td>
+		<td align="center">{effective_energy:n} (perte: {loss}%)</td>
+	</tr>
+	[/send]]
+	[[submit]]
+	<tr><td colspan="3" align="center"><input type="submit" name="submit" value="Valider"></td></tr>
+	[/submit]]
+	</table>
+	</form>
+	</div>
+	[/sendreceive]]
+</td>
+</tr>
+</table>

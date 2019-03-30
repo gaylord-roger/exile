@@ -1,0 +1,86 @@
+<script type="text/javascript" src='/scripts/third-party/tooltip.js?v=1'></script>
+<script>
+tipname = "hint";
+tipwidth = 450;
+tiptext = $("hinttext");
+</script>
+
+<script>
+function cancelresearch(){return confirm('Êtes-vous sûr de vouloir abandonner cette recherche ?\r\nNote: toute recherche future recommencera à zéro');}
+function putlevel(level,levels,inprogress){
+	var s;
+
+	if(levels <= 5)
+	{
+		if(!inprogress)
+			s = '<img src="{PATH_IMAGES}/research/level'+levels+'_'+level+'.gif" alt="Niveau '+level+'">';
+		else
+			s = '<img src="{PATH_IMAGES}/research/leveling'+levels+'_'+level+'.gif" alt="Niveau '+(level+1)+' en cours">';
+	}
+	else
+	{
+		if(!inprogress)
+			s = level + '/' + levels;
+		else
+			s = 'Niveau ' + (level+1) + ' en cours';
+	}
+	document.write(s);
+}
+[[category]][[research]]var description{id}={description:quote};[/research]][/category]]
+</script>
+
+<div id="research">
+<table class="default" width="100%">
+<tr class="header">
+	<td>Recherche</td><td>Crédits</td><td>Niveau</td><td>Temps</td><td>Action</td>
+</tr>
+
+[[category]]
+<tr class="category">
+	<td colspan=5>
+	[[category10]]Technologies[/category10]]
+	[[category20]]Industrie[/category20]]
+	[[category30]]Empire[/category30]]
+	[[category40]]Recherche[/category40]]
+	[[category50]]Technologies militaires[/category50]]
+	[[category90]]Vaisseaux spatiaux[/category90]]
+	&nbsp;</td>
+</tr>
+
+[[research]]
+<tr class="smallitem">
+
+<td><a href="help.asp?cat=research#{id}" onmouseover="ddrivetip(description{id})" onmouseout="hideddrivetip()"><b>{name}</b></a></td>
+<td align=center>
+[[cost]]<img src="{PATH_IMAGES}/interface/credits.gif" class=icon title="Crédits" width=16 height=16> {credits:n}[/cost]]
+[[nocost]]-[/nocost]]
+</td>
+<td align=center>
+<script>putlevel({level},{levels},0[[leveling]]1[/leveling]]);</script>
+</td>
+
+<td align=center>
+[[countdown]]<script>putcountdown1({remainingtime},"");</script>[/countdown]]
+[[researchtime]]<script>document.write(formattime({time}));</script>[/researchtime]]
+[[noresearchtime]]-[/noresearchtime]]
+</td>
+
+<td align=center>
+	[[complete]]-[/complete]]
+	[[busy]]-[/busy]]
+	[[notresearchable]]<span class="impossible">recherches impossibles</span>[/notresearchable]]
+	[[notenoughmoney]]<span class="notenough">fonds insuffisants</span>[/notenoughmoney]]
+	[[research]]<a href="?a=research&r={id}" title="Lancer la recherche sur {name}">rechercher</a>[/research]]
+	[[researching]]<script>putcountdown2({remainingtime}, "<a href='?a=cancel&r={id}' title='Annuler' onclick='return cancelresearch()'>annuler</a>", "<a href='research.asp'>terminé</a>");</script>[/researching]]
+	[[auto]](<a href='research.asp?a=stop&r={id}'>Automatique</a>)[/auto]]
+	[[manual]](<a href='research.asp?a=continue&r={id}'>Manuel</a>)[/manual]]
+</td>
+
+</tr>
+[/research]]
+
+<tr class="clear"><td colspan=5>&nbsp;</td></tr>
+[/category]]
+
+</table>
+</div>

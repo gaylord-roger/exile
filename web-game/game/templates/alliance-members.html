@@ -1,0 +1,148 @@
+[[members]]
+<script>
+[[recruit]]
+function showKick(name)
+{
+	$("kick"+name).style.display = "none";
+	$("kickConfirm"+name).style.display = "block";
+	$("kickConfirm"+name).style.visibility = "visible";
+	return false;
+}
+[/recruit]]
+
+var ranks = new Array();
+[[rank]]
+ranks[{rank_id}] = {rank_label:quotehtml};
+[/rank]]
+
+function showSubmit(){ $("SubmitChanges").className = "item"; }
+
+function displayStatus(id,rank,manage,kick){
+	var s = '';
+
+	if(!manage)
+		s = ranks[rank];
+	else
+	{
+		s = '<select name="player'+id+'" onchange="showSubmit()">';
+		for(var x in ranks){
+			s += '<option value="'+x+'"'+(rank==x?' selected':'')+'>'+ranks[x]+'</option>';
+		}
+		s += '</select>';
+	}
+
+	document.write(s);
+}
+</script>
+[/members]]
+
+<table width="850" cellpadding="0" cellspacing="0">
+<tr>
+<td align=center>
+	[[nav]]
+	<div>
+	<ul class="htabs">
+		[[cat1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Membres</a></li>[/cat1]]
+		[[cat2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Invitations</a></li>[/cat2]]
+	</ul>
+	</div>
+	[/nav]]
+	<div>
+
+[[members]]
+
+<form action="?cat={cat}" method="post">
+<table class="default" width="100%">
+<tr class="title"><td colspan="7">Nations ralliées</td></tr>
+<tr class="header">
+<td><a href="?cat={cat}&col=1[[r1]]&r=1[/r1]]">Nation</a></td>
+<td><a href="?cat={cat}&col=2[[r2]]&r=2[/r2]]">Développement</a></td>
+<td><a href="?cat={cat}&col=3[[r3]]&r=3[/r3]]">Colonies</a></td>
+<td><a href="?cat={cat}&col=4[[r4]]&r=4[/r4]]">Crédits</a></td>
+<td><a href="?cat={cat}&col=5[[r5]]&r=5[/r5]]">Dernière activité</a></td>
+<td><a href="?cat={cat}&col=6[[r6]]&r=6[/r6]]">Date de ralliement</a></td>
+<td><a href="?cat={cat}&col=7[[r7]]&r=7[/r7]]">Statut</a></td>
+</tr>
+
+[[player]]
+<tr><td>{place}. <a href="/game/nation.asp?name={name}" title="Afficher les infos sur {name}">{name}</a><br/><span class="grey">[[orientation1]]Marchand[/orientation1]][[orientation2]]Militaire[/orientation2]][[orientation3]]Scientifique[/orientation3]][[orientation4]]Seigneur de guerre[/orientation4]]</span></td>
+<td align="right">
+[[score]]{score:n}<br/><span[[plus]] class="plus"[/plus]][[minus]] class="minus"[/minus]]>[[plus]]+[/plus]]{score_delta:n}</span>[/score]]
+[[score_na]]<span class="grey">Non publié</span>[/score_na]]
+</td>
+<td align="right">{stat_colonies}</td>
+<td align="right"><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="res" width="16" height="16">[[lowcredits]]<span class="low">[/lowcredits]]{credits:n}[[lowcredits]]</span>[/lowcredits]]</td>
+<td align="right">
+[[banned]]<span class="banned">Compte suspendu</span>[/banned]]
+[[onholidays]]<span class="onholidays">En vacances</span>[/onholidays]]
+[[online]]<span class="recent">En ligne</span>[/online]]
+[[less1h]]<span class="recent">&lt; 1 heure</span>[/less1h]]
+[[hours]]<span class="recent">{hours} heure(s)</span>[/hours]]
+[[days]]<span class="fewdays">{days} jour(s)</span>[/days]]
+[[1weekplus]]<span class="fewweeks">&gt;1 semaine</span>[/1weekplus]]
+[[2weeksplus]]<span class="fewweeks">&gt;2 semaines</span>[/2weeksplus]]
+</td>
+<td>{joined:dd mmm yyyy hh:mm:ss}</td>
+<td id="statusref{id}">
+<script>displayStatus({id},{rank},0[[manage]]1[/manage]],0[[kick]]1[/kick]]);</script>
+[[kick]] - <span id="kick{id}" onclick="return showKick({id});"><a href="?#">Exclure</a></span><span id="kickConfirm{id}" class="hidden">Coût: <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="res" width="16" height="16">{kick_price:n}&nbsp;<a href="?cat={cat}&a=kick&name={name}">Confirmer</a></span>[/kick]]
+[[leaving]]&nbsp;<span class="warning">Quitte: <script>putcountdown1({leaving_time}, "Terminé", "?cat={cat}");</script></span>[/leaving]]
+</td>
+</tr>
+[/player]]
+
+<tr>
+<td class="justhidden"></td>
+<td align="right">[[score]]{total_score:n}<br/><span[[plus]] class="plus"[/plus]][[minus]] class="minus"[/minus]]>[[plus]]+[/plus]]{total_score_delta:n}</span>[/score]]
+[[score_na]]<span class="grey">Non publié</span>[/score_na]]
+</td>
+<td align="right">{total_colonies:n}</td>
+<td align="right"><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="res" width="16" height="16">{total_credits:n}</td>
+<td colspan="3" class="justhidden"></td>
+</tr>
+
+<tr id="SubmitChanges" class="hidden"><td colspan="6" align="center"><input type="submit" name="submit" value="Valider changements"></td></tr>
+</table>
+</form>
+[/members]]
+
+[[invitations]]
+<form action="?cat={cat}" method="post">
+<table class="default" width="100%">
+<tr class=title><td>Inviter une nation à rallier notre alliance</td></tr>
+<tr class=item align=center><td>Nation <input type="text" name="name" value="{player:html}"><br/><br/>
+<input type="submit" name="submit" value="Rallier"></td></tr>
+[[message]]<tr><td class="error">
+[[ok]]Nation invitée[/ok]]
+[[norights]]Vous n'êtes pas en droit de rallier de nouvelles nations[/norights]]
+[[unknown]]Aucune nation répondant à ce nom n'a été trouvée[/unknown]]
+[[already_member]]Cette nation est déjà membre de notre alliance ![/already_member]]
+[[already_invited]]Cette nation a déjà été invitée récemment[/already_invited]]
+[[impossible]]Cette nation ne peut être invitée[/impossible]]
+</td></tr>
+[/message]]
+</table>
+</form>
+
+<br/>
+
+<table class="default" width="100%">
+<tr class="title"><td colspan=4>Invitations de ralliement en cours...</td></tr>
+<tr class="header"><td>Nation</td><td>Date d'invitation</td><td>Invité par</td><td>Réponse</td></tr>
+
+[[invitation]]
+<tr class="smallitem"><td>{name}</td><td>{date:dd/mm/yyyy hh:mm:ss}</td><td>{recruiter}&nbsp;</td><td>[[waiting]]En attente[/waiting]][[declined]]Refusée[/declined]]</td></tr>
+[/invitation]]
+
+[[noinvitations]]
+<tr><td colspan=4 align=center>Aucune invitation</td></tr>
+[/noinvitations]]
+
+</table>
+[/invitations]]
+
+	</div>
+
+</td>
+</tr>
+</table>

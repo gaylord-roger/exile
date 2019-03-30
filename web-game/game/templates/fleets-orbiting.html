@@ -1,0 +1,19 @@
+<div id="fleets">
+<table class="default" width="450">
+<tr class="header">
+	<td>Planète</td><td>Flottes</td>
+</tr>
+
+[[planet]]
+<tr class="smallitem">
+	<td><b><a href="orbit.asp?planet={planetid}">{planetname}</a>&nbsp;<a href="map.asp?g={g}&s={s}&p={p}">({g}.{s}.{p})</a></b></td>
+	<td align=left>[[fleet]]<a title="Écrire à {fleetowner}" href="mails.asp?subject=À propos de la flotte {fleetname}&to={fleetowner}" class=[[ally]]ally[/ally]][[friend]]friend[/friend]][[enemy]]enemy[/enemy]]>[[alliance]][{tag}][/alliance]] {fleetname} ({fleetsignature:n})</a><br/>[/fleet]]</td>
+</tr>
+[/planet]]
+[[nofleets]]
+<tr class="smallitem">
+	<td colspan="3" align="center">Aucune flotte étrangère en orbite de nos planètes</td>
+</tr>
+[/nofleets]]
+</table>
+</div>

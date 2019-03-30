@@ -1,0 +1,193 @@
+<script type="text/javascript" src='/scripts/cookies.js'></script>
+
+<script type="text/javascript">
+function toggle_elt(uid){
+	var d = new Date();
+	d = new Date(d.getFullYear()+1, d.getMonth(), d.getDay());
+
+	var obj = $(uid);
+	if (obj != undefined)
+	{
+		if(obj.className == "")
+		{
+			obj.className = "hidden";
+			SetCookie('display_' + uid, 0, d);
+		} else
+		{
+			obj.className = "";
+			SetCookie('display_' + uid, 1, d);
+		}
+	}
+}
+function restore_elt(uid){
+	var obj = $(uid);
+	if (obj == undefined) return;
+
+	if (GetCookie('display_' + uid) != 0)
+		$(uid).className = "";
+	else
+		$(uid).className = "hidden";
+}
+
+function sig(signature){
+	if(signature > 0)
+		document.write('('+formatnumber(signature)+')');
+	else
+		document.write('(indéterminé)');
+}
+</script>
+
+[[motd]]
+<div id="motd">
+<table class="default" width="100%">
+<tr class="category"><td onclick="toggle_elt('motd_content')">Annonce de l'alliance[[defcon]] - 
+[[5]]<b>DEFCON 5</b> : Préparation normale en temps de paix[/5]]
+[[4]]<b>DEFCON 4</b> : Préparation normale, mais renseignement accru et mesures de sécurité renforcées[/4]]
+[[3]]<b>DEFCON 3</b> : Accroissement de la préparation des forces au-dessus de la préparation normale[/3]]
+[[2]]<b>DEFCON 2</b> : Accroissement supplémentaire dans la préparation des forces[/2]]
+[[1]]<b>DEFCON 1</b> : Préparation maximale des forces (état de guerre)[/1]]
+[/defcon]]</td></tr>
+<tr id="motd_content" class="item">
+<td>
+	{motd:bbcode}
+</td>
+</tr>
+</table>
+</div>
+[/motd]]
+<div id="stats">
+<table class="default" width="100%">
+<tr class="category"><td onclick="toggle_elt('stats_content')">Statistiques de votre [[orientation1]][/orientation1]][[orientation2]][/orientation2]][[orientation3]][/orientation3]]empire - {date:dddd d mmmm yyyy hh:mm:ss}</td></tr>
+<tr id="stats_content" class="item" valign="top">
+<td>
+	<table class="clear" width="100%">
+	<tr><td nowrap>
+	<div><span class="label">Nation: </span><span class="value">[[orientation1]]Marchand [/orientation1]][[orientation2]]Militaire [/orientation2]][[orientation3]]Scientifique [/orientation3]][[orientation4]]Seigneur de guerre [/orientation4]]{nation}</span></div>
+	<div><span class="label">Grade: </span><span class="value">[[alliance]]{alliance_rank_label:html} de <a href="alliance.asp?tag={alliance_tag}">[{alliance_tag}] {alliance_name}</a>[/alliance]][[no_alliance]]Indépendant[/no_alliance]]</span></div>
+	<div><span class="label">Trésorerie: </span><span class="value"><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="res" width=16 height=16>{stat_credits:n}</span></div>
+	<div><span class="label">Score de développement: </span><span class="value">{stat_score:n}&nbsp;<span[[plus]] class="plus"[/plus]][[minus]] class="minus"[/minus]]>[[plus]]+[/plus]]{stat_score_delta:n}</span>&nbsp;(<a href="ranking-players.asp">rang: {stat_rank}/{stat_players}</a>)</span></div>
+	</td><td>
+	<div><span class="label">Nombre de colonies: </span><span class="value">{stat_colonies:n} / {stat_maxcolonies:n}</span></div>
+	<div><span class="label">Minerai par heure: </span><span class="value">{stat_prod_ore:n}</span></div>
+	<div><span class="label">Hydrocarbure par heure: </span><span class="value">{stat_prod_hydrocarbon:n}</span></div>
+	<div><span class="label">Score de prestige: </span><span class="value">{stat_score_battle:n} (<a href="ranking-players.asp?col=4">rang: {stat_rank_battle}/{stat_players}</a>)</span></div>
+	</td><td>
+	<div><span class="label">Travailleurs: </span><span class="value">{stat_workers:n}</span></div>
+	<div><span class="label">Scientifiques: </span><span class="value">{stat_scientists:n}</span></div>
+	<div><span class="label">Soldats: </span><span class="value">{stat_soldiers:n}</span></div>
+	<div><span class="label">Points de prestige: </span><span class="value">{stat_victory_marks:n}</span></div>
+	</td></tr>
+	</table>
+</td>
+</tr>
+</table>
+</div>
+
+[[tcg_]]
+<div id="tcg">
+<table class="default" width="100%">
+<tr class="category"><td onclick="toggle_elt('tcg_content')">Exile Tcg : {redeemable_credits:n} crédits disponibles</td></tr>
+<tr id="tcg_content" class="item" valign="top">
+<td>
+	<div>
+	En participant aux matchs classés d'<a href="https://tcg.exil.pw/play/index.aspx">Exile Tcg</a>, vous pouvez gagner jusqu'à 1 million de crédits par jour.<br/>
+	Vous avez actuellement {redeemable_credits:n} disponibles dans votre cagnote Exile TCG.<br/>
+[[redeem_credits]]
+	<a href="?redeem=1">Cliquez ici pour récupérer les crédits sur ce compte</a>
+[/redeem_credits]]
+	</div>
+</td>
+</tr>
+</table>
+</div>
+[/tcg_]]
+
+<div id="fleetsmoving">
+<table class="default" width="100%">
+<tr class="category"><td><b>Mouvements en cours</b></td></tr>
+<tr class="item">
+<td>
+	[[fleet]]
+	<div>
+	[[owned]]Votre flotte [[attack]]<img src="{PATH_IMAGES}/interface/stance_attack.gif" class="stance" alt="Attaque" width=10 height=10>[/attack]][[defend]]<img src="{PATH_IMAGES}/interface/stance_defend.gif" class="stance" alt="Riposte" width=10 height=10>[/defend]]<a href="fleet.asp?id={id}" class="self">{name}</a>[/owned]]
+	[[ally]]Une flotte alliée de <a href="mails.asp?to={name}" class="ally" title="Envoyer un message à {name}">{name}</a>[/ally]]
+	[[friend]]Une flotte amie de <a href="mails.asp?to={name}" class="friend" title="Envoyer un message à {name}">{name}</a>[/friend]]
+	[[hostile]]Une flotte hostile de <a href="nation.asp?name={name}" class="enemy" title="Envoyer un message à {name}">{name}</a>[/hostile]]
+	<script>sig({signature})</script> est en transit[[movingfrom]] de <script>putplanet("{f_planetid}","{f_planetname}","{f_g}","{f_s}","{f_p}",{f_relation});</script>[/movingfrom]][[no_from]] d'une planète inconnue[/no_from]] vers <script>putplanet("{t_planetid}","{t_planetname}","{t_g}","{t_s}","{t_p}",{t_relation});</script> - (<script>putcountdown1({time}, "Terminé", "overview.asp");</script>)
+	</div>
+	[/fleet]]
+	[[nofleets]]
+	<div>Aucun mouvement en cours</div>
+	[/nofleets]]
+</td>
+</tr>
+</table>
+</div>
+
+<div id="researchesunderway">
+<table class="default" width="100%">
+<tr class="category"><td>Recherche en cours</td></tr>
+<tr class="item">
+<td>
+	[[research]]<div><a href="research.asp#{researchid}">{research}</a> (<script>putcountdown1({time}, "Terminé", "research.asp");</script>)</div>[/research]]
+	[[noresearch]]<div><a href="research.asp" title="Voir le laboratoire de recherches">Aucune recherche en cours</a></div>[/noresearch]]
+</td>
+</tr>
+</table>
+</div>
+
+<div id="buildingsunderconstruction">
+<table class="default" width="100%">
+<tr class="category"><td>Bâtiments en construction</td><td>Vaisseaux en construction</td></tr>
+<tr class="item" valign="top">
+<td width="50%">
+	[[constructionyards]]
+		[[planet]]
+		<table class="clear" cellpadding="0" cellspacing="0">
+		<tr valign="top"><td><a href="buildings.asp?planet={planetid}">{planetname} ({galaxy}.{sector}.{planet}) : </a></td><td>
+			[[building]]
+			<div>[[destroy]]<span class="destroy">Destruction de [/destroy]]{building} (<script>putcountdown1({time}, "Terminé", "buildings.asp?planet={planetid}#{buildingid}");</script>)[[destroy]]</span>[/destroy]]</div>
+			[/building]]
+			[[none]]
+			<div><a href="buildings.asp?planet={planetid}" title="Voir les infrastructures">Aucune construction en cours</a></div>
+			[/none]]
+		</td></tr>
+		</table>
+		[/planet]]
+	[/constructionyards]]
+	&nbsp;
+</td>
+<td width="50%">
+	[[shipyards]]
+		[[planet]]
+		<table class="clear" cellpadding="0" cellspacing="0">
+		<tr valign="top"><td><a href="shipyard.asp?planet={planetid}">{planetname} ({galaxy}.{sector}.{planet}) : </a></td><td>
+			[[ship]]
+			<div>[[recycle]]Recyclage de [/recycle]]{ship} (<script>putcountdown1({time}, "Terminé", "shipyard.asp?planet={planetid}&f=0#{shipid}");</script>)</div>
+			[/ship]]
+			[[suspended]]
+			<div><a href="shipyard.asp?planet={planetid}" title="Voir le chantier spatial">En pause</a></div>
+			[/suspended]]
+			[[waiting_resources]]
+			<div>{waiting_ship} (<span class="error">en attente de ressources</span>)</a></div>
+			[/waiting_resources]]
+			[[none]]
+			<div><a href="shipyard.asp?planet={planetid}" title="Voir le chantier spatial">Aucune construction en cours</a></div>
+			[/none]]
+		</td></tr>
+		</table>
+		[/planet]]
+	[/shipyards]]
+	&nbsp;
+</td>
+</tr>
+</table>
+</div>
+
+[[motd]]
+<script type="text/javascript">
+	restore_elt('motd_content');
+	restore_elt('stats_content');
+	restore_elt('tcg_content');
+</script>
+[/motd]]

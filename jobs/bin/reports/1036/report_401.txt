@@ -1,0 +1,2 @@
+Récolteurs pleins
+Les récolteurs de la flotte "%fleetname%" ne peuvent plus recycler aux coordonnées (%g%:%s%:%p%) car les soutes sont pleines. Videz les avant de recycler à nouveau.

@@ -1,0 +1,170 @@
+<script>
+var costs = new Array();
+
+costs["nation"]=new Array({nation_cost_lvl_0},{nation_cost_lvl_1},{nation_cost_lvl_2},{nation_cost_lvl_3});
+costs["fleets"]=new Array({fleets_cost_lvl_0},{fleets_cost_lvl_1},{fleets_cost_lvl_2},{fleets_cost_lvl_3});
+costs["planet"]=new Array({planet_cost_lvl_0},{planet_cost_lvl_1},{planet_cost_lvl_2},{planet_cost_lvl_3});
+
+function updateCost(obj, type)
+{	
+	var selected = obj.selectedIndex;
+	document.getElementById(type+"cost").innerHTML = formatnumber(costs[type][selected]);
+}
+
+function confirmAction(id)
+{	
+	var cost = $(id).innerHTML;
+	return confirm('Confirmez-vous la dépense de ' + cost + ' Points de Prestige pour l\'espionnage ?');
+}
+
+</script><div id="intelligence">
+
+<div id="spynation">
+<table class="default" width="650">
+<tr class="title"><td>Espionner une nation</td></tr>
+<tr class="item">
+	<td><p>
+	Espionner une nation vous permettra de recueillir des informations concernant le nombre et la position des planètes lui appartenant.<br />
+	Différentes qualités de service vous sont proposées, car bien entendu, plus vous paierez cher, et plus les espions recrutés seront efficaces et discrets.</p>
+	</td>
+</tr>
+<tr>
+	<td>
+	<dl class="spy">
+		<dt>Novice (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {nation_cost_lvl_0:n})</dt><dd>Cet espion a <span class="highlight">60%</span> de chance de se faire repérer par la nation que vous espionnez<br/>et espionnera un maximum de <span class="highlight">5</span> planètes.</dd>
+		<dt>Initié (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {nation_cost_lvl_1:n})</dt><dd>Cet espion a <span class="highlight">30%</span> de chance de se faire repérer par la nation que vous espionnez<br/>et espionnera un maximum de <span class="highlight">10</span> planètes.</dd>
+		<dt>Agent (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {nation_cost_lvl_2:n})</dt><dd>Cet espion a <span class="highlight">15%</span> de chance de se faire repérer par la nation que vous espionnez,<br/> il s'infiltrera au sein des hautes instances de la nation pour en connaître <span class="highlight">tous les secrets</span> (recherches en cours, nombre exact et positions des planètes...).<br/>
+		Cette mission peut être assez longue.</dd>
+		<dt>Taupe (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {nation_cost_lvl_3:n})</dt><dd>Cet espion <span class="highlight">ne peut être détecté</span>,<br/> il s'infiltrera au sein des hautes instances de la nation pour en connaître <span class="highlight">tous les secrets</span> (recherches en cours, nombre exact et positions des planètes...).<br/>
+		Cette mission peut prendre beaucoup de temps.</dd>
+	</dl>
+	</td>
+</tr>
+<tr>
+	<td align=center>
+	<form method="post" action="mercenary-intelligence.asp" onsubmit="return confirmAction('nationcost')">
+	<input type="hidden" name="spy" value="nation">
+	Espionner <input type="text" name="nation_name" value="" size="" maxlength="" size="14" maxlength="12"> avec <select name="level" onchange="updateCost(this, 'nation');">
+		<option value="0">Novice</option>
+		<option value="1">Initié</option>
+		<option value="2">Agent</option>
+		<option value="3">Taupe</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td align=center>
+	Coût : <span id="nationcost">{nation_cost_lvl_0:n}</span> Points de Prestige&nbsp;&nbsp;
+	<input type="submit" value="Espionner la nation">
+	</td>
+</tr>
+</form>
+[[nation_error1]]<tr><td class="error">Erreur</td></tr>[/nation_error1]]
+[[nation_error2]]<tr><td class="error">Vous n'avez pas assez de points de prestige</td></tr>[/nation_error2]]
+[[nation_error4]]<tr><td class="error">Cette nation n'existe pas</td></tr>[/nation_error4]]
+[[nation_error5]]<tr><td class="error">Vous n'avez pas besoin de vous espionner</td></tr>[/nation_error5]]
+[[nation_ok]]<tr><td class="error">L'espionnage a déjà commencé, vous recevrez un rapport très prochainement.</td></tr>[/nation_ok]]
+</table>
+</div>
+
+[[dev]]
+<br/>
+<div id="spyfleets">
+<table class="default" width="650">
+<tr class="title"><td>Traquer les flottes d'une nation</td></tr>
+<tr class="item">
+	<td><p>
+	Vous pouvez recruter des espions qui iront repérer les flottes d'une nation et vous feront un rapport sur leurs positions et leurs signatures radar, voire leur composition.<br />
+	Différentes qualités de service vous sont proposées, car bien entendu, plus vous paierez cher, et plus les espions recrutés seront efficaces et discrets, et plus les informations seront détaillées.</p>
+	</td>
+</tr>
+<tr>
+	<td style="color:#BCBCC0;">
+	<ul>
+		<li><b class="white">Novice</b>: Cet espion a 50% de chance de se faire repérer par la nation que vous espionnez, <br/>et rassemblera des informations générales sans trop prendre de risque.</li>
+		<li><b class="white">Initié</b>: Cet espion a 20% de chance de se faire repérer par la nation que vous espionnez, <br/>et rassemblera plus d'informations que l'agent novice.</li>
+		<li><b class="white">Agent</b>: Cet espion a 5% de chance de se faire repérer par la nation que vous espionnez, <br/>et rassemblera le plus d'information possible.</li>
+		<li><b class="white">Espion militaire</b>: Cet espion est un vieux baroudeur, rompu à l'espionnage militaire, qui saura vous dire la composition (corvettes, frégates...) des flottes repérées.<br/>
+		Etant donné qu'il doit infitrer le commandement militaire et accéder à des informations techniques sur les flottes, cette mission prendra plus longtemps et le risque de se faire repérer est assez élevé.</li>
+	</ul>
+	</td>
+</tr>
+<tr>
+	<td align=center>
+	<form method="post" action="mercenary-intelligence.asp">
+	<input type="hidden" name="spy" value="fleets">
+	Espionner <input type="text" name="nation_name" value="" size="" maxlength="" size="14" maxlength="12"> avec <select name="level" onchange="updateCost(this, 'fleets');">
+		<option value="0">Novice</option>
+		<option value="1">Initié</option>
+		<option value="2">Agent</option>
+		<option value="3">Espion militaire</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td align=center>
+	Coût : <span id="fleetscost">{fleets_cost_lvl_0:n}</span> Points de Prestige&nbsp;&nbsp;
+	<input type="submit" value="Espionner la flotte">
+	</td>
+</tr>
+</form>
+[[fleets_error1]]<tr><td class="error">Erreur</td></tr>[/fleets_error1]]
+[[fleets_error2]]<tr><td class="error">Vous n'avez pas assez de points de prestige</td></tr>[/fleets_error2]]
+[[fleets_error4]]<tr><td class="error">Cette nation n'existe pas</td></tr>[/fleets_error4]]
+[[fleets_error5]]<tr><td class="error">Vous n'avez pas besoin de vous espionner</td></tr>[/fleets_error5]]
+[[fleets_ok]]<tr><td class="error">L'espionnage a déjà commencé, vous recevrez un rapport très prochainement.</td></tr>[/fleets_ok]]
+</table>
+</div>
+[/dev]]
+
+<br/>
+<div id="spyplanet">
+<table class="default" width="650">
+<tr class="title"><td>Espionner une planète</td></tr>
+<tr class="item">
+	<td><p>
+	Vous pouvez demander à espionner une planète en particulier.<br />
+	En fonction du prix que vous êtes prêt à payer, vous pourrez obtenir de nombreux détails : vaisseaux au sol, bâtiments construits, présence d'un commandant et bien d'autres.</p>
+	</td>
+</tr>
+<tr>
+	<td style="color:#BCBCC0;">
+	<dl class="spy">
+		<dt>Novice (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {planet_cost_lvl_0:n})</dt><dd>Cet espion a <span class="highlight">60%</span> de chance de se faire repérer par la nation que vous espionnez,<br/>et aura <span class="highlight">peu de chance</span> d'obtenir des informations stratégiques.</dd>
+		<dt>Initié (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {planet_cost_lvl_1:n})</dt><dd>Cet espion a <span class="highlight">30%</span> de chance de se faire repérer par la nation que vous espionnez, <br/>et aura <span class="highlight">plus de chance</span> d'obtenir des informations stratégiques.</dd>
+		<dt>Agent (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {planet_cost_lvl_2:n})</dt><dd>Cet espion a <span class="highlight">15%</span> de chance de se faire repérer par la nation que vous espionnez, <br/> il s'infiltrera au sein de la planète pour en connaître <span class="highlight">tous les secrets</span> (constructions en cours, nombre de bâtiments plus précis ...).<br/>
+		Cette mission peut être assez longue.</dd>
+		<dt>Infiltrateur (<img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {planet_cost_lvl_3:n})</dt><dd>Cet espion <span class="highlight">ne peut être détecté</span>, <br/> il s'infiltrera au sein de la planète pour en connaître <span class="highlight">tous les secrets</span> (constructions en cours, nombre de bâtiments plus précis ...).<br/>
+		Cette mission peut lui prendre beaucoup de temps.</dd>
+	</ul>
+	</td>
+</tr>
+<form method="post" action="mercenary-intelligence.asp" onsubmit="return confirmAction('planetcost')">
+<tr>
+	<td align="center">
+
+	<input type="hidden" name="spy" value="planet">
+	Espionner la planète <input type="text" name="g" value="{g}" maxlength="2" size="2">&nbsp;<input type="text" name="s" value="{s}" maxlength="2" size="2">&nbsp;<input type="text" name="p" value="{p}" maxlength="2" size="2"> avec <select name="level" onchange="updateCost(this, 'planet');">
+		<option value="0">Novice</option>
+		<option value="1">Initié</option>
+		<option value="2">Agent</option>
+		<option value="3">Infiltrateur</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td align="center">
+	Coût : <span id="planetcost">{planet_cost_lvl_0:n}</span> Points de Prestige&nbsp;&nbsp;
+	<input type="submit" value="Espionner la planète">
+	</td>
+</tr>
+</form>
+[[planet_error1]]<tr><td class="error">Erreur</td></tr>[/planet_error1]]
+[[planet_error2]]<tr><td class="error">Vous n'avez pas assez de points de prestige</td></tr>[/planet_error2]]
+[[planet_error3]]<tr><td class="error">Cette planète n'existe pas</td></tr>[/planet_error3]]
+[[planet_error5]]<tr><td class="error">Vous n'avez pas besoin de vous espionner</td></tr>[/planet_error5]]
+[[planet_ok]]<tr><td class="error">L'espionnage a déjà commencé, vous recevrez un rapport très prochainement.</td></tr>[/planet_ok]]
+</table>
+</div>
+
+</div>

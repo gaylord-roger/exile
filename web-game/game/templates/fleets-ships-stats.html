@@ -1,0 +1,41 @@
+<div id="fleets_ships_stats">
+<table class="default" width="800">
+<tr class="header"><td>Vaisseau</td><td width=100>Détruits</td><td width=100>Perdus</td></tr>
+
+[[no_ship]]
+<tr><td colspan="3"><p class="error">Vous n'avez détruit et/ou perdu aucun vaisseau.</p></td></tr>
+[/no_ship]]
+
+[[category]]
+<tr class="category">
+	<td colspan="3">
+	[[category10]]Vaisseaux utilitaires[/category10]]
+	[[category11]]Vaisseaux de déploiement[/category11]]
+	[[category15]]Vaisseaux tactiques[/category15]]
+	[[category20]]Vaisseaux légers[/category20]]
+	[[category30]]Corvettes[/category30]]
+	[[category40]]Frégates[/category40]]
+	[[category50]]Croiseurs[/category50]]
+	[[category60]]Dreadnought[/category60]]
+	[[category80]]Titan[/category80]]
+	[[category90]]Plateforme de défense[/category90]]
+	&nbsp;
+	</td>
+</tr>
+
+[[ship]]
+<tr align="right" class="item">
+<td nowrap align="left"><a href="help.asp?cat=ships#{id}"><b>{name}</b></a></td>
+<td align="right">{killed:n}</td>
+<td align="right">{lost:n}</td>
+</tr>
+[/ship]]
+
+[/category]]
+
+[[total]]
+<tr><td class="clear">&nbsp;</td><td align="right">{kills:n}</td><td align="right">{losses:n}</td></tr>
+[/total]]
+
+</table>
+</div>

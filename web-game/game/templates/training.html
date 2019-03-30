@@ -1,0 +1,83 @@
+<script>
+function updateNeeds() {
+	var sc=getval('scientists');
+	var so=getval('soldiers');
+
+	var ore=sc*{scientist_ore} + so*{soldier_ore};
+	var hydro=sc*{scientist_hydrocarbon} + so*{soldier_hydrocarbon};
+	var credits=sc*{scientist_credits} + so*{soldier_credits};
+
+	$('totalore').innerHTML = formatnumber(ore);
+	$('totalhydrocarbon').innerHTML = formatnumber(hydro);
+	$('totalcredits').innerHTML = formatnumber(credits);
+}
+</script>
+<div id="training">
+<form action="training.asp?a=train" method="post">
+<table class="default" width=600>
+<tr class="header"><td>Unité</td><td width=100>Minerai</td><td width=100>Hydrocarbure</td><td width=80>Crédits</td><td width=100>Quantité</td><td width='1%'>Entraînement</td></tr>
+
+<tr class="item">
+	<td nowrap><img src="{PATH_IMAGES}/interface/scientists.gif" class=res title="Scientifiques" width="16" height="16"> Scientifique</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/ore.gif" class=res title="Minerai" width=16 height=16> {scientist_ore}</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class=res title="Hydrocarbure" width=16 height=16> {scientist_hydrocarbon}</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/credits.gif" class=res title="Crédits" width=16 height=16> {scientist_credits}</td>
+	<td align=center>{scientists} / {scientists_capacity}</td>
+	<td align=center>[[input_scientists]]<input type=text name=scientists id=scientists size=5 maxlength=5 onkeyup="updateNeeds()" >[/input_scientists]][[max_scientists]]<p class="error">Maximum atteint</p>[/max_scientists]]</td>
+</tr>
+<tr class="item">
+	<td nowrap><img src="{PATH_IMAGES}/interface/soldiers.gif" class=res title="Soldats" width="16" height="16"> Soldat</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/ore.gif" class=res title="Minerai" width=16 height=16> {soldier_ore}</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class=res title="Hydrocarbure" width=16 height=16> {soldier_hydrocarbon}</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/credits.gif" class=res title="Crédits" width=16 height=16> {soldier_credits}</td>
+	<td align=center[[not_enough_soldiers]] class="low"[/not_enough_soldiers]]>{soldiers} / {soldiers_capacity}</td>
+	<td align=center>[[input_soldiers]]<input type=text name=soldiers id=soldiers size=5 maxlength=5 onkeyup="updateNeeds()" >[/input_soldiers]][[max_soldiers]]<p class="error">Maximum atteint</p>[/max_soldiers]]</td>
+</tr>
+<tr class="item">
+	<td>&nbsp;</td>
+	<td align=right><img src="{PATH_IMAGES}/interface/ore.gif" class=res title="Minerai" width=16 height=16> <span id=totalore>0</span></td>
+	<td align=right><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" class=res title="Hydrocarbure" width=16 height=16> <span id=totalhydrocarbon>0</span></td>
+	<td align=right><img src="{PATH_IMAGES}/interface/credits.gif" class=res title="Crédits" width=16 height=16> <span id=totalcredits>0</span></td>
+	<td>&nbsp;</td>
+	<td align=center><input type="submit" value="Entraîner"></td>
+</tr>
+
+[[error]]
+<tr class="item"><td colspan=6 align=center>
+[[not_enough_workers]]<span class="error">Ressources ou nombre de travailleurs insuffisant.</span>[/not_enough_workers]]
+[[cant_train_now]]<span class="error">Vous ne disposez pas des bâtiments nécessaires pour la formation des scientifiques ou des soldats demandés.</span>[/cant_train_now]]
+</td></tr>
+[/error]]
+
+[[training]]
+<tr class="clear"><td colspan=6>&nbsp;</td></tr>
+<tr class="category">
+	<td colspan=6>Entraînement en cours</td>
+</tr>
+	[[item]]
+	<tr align=right>
+		<td align=left colspan=3>[[scientists]]<a href="help.asp#scientists" title="Aide sur les scientifiques"><b>Scientifiques</a>[/scientists]][[soldiers]]<a href="help.asp#soldiers" title="Aide sur les soldats"><b>Soldats</a>[/soldiers]]</td>
+		<td>x{quantity}</td>
+		<td align=center><script>putcountdown1({remainingtime},"&nbsp;");</script></td>
+		<td align=center><script>putcountdown2({remainingtime}, "<a href='?planet={planetid}&a=cancel&q={queueid}'>annuler</a>", "<a href='training.asp'>terminé</a>");</script></td>
+	</tr>
+	[/item]]
+[/training]]
+[[queue]]
+<tr class="clear"><td colspan=9>&nbsp;</td></tr>
+<tr class="category">
+	<td colspan=6>En attente</td>
+</tr>
+	[[item]]
+	<tr align=right>
+		<td align=left colspan=3>[[scientists]]<a href="help.asp#scientists" title="Aide sur les scientifiques"><b>Scientifiques</a>[/scientists]][[soldiers]]<a href="help.asp#soldiers" title="Aide sur les soldats"><b>Soldats</a>[/soldiers]]</td>
+		<td>x{quantity}</td>
+		<td align=center><script language="javascript">document.write(formattime({remainingtime}));</script></td>
+		<td align=center><a href="?planet={planetid}&a=cancel&q={queueid}">annuler</a></td>
+	</tr>
+	[/item]]
+[/queue]]
+
+</table>
+</form>
+</div>

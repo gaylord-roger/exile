@@ -1,0 +1,3 @@
+Invasion ennemie : perte d'une planète
+Une flotte ennemie de %username% s'est emparée d'une de nos planètes.
+Elle est désormais connue sous le nom de %planetname% (%g%:%s%:%p%).

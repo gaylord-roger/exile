@@ -1,0 +1,40 @@
+<div id="alliance">
+[[noalliance]]
+<a href="alliance-create.asp">Créer une alliance</a><br/>
+<a href="alliance-invitations.asp">Invitations reçues</a><br/>
+[/noalliance]]
+[[display]]
+<table class="default">
+<tr class="bigtitle"><td>[{tag}] {name}</td></tr>
+[[logo]]<tr class="item"><td align=center><img src="{logo_url}" class="logo"></td></tr>[/logo]]
+[[description]]
+<tr class="item"><td><p>{description:bbcode}</p></td></tr>
+[/description]]
+
+[[members]]
+<tr class="item"><td><div id="stats"><span class="label">{rank_label:html}:</span> <span class="value">[[member]]<a href="mails.asp?to={member}">{member}</a>[/member]][[other_member]], <a href="mails.asp?to={member}">{member}</a>[/other_member]]</span></div></td></tr>
+[/members]]
+<tr class="item"><td><div id="stats"><span class="label">Nombre de membres:</span> <span class="value">{members} / {max_members}</span></div></td></tr>
+[[website]]<tr class="item"><td><div id="stats"><span class="label">Site web:</span> <span class="value"><a href="{website_url}">{website_url}</a></span></div></td></tr>[/website]]
+
+<tr><td>
+	<table class="clear">
+	<tr valign="top"><td>
+		<table width="300">
+		<tr class="title"><td>Pacte(s) de non-aggression</td></tr>
+		[[nap]]<tr class="smallitem"><td><a href="alliance.asp?tag={naptag}">[{naptag}] {napname}</a></td></tr>[/nap]]
+		[[nonaps]]<tr><td align=center>Aucun</td></tr>[/nonaps]]
+		</table>
+	</td>
+	<td>
+		<table>
+		<tr class="title"><td>Guerres en cours</td></tr>
+		[[war]]<tr class="smallitem"><td><a href="alliance.asp?tag={wartag}">[{wartag}] {warname}</a></td></tr>[/war]]
+		[[nowars]]<tr><td align=center>Aucune</td></tr>[/nowars]]
+		</table>
+	</td></tr>
+	</table>
+</td></tr>
+</table>
+[/display]]
+</div>

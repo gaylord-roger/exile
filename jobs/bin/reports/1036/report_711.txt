@@ -1,0 +1,2 @@
+Fin d'alerte : tempête solaire
+Les éruptions solaires ont cessé sur %planetname% (%g%:%s%:%p%). Nous reprenons une activité normale.

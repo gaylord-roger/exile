@@ -1,0 +1,106 @@
+[[ranks]]
+<script>
+function check(){
+	[[rank]]
+	if($('n{rank_id}').value.length <= 2) {
+		alert('Le nom du grade "' + $('n{rank_id}').value + '" est trop court : 2 lettres minimum.');
+		return false;
+	}
+	[/rank]]
+	return true;
+}
+</script>
+[/ranks]]
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td valign="top">
+[[nav]]
+<ul class="vtabs">
+	[[cat1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Général</a></li>[/cat1]]
+	[[cat2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Annonce</a></li>[/cat2]]
+	[[cat3]]<li[[selected]] class="active"[/selected]]><a href="?cat=3">Grades</a></li>[/cat3]]
+</ul>
+[/nav]]
+</td>
+<td>
+
+<table class="default" width="600">
+<form method="post" action="?cat={cat}"[[ranks]] onsubmit="return check()"[/ranks]]>
+[[general]]
+<tr class="item">
+	<td colspan="5" align="center">
+		<div id="stats">
+		<table class="clear">
+			<tr>
+				<td align="center">
+					[[logo]]<img src="{logo_url}" class="logo">[/logo]]
+				</td>
+			</tr>
+			<tr>
+				<td align="left">
+				<b style="color:#ffa500">[{tag}] {name}</b><br>
+				<span class="label">Date de création: </span><span class="value">{created:dddd d mmmm yyyy hh:mm:ss}</span><br>
+				<span class="label">Nombre de membres: </span><span class="value">{members} / {max_members}</span></td>
+			</tr>
+		</table>
+		</div>
+	</td>
+</tr>
+<tr class="item"><td colspan="5">{description:bbcode}</td></tr>
+
+<tr><td colspan="5">&nbsp;</td></tr>
+<tr class="smallitem">
+	<td>Logo (https://domain.com/image.gif)</td>
+	<td colspan="4"><input type="text" name="logo" id="logo" value="{logo_url}" style="width:290px;" maxlength="250"></td>
+</tr>
+
+<tr class="title"><td colspan="5">Description</td></tr>
+<tr class="item"><td colspan="5" align="center"><textarea name="description" cols="62" rows="15">{description:html}</textarea><div align="center"><a href="help.asp?cat=tags" target="_blank">Balises supportées</a></div></td></tr>
+[/general]]
+
+[[motd]]
+<tr class="item"><td colspan="5">{motd:bbcode}</td></tr>
+
+<tr class="title"><td colspan="5">Annonce</td></tr>
+<tr class="item"><td width='1%'>DEFCON</td><td colspan="4"><select name="defcon">
+<option value=5[[defcon_5]] selected[/defcon_5]]>5 : Préparation normale en temps de paix</option>
+<option value=4[[defcon_4]] selected[/defcon_4]]>4 : Préparation normale, mais renseignement accru et mesures de sécurité renforcées</option>
+<option value=3[[defcon_3]] selected[/defcon_3]]>3 : Accroissement de la préparation des forces au-dessus de la préparation normale</option>
+<option value=2[[defcon_2]] selected[/defcon_2]]>2 : Accroissement supplémentaire dans la préparation des forces</option>
+<option value=1[[defcon_1]] selected[/defcon_1]]>1 : Préparation maximale des forces (état de guerre)</option>
+</select></td></tr>
+<tr class="item"><td colspan="5" align="center"><textarea name="motd" cols="62" rows="15">{motd:html}</textarea><div align=center><a href="help.asp?cat=tags" target=_blank>Balises supportées</a></div></td></tr>
+[/motd]]
+
+[[ranks]]
+<tr class="title"><td colspan="5">Grades</td></tr>
+[[rank]]
+<tr class="item"><td colspan="5">
+<table class="clear" width="100%" cellspacing="0" cellpadding="0">
+<tr><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_enabled" name="c{rank_id}_enabled" value="1"[[checked_enabled]] checked[/checked_enabled]][[disabled]] disabled[/disabled]]><input type="text" size="28" maxlength="32" name="n{rank_id}" id="n{rank_id}" value="{rank_label:html}"></td><td><input type="checkbox" class="checkbox" id="c{rank_id}_0" name="c{rank_id}_0" value="1"[[checked_0]] checked[/checked_0]][[disabled]] disabled[/disabled]]><label for="c{rank_id}_0">Grade des nouveaux membres</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_1" name="c{rank_id}_1" value="1"[[checked_1]] checked[/checked_1]]><label for="c{rank_id}_1">Recruter une nation</label></td><td><input type="checkbox" class="checkbox" id="c{rank_id}_2" name="c{rank_id}_2" value="1"[[checked_2]] checked[/checked_2]]><label for="c{rank_id}_2">Exclure une nation</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_3" name="c{rank_id}_3" value="1"[[checked_3]] checked[/checked_3]]><label for="c{rank_id}_3">Créer un pacte/tribut/guerre</label></td><td><input type="checkbox" class="checkbox" id="c{rank_id}_4" name="c{rank_id}_4" value="1"[[checked_4]] checked[/checked_4]]><label for="c{rank_id}_4">Rompre un pacte/tribut/guerre</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_5" name="c{rank_id}_5" value="1"[[checked_5]] checked[/checked_5]]><label for="c{rank_id}_5">Demander un financement</label></td><td><input type="checkbox" class="checkbox" id="c{rank_id}_6" name="c{rank_id}_6" value="1"[[checked_6]] checked[/checked_6]]><label for="c{rank_id}_6">Voir les rapports d'alliance</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_7" name="c{rank_id}_7" value="1"[[checked_7]] checked[/checked_7]]><label for="c{rank_id}_7">Accepter les demandes de financement</label></td><td><input type="checkbox" class="checkbox" id="c{rank_id}_8" name="c{rank_id}_8" value="1"[[checked_8]] checked[/checked_8]]><label for="c{rank_id}_8">Modifier la taxe</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_9" name="c{rank_id}_9" value="1"[[checked_9]] checked[/checked_9]]><label for="c{rank_id}_9">Envoyer un message à toute l'alliance</label></td><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_12" name="c{rank_id}_12" value="1"[[checked_12]] checked[/checked_12]]><label for="c{rank_id}_12">Voir les détails sur les membres (infos nation)</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_10" name="c{rank_id}_10" value="1"[[checked_10]] checked[/checked_10]]><label for="c{rank_id}_10">Modifier la description de l'alliance</label></td><td><input type="checkbox" class="checkbox" id="c{rank_id}_11" name="c{rank_id}_11" value="1"[[checked_11]] checked[/checked_11]]><label for="c{rank_id}_11">Modifier l'annonce de l'alliance</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap colspan="2"><input type="checkbox" class="checkbox" id="c{rank_id}_13" name="c{rank_id}_13" value="1"[[checked_13]] checked[/checked_13]]><label for="c{rank_id}_13">Publier la liste des membres</label></td></tr>
+<tr[[disabled]] disabled[/disabled]]><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_14" name="c{rank_id}_14" value="1"[[checked_14]] checked[/checked_14]]><label for="c{rank_id}_14">Commander les flottes partagées</label></td><td nowrap><input type="checkbox" class="checkbox" id="c{rank_id}_15" name="c{rank_id}_15" value="1"[[checked_15]] checked[/checked_15]]><label for="c{rank_id}_15">Utiliser les radars de l'alliance</label></td></tr>
+</table>
+</td></tr>
+[/rank]]
+[/ranks]]
+
+<tr><td colspan="5" align="center"><input type="submit" name="submit" id="submit" value="Valider changements"></td></tr>
+
+[[error]]
+<tr><td colspan="5"><p class="error">
+[[check_logo]]L'adresse de votre logo est incorrecte, vérifiez votre saisie[/check_logo]]
+[[done]]Changements effectués[/done]]
+</p></td></tr>
+[/error]]
+</form>
+</table>
+</td>
+</tr>
+</table>

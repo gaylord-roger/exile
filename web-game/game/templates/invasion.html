@@ -1,0 +1,35 @@
+[[invasion_report]]
+<table class="default" width="60%">
+<tr class="title"><td colspan=4 align=center>Rapport d'invasion de <script>putplanet("{planetid}","{planetname}","{g}","{s}","{p}",{relation});</script> par {fleet_owner} </td></tr>
+[[report]]
+<tr class="category"><td>Troupes</td><td>Effectif<td>Pertes</td><td>Après Combat</td></tr>
+[[attacker]]<tr class="category [[ally]]ally[/ally]][[enemy]]enemy[/enemy]]"><td>{fleet_owner}</td><td>{soldiers_total}</td><td>{soldiers_lost}</td><td>{soldiers_alive}</td></tr>[/attacker]]
+<tr class="item">
+<td><span class="dot">&middot;</span>Soldats</td><td>{soldiers_total}</td><td>{soldiers_lost}</td><td>{soldiers_alive}</td>
+</tr>
+[[defender]]<tr class="category [[ally]]ally[/ally]][[enemy]]enemy[/enemy]]"><td>{planet_owner}</td><td>{def_total}</td><td>{def_losts}</td><td>{def_alive}</td></tr>[/defender]]
+<tr class="item">
+<td><span class="dot">&middot;</span>Soldats</td><td>{def_soldiers_total}</td><td>{def_soldiers_lost}</td><td>{def_soldiers_alive}</td>
+</tr>
+[[workers]]<tr class="smallitem">
+<td><span class="dot">&middot;</span>Travailleurs</td><td>{def_workers_total}</td><td>{def_workers_lost}</td><td>{def_workers_alive}</td>
+</tr>[/workers]]
+[[scientists]]<tr class="smallitem">
+<td><span class="dot">&middot;</span>Scientifiques</td><td>{def_scientists_total}</td><td>{def_scientists_lost}</td><td>{def_scientists_alive}</td>
+</tr>[/scientists]]
+[/report]]
+[[not_succeeded]]
+<tr>
+<td colspan=4 align=center><script>putplanet("{planetid}","{planetname}","{g}","{s}","{p}",{relation});</script> a été défendue avec succès.</td>
+</tr>
+[/not_succeeded]]
+[[succeeded]]
+<tr>
+<td colspan=4 align=center>La nation <a href="nation.asp?name={fleet_owner}">{fleet_owner}</a> s'est emparée de <script>putplanet("{planetid}","{planetname}","{g}","{s}","{p}",{relation});</script>.</td>
+</tr>
+[/succeeded]]
+[[justdone]]
+<tr><td colspan=4 align=center><a href="fleet.asp?id={fleetid}">Continuer</a></td></tr>
+[/justdone]]
+</table>
+[/invasion_report]]

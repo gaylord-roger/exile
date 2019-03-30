@@ -1,0 +1,24 @@
+<script language="vbscript" runat="server">
+
+sub Application_OnStart
+	Application("players") = 0
+	Application("visitors") = 0
+end sub
+
+sub Session_OnStart
+	Session.LCID = 1036
+
+	Application.Lock
+	Session("isplaying") = false
+	Application("visitors") = Application("visitors")+1
+	Application.UnLock
+end sub
+
+sub Session_OnEnd
+	Application.Lock
+	if Session("isplaying") then Application("players")=Application("players")-1
+	Application("visitors") = Application("visitors")-1
+	Application.UnLock
+end sub
+
+</script>

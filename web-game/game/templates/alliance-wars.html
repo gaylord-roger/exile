@@ -1,0 +1,102 @@
+<script type="text/javascript">
+function confirmStopWar(tag) {
+	return confirm("Êtes-vous sûr de vouloir arrêter la guerre avec [" + tag + "] ?");
+}
+</script>
+<table width="750" cellpadding=0 cellspacing=0>
+<tr>
+<td align="center">
+	[[nav]]
+	<div>
+	<ul class="htabs">
+		[[cat1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Guerres en cours</a></li>[/cat1]]
+		[[cat2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Déclaration de guerre</a></li>[/cat2]]
+	</ul>
+	</div>
+	[/nav]]
+	<div>
+
+[[wars]]
+<table class="default" width="100%">
+<tr class="header">
+<td><a href="?col=1[[r1]]&r=1[/r1]]">Alliance</a></td>
+<td><a href="?col=2[[r2]]&r=1[/r2]]">Déclarée le</a></td>
+<td>status</td>
+</tr>
+[[war]]
+<tr><td>{place}. <a href="alliance.asp?tag={tag}">[{tag}] {name}</a></td>
+<td>{created:dd mmm yyyy hh:mm:ss}<br/>[[cant_fight]]Préparation en cours[/cant_fight]][[can_fight]]{next_bill:dd mmm yyyy hh:mm:ss}[/can_fight]]</td>
+<td>
+[[extend]]<a href="?cat={cat}&a=pay&tag={tag}">Étendre la guerre d'une semaine</a> <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16">{cost:n}<br/>[/extend]]
+[[ceasing]]Fin de guerre demandée (<script>putcountdown1({time}, "Terminé", "?")</script>)[/ceasing]]
+[[cease_requested]]<a href="?cat={cat}&a=cease&tag={tag}">Accepter la fin de la guerre (<script>putcountdown1({time}, "Terminé", "?")</script>)</a>[/cease_requested]]
+[[stop]]<a href="?cat={cat}&a=stop&tag={tag}" onclick="return confirmStopWar({tag:quote})">Arrêter la guerre</a>[/stop]]
+[[surrender]]&nbsp;[/surrender]]
+</td>
+</tr>
+[/war]]
+[[nowars]]
+<tr><td colspan=5 align=center>Aucun</td></tr>
+[/nowars]]
+[[message]]<tr><td colspan=5 class="error">
+[[norights]]Vous n'êtes pas en droit de faire une telle demande[/norights]]
+[[unknown]]Aucune alliance avec un tel tag n'a été trouvé[/unknown]]
+[[war_not_found]]Nous ne sommes pas en guerre avec cette alliance[/war_not_found]]
+</td></tr>
+[/message]]
+</table>
+[/wars]]
+
+[[newwar]]
+<form action="?cat={cat}&a=new" method="post">
+<table class="default" width="100%">
+<tr class="title"><td colspan=2>Déclarer la guerre</td></tr>
+<tr><td colspan=2>Veuillez indiquer le tag de l'alliance à laquelle déclarer la guerre.[[old]]<br/>
+La guerre n'est effective qu'après une période de préparation qui est égale au nombre de membres dans l'alliance ciblée en heure (20 membres = 20 heures de préparation).<br/>
+Tant que la guerre n'est pas effective, les combats contre les flottes de cette alliance ne seront pas automatiques et les invasions des planètes de cette alliance seront impossibles.[/old]]</td></tr>
+<tr><td>Alliance (tag)</td><td><input type="text" name="tag" value="{tag:html}" maxlength=4></td></tr>
+<tr><td>Coût par semaine</td><td>Le coût est proportionnel à la force des alliances actuellement en guerre contre l'alliance ciblée</td></tr>
+<tr><td colspan="2" align="center"><input type="submit" name="submit" value="Envoyer"></td></tr>
+[[message]]<tr><td colspan="2" class="error">
+[[ok]]Guerre déclarée[/ok]]
+[[norights]]Vous n'êtes pas en droit de faire une telle demande[/norights]]
+[[unknown]]Aucune alliance avec un tel tag n'a été trouvée[/unknown]]
+[[already_at_war]]Nous sommes déjà en guerre contre cette alliance ![/already_at_war]]
+[[not_enough_credits]]Pas assez de crédits ![/not_enough_credits]]
+</td></tr>
+[/message]]
+</table>
+</form>
+
+</td>
+</table>
+[/newwar]]
+
+[[newwar_confirm]]
+<form action="?cat={cat}&a=new2" method="post">
+<input type="hidden" name="tag" value="{tag}"/>
+<table class="default" width="100%">
+<tr class="title"><td colspan="2">Déclaration de guerre</td></tr>
+<tr><td colspan=2>Veuillez confirmer la déclaration de guerre à l'encontre de l'alliance [{tag:html}] {name:html}.</td></tr>
+<tr><td>Coût </td><td><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {cost:n}</td></tr>
+<tr><td colspan="2" align="center"><input type="submit" name="submit" value="Confirmer"></td></tr>
+[[message]]<tr><td colspan="2" class="error">
+[[ok]]Guerre déclarée[/ok]]
+[[norights]]Vous n'êtes pas en droit de faire une telle demande[/norights]]
+[[unknown]]Aucune alliance avec un tel tag n'a été trouvée[/unknown]]
+[[already_at_war]]Nous sommes déjà en guerre contre cette alliance ![/already_at_war]]
+[[not_enough_credits]]Pas assez de crédits ![/not_enough_credits]]
+</td></tr>
+[/message]]
+</table>
+</form>
+
+</td>
+</table>
+[/newwar_confirm]]
+
+</div>
+
+</td>
+</tr>
+</table>

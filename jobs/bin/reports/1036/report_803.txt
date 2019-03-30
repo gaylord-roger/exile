@@ -1,0 +1,3 @@
+Contre-espionnage : notre Nation est espionnée !
+Nos services de contre-espionnage ont capté un message codé provenant certainement d'un espion, destiné à %description%, contenant des informations capitales sur la planète %planetname% (%g%:%s%:%p%).
+Il est possible que l'ennemi connaisse nos forces de défenses.

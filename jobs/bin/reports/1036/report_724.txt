@@ -1,0 +1,2 @@
+Flotte retardée par une avarie
+La flotte "%fleetname%" a subi une avarie. Toute la flotte est immobilisée en attendant que les techniciens de bord réparent les vaisseaux endommagés.

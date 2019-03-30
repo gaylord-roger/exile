@@ -1,0 +1,2 @@
+Contre-espionnage : notre Nation est espionnée !
+Nos services de contre-espionnage ont capté un message codé provenant certainement d'un espion, destiné à %description%, contenant des informations sur l'ensemble de notre nation.

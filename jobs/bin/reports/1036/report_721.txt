@@ -1,0 +1,3 @@
+Des émeutes éclatent
+Des rassemblements se sont formés sur %planetname% (%g%:%s%:%p%) pour manifester contre le manque de sécurité et ont dégénéré en émeutes générales. Les gens sont devenus incontrôlables et s'en sont pris aux bâtiments administratifs.
+Les urgences sont sur place pour soigner les blessés.

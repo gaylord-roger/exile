@@ -1,0 +1,3 @@
+Vente effectuée
+Un commerçant est venu acheter nos ressources mises en vente sur %planetname% (%g%:%s%:%p%).
+Les ressources (%ore% unités de minerai et %hydrocarbon% unités d'hydrocarbure) ont été vendues pour un total de %credits% crédits, la moitié a été payée à la vente.

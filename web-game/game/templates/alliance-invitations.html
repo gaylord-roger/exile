@@ -1,0 +1,33 @@
+<table class="default" width="700">
+<tr class="title"><td colspan="4">Alliances nous invitant à les rejoindre</td></tr>
+<tr class="header"><td>Alliance</td><td>Réception de l'offre</td><td>Recruteur</td><td>Réponse</td></tr>
+[[invitation]]
+<tr><td><a href="alliance.asp?tag={tag}">[{tag}] {name}</a></td><td>{date:dd mmm yyyy hh:mm:ss}</td><td>{recruiter}</td><td align=center>[[accept]]<a href="?a=accept&tag={tag}">Accepter</a>[/accept]][[cant_accept]]<span class="error">Déjà dans une alliance</span>[/cant_accept]] [[cant_join]]<span class="error">Impossible de rejoindre</span>[/cant_join]] - <a href="?a=decline&tag={tag}">Refuser</a></td></tr>
+[/invitation]]
+[[noinvitations]]
+<tr><td colspan="4" align="center">Aucune invitation</td></tr>
+[/noinvitations]]
+[[max_members_reached]]
+<tr class="item"><td colspan="4" align="center" class="warning">Impossible de rejoindre l'alliance, elle a atteint son nombre maximal de membres.</td></tr>
+[/max_members_reached]]
+[[cant_rejoin_previous_alliance]]
+<tr class="item"><td colspan="4" align="center" class="warning">Impossible de rejoindre cette alliance pour le moment, vous devez attendre plusieurs jours avant de pouvoir la rejoindre à nouveau.</td></tr>
+[/cant_rejoin_previous_alliance]]
+</table>
+[[cant_join]]
+<table class="default" width="700">
+<tr class="item"><td><span class="warning">Vous êtes actuellement en train de quitter votre ancienne alliance, il vous est actuellement impossible de rejoindre une autre alliance.</span></td></tr>
+</table>
+[/cant_join]]
+[[leave]]
+<br/>
+<form action="?a=leave" method="post">
+<table class="default" width=700>
+<tr class="title"><td>Quitter l'alliance</td></tr>
+<tr class="smallitem"><td align=center><input type="checkbox" class="checkbox" name="leave" id="leave" value="1"><label for="leave">Je quitte mon alliance actuelle[[charges]], les frais s'élevant à {credits:n}&nbsp;crédits[/charges]].</label><br/><br/><span class="warning">Attention, vous ne pourrez pas créer ou rejoindre d'alliance pendant {hours_before_rejoin} heures.</span></td></tr>
+<tr class="smallitem"><td align=center><input type="submit" name="submit" value="Valider"></td></tr>
+[[too_many_leaving]]<tr><td class="error">Trop de membres sont déjà en train de quitter l'alliance, vous devez attendre avant de pouvoir quitter à votre tour</td></tr>[/too_many_leaving]]
+[[not_enough_credits]]<tr><td class="error">Fonds insuffisants</td></tr>[/not_enough_credits]]
+</table>
+</form>
+[/leave]]

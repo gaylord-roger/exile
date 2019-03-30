@@ -1,0 +1,97 @@
+<script type="text/javascript" src='/scripts/third-party/tooltip.js?v=1'></script>
+<script>
+tipname = "hint";
+tipwidth = 450;
+tiptext = $("hinttext");
+</script>
+
+<script>
+[[temp]]
+var cargos = new Array();
+[[fleet]]cargos[{id}] = new Array('{cargo_ore:n}','{cargo_hydrocarbon:n}','{cargo_scientists:n}','{cargo_soldiers:n}','{cargo_workers:n}');[/fleet]]
+
+function cargoDesc(id){
+	var c=cargos[id];
+	var s='<table width="100%">';
+	s+='<tr><td width="1%"><img src="{PATH_IMAGES}/interface/ore.gif" width=16 height=16></td><td align="left">Minerai</td><td width="1%" align="right" class="grey">'+c[0]+'</td></tr>';
+	s+='<tr><td width="1%"><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" width=16 height=16></td><td>Hydrocarbure</td><td width="1%" align="right" class="grey">'+c[1]+'</td></tr>';
+	s+='<tr><td width="1%"><img src="{PATH_IMAGES}/interface/scientists.gif" width=16 height=16></td><td>Scientifiques</td><td width="1%" align="right" class="grey">'+c[2]+'</td></tr>';
+	s+='<tr><td width="1%"><img src="{PATH_IMAGES}/interface/soldiers.gif" width=16 height=16></td><td>Soldats</td><td width="1%" align="right" class="grey">'+c[3]+'</td></tr>';
+	s+='<tr><td width="1%"><img src="{PATH_IMAGES}/interface/workers.gif" width=16 height=16></td><td>Travailleurs</td><td width="1%" align="right" class="grey">'+c[4]+'</td></tr>';
+	return s+'</table>';
+}
+[/temp]]
+</script>
+
+<div id="orbit">
+<form method="post" action="?a=new&planet={planetid}">
+<table class="default" width="650">
+<tr class="title"><td colspan=6>Flottes</td></tr>
+<tr class="header"><td>Flotte</td><td>Taille</td><td>Signature</td><td>Cargo</td><td>Action</td><td>Commandant</td></tr>
+
+[[fleet]]
+<tr class="smallitem">
+	<td nowrap>
+		[[owner]]<a href="fleet.asp?id={id}"><b>{name}</b></a>[/owner]]
+		[[friend]]<p class="friend"><b>{name}</b></p>[/friend]]
+		[[ally]]<p class="ally"><b>{name}</b></p>[/ally]]
+		[[enemy]]<p class="enemy"><b>{name}</b></p>[/enemy]]
+	</td>
+	<td nowrap align="right">{size:n}</td>
+	<td nowrap align="right">{signature:n}</td>
+	<td nowrap align="right">[[trade]]<a href="fleet-trade.asp?id={id}" onmouseover="ddrivetip(cargoDesc({id}))" onmouseout="hideddrivetip()">[/trade]]{cargo:n}[[trade]]</a>[/trade]]</td>
+	<td nowrap>
+	[[recycling]]<p class="recycling">Recyclage en cours</p>[/recycling]]
+	[[fighting]]<p class="fighting">En combat</p>[/fighting]]
+	[[patrolling]]En patrouille[/patrolling]]
+	</td>
+
+	<td><img src="{PATH_IMAGES}/interface/commander.gif" class="smallicon" title="Commandant" width=10 height=6>[[commander]]<a href="commanders.asp#{commanderid}">{commandername}</a>[/commander]][[nocommander]]-[/nocommander]]</td>
+</tr>
+[/fleet]]
+[[nofleets]]
+<tr><td colspan=6 align=center>Aucune flotte n'est actuellement à proximité de la planète.</td></tr>
+[/nofleets]]
+</table>
+
+<br/>
+
+<table class="default" width="450">
+<tr class="title"><td colspan=2>Nouvelle flotte</td></tr>
+[[new]]
+<tr class="category">
+	<td colspan=2>Nom de flotte <span style="margin:0px 10px;"><input type="text" name="name" value="{fleetname}" maxlength="16"></span></td>
+</tr>
+[[ship]]
+<script>
+description{id}="<table><tr valign='top'><td><span class=title>Description</span><br/><br/>"+ unescape("{description:escape}")+"</td><td width='1%' nowrap><span class=title>Caractéristiques</span><br/><br/>"+
+"Signature: <span class=value>{ship_signature:n}</span><br/>Cargo: <span class=value>{ship_cargo:n}</span><br/>Vitesse: <span class=value>{ship_speed:n}</span><br/>Manœuvrabilité: <span class=value>{ship_handling:n}</span>[[attack]]<br/>Puissance d'attaque: <span class=value>{ship_turrets}x{ship_power}</span><br/>Ciblage: <span class=value>{ship_tracking_speed:n}</span>[/attack]]<br/>Armure: <span class=value>{ship_hull:n}</span>[[shield]]<br/>Bouclier: <span class=value>{ship_shield:n}</span>[/shield]][[recycler_output]]<br/>Capacité de recyclage: <span class=value>{ship_recycler_output:n}</span>[/recycler_output]][[long_distance_capacity]]<br/>Capacité de saut intergalactique: <span class=value>{ship_long_distance_capacity:n}</span>[/long_distance_capacity]][[droppods]]<br/>Capacité d'invasion: <span class=value>{ship_droppods:n}</span>[/droppods]]</td></tr></table>";
+</script>
+<tr class="smallitem">
+	<td nowrap>
+		<table class=clear width='100%'>
+		<tr><td><a href="help.asp?cat=ships#{id}" onmouseover="ddrivetip(description{id})" onmouseout="hideddrivetip()"><b>{name}</b></a></td>
+			<td align="right" width="10%">x{quantity}</td>
+		</tr></table>
+	</td>
+	<td align="center" width="15%" nowrap><input type="text" size="5" value="{ship_quantity}" id="s{id}" name="s{id}"> <a href="#" onclick="setval('s{id}', {quantity}); return false;">max</a></td>
+</tr>
+[/ship]]
+<tr class="smallitem"><td colspan=2 align=center><input type="submit" value="Former la flotte"></td></tr>
+[/new]]
+[[noships]]
+<tr><td colspan=2 align=center>Aucun vaisseau n'est disponible.</td></tr>
+[/noships]]
+
+[[error]]
+<tr><td colspan=2 align=center>
+[[fleet_too_many]]<span class="error">Vous avez atteint le nombre maximum de flottes.</span>[/fleet_too_many]]
+[[fleet_name_already_used]]<span class="error">Le nom de la flotte est déjà utilisé, veuillez en choisir un autre.</span>[/fleet_name_already_used]]
+[[fleet_name_invalid]]<span class="error">Le nom de la flotte est invalide, il ne peut contenir que des lettres (a-z) et des chiffres (0-9).</span>[/fleet_name_invalid]]
+[[ship_cant_be_used]]<span class="error">Certains vaisseaux n'ont pu être ajoutés à la flotte car nous ne disposons pas des recherches requises pour les utiliser.</span>[/ship_cant_be_used]]
+</td></tr>
+[/error]]
+
+</table>
+</form>
+</div>

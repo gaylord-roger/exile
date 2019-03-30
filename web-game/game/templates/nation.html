@@ -1,0 +1,84 @@
+<form method="get" action="nation.asp">
+<table class="default">
+
+<tr class="title"><td colspan="2"><b>Saisissez le nom d'une nation :</b>&nbsp;
+<input type="text" size="14" maxlength="14" name="name" value=""><br/>
+</td></tr>
+
+<tr class="item">
+	<td align="center" colspan="2">
+		<table class="clear">
+			<tr>
+				<td>
+					[[avatar]]<img src="{avatar_url}" width=64 height=64 class="avatar">[/avatar]]
+					[[noavatar]]<img src="{PATH_IMAGES}/interface/noavatar.gif" width=64 height=64 class="avatar">[/noavatar]]
+				</td>
+				<td valign="top">[[alliance]]<a href="alliance.asp?tag={alliancetag}" class="[[self]]self[/self]][[ally]]ally[/ally]][[friend]]friend[/friend]][[enemy]]enemy[/enemy]]">[{alliancetag}]</a>&nbsp;[/alliance]]<span class="[[self]]self[/self]][[ally]]ally[/ally]][[friend]]friend[/friend]][[enemy]]enemy[/enemy]]">{name}</span>, 
+				[[alliance]]{rank_label:html}[/alliance]][[noalliance]]indépendant[/noalliance]]
+				<br/>
+				Date d'arrivée:&nbsp;{regdate:d}<br/>
+				<br/>
+				[[sendmail]]<a href="/game/mails.asp?a=new&b={name}" title="Nouveau message à {name}">Envoyer un message</a>[/sendmail]]
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+
+[[description]]<tr class="item"><td colspan="2"><p>{description:bbcode}</p></td></tr>[/description]]
+
+[[alliances]]
+<tr class="category"><td>Alliance</td><td>Rallié</td></tr>
+[[item]]
+<tr class="item"><td>[{history_tag:html}] {history_name:html}</td><td>De {joined:d} à {left:d}</td></tr>
+[/item]]
+[/alliances]]
+
+[[allied]]
+<tr class="category"><td>Planètes colonisées</td><td>Flottes</td></tr>
+<tr class="item" valign="top">
+	<td>
+		<table class="clear">
+		[[planet]]
+		<tr>
+			<td><a href="map.asp?g={g}&s={s}" title="Localiser la planète {planetname}">{planetname}&nbsp;({g}.{s}.{p})</a></td>
+		</tr>
+		[/planet]]
+		[[noplanets]]
+		<tr>
+			<td>Aucune planète</td>
+		</tr>
+		[/noplanets]]
+		</table>
+	</td>
+	<td>
+		<table class="clear" width="100%">
+		[[fleet]]
+		<tr>
+			<td nowrap>[[owned]]<a href="fleet.asp?id={fleetid}">[/owned]][[ally]]<span class="ally">[/ally]]{fleetname}[[owned]]</a>[/owned]][[ally]]</span>[/ally]]&nbsp;({signature:n})</td>
+			<td><script>putplanet("{planetid}","{planetname}","{g}","{s}","{p}",{relation});</script></td>
+		<td nowrap>
+		[[recycling]]
+		Recyclage - (<script>putcountdown1({time}, 'Cycle terminé', 'nation.asp?')</script>)
+		[/recycling]]
+		[[patrolling]]En patrouille[/patrolling]]
+		[[fighting]]En combat[/fighting]]
+		[[moving]]En transit vers <script>putplanet("{t_planetid}","{t_planetname}","{t_g}","{t_s}","{t_p}",{t_relation});</script> - (<script>putcountdown1({time}, 'Arrivé', 'nation.asp')</script>)
+		[/moving]]
+		</td>
+
+			
+		</tr>
+		[/fleet]]
+		[[nofleets]]
+		<tr>
+			<td>Aucune flotte</td>
+		</tr>
+		[/nofleets]]
+		</table>
+	</td>
+</tr>
+[/allied]]
+
+</table>
+</form>

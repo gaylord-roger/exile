@@ -1,0 +1,117 @@
+<link href="/game/exile.css" type="text/css" rel="stylesheet" media="all"/>
+
+<style>
+div .parent
+{
+	text-align:center;
+}
+div .item
+{
+	width:450px;
+	background: url('/images/interface/grad50.gif') repeat-x;
+	background-color: #3c3c3c; 
+	border: #222 1px solid;
+	margin: 2px 2px;
+	padding:5px 10px;
+	text-align:left;
+}
+div .title
+{
+	font-weight:bold;
+}
+div .center
+{
+	text-align:center;
+}
+</style>
+<script>
+function toggleObj(id,visible) { var ob = document.getElementById(id); ob.className=visible?'':'hidden'; }
+function setval(obj, val){ document.getElementById(obj).value = val; }
+
+function changeAction(id, obj)
+{
+	toggleObj("move"+id,obj.selectedIndex==1);
+}
+
+[[comment]]Fill the list of destination planets[/comment]]
+var tab = new Array();
+
+function fillDest(id,obj){
+	var dest = obj.selectedIndex;
+	setval("g"+id,tab[dest][0]);
+	setval("s"+id,tab[dest][1]);
+	setval("p"+id,tab[dest][2]);	
+}
+function d(idx,name,g,s,p){tab[idx]=new Array(g,s,p);}
+[[planetgroup]]
+[[planet]]d({index},'{name}',{to_g},{to_s},{to_p});[/planet]]
+[/planetgroup]]
+
+[[fleetgroup]]
+[[fleet_location]]d({fleetindex},'{fleet_name}',{fleet_g},{fleet_s},{fleet_p});[/fleet_location]]
+[/fleetgroup]]
+
+
+var idx = 0;
+function insertAction(action,ore,hydro,workers,scientists,soldiers,g,s,p,obj)
+{
+	var model=document.getElementById('model');
+
+	var nod=document.createElement("DIV");
+	nod.innerHTML='<a href="#" onclick="insertAction(0,0,0,0,0,0,0,0,0,this.parentNode)">Insérer une action</a>';
+	nod.className='item center';
+	document.getElementById("orders").insertBefore(nod, obj);
+
+	var nod=document.createElement("DIV");
+	nod.innerHTML=model.innerHTML.replace(/XX/g,idx);
+	nod.className='item';
+	document.getElementById("orders").insertBefore(nod, obj);
+
+	idx++;
+}
+</script>
+
+<div class=hidden id=model>
+<table>
+<tr><td>
+	<select name="action" onchange="changeAction(XX,this)">
+		<option value="0">Charger/Décharger</option>
+		<option value="1">Aller vers</option>
+		<option value="2">Recycler</option>
+	</select>
+</td><td>
+	<div class=hidden id="moveXX">
+	<input type="text" name="g" id="gXX" size=3 maxlength=2 value="{g}">&nbsp;<input type="text" name="s" id="sXX" size=3 maxlength=2 value="{s}">&nbsp;<input type="text" name="p" id="pXX" size=3 maxlength=2 value="{p}">&nbsp;
+	<select name="planetlist" onchange="fillDest(XX,this)">
+		[[planetgroup]]<optgroup label="Planètes">
+		[[planet]]<option [[selected]] selected[/selected]]>{name} ({to_g}:{to_s}:{to_p})</option>[/planet]]
+		</optgroup>[/planetgroup]]
+		[[fleetgroup]]<optgroup label="Vers Flottes">
+		[[fleet_location]]<option>{fleet_name} ({fleet_g}:{fleet_s}:{fleet_p})</option>[/fleet_location]]
+		</optgroup>[/fleetgroup]]
+	</select>
+	</div>
+</td></tr>
+</table>
+</div>
+
+<div align=center>
+
+<form action="?" method="post">
+
+<div id="traderoute">
+
+<div id="orders" class="parent">
+
+<div class="item title center">{traderoute}</div>
+
+<div class="item center"><a href="#" onclick="insertAction(0,0,0,0,0,0,0,0,0,this.parentNode)">Insérer une action</a></div>
+
+<div class="item center"><input type="submit" value="Valider"></div>
+
+</div>
+
+</div>
+
+</form>
+</div>

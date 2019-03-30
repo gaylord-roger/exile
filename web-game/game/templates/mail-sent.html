@@ -1,0 +1,33 @@
+<div id="mails">
+<table class="default" width="100%">
+
+<tr class="title"><td colspan=2>Messages envoyés</td></tr>
+
+[[nav]]<tr class="nav"><td colspan=2 align=left>Page {page_display}, Messages {min}-{max}. Aller à
+[[p]]&nbsp;[[link]]<a href="?a=sent&start={page_link}">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td></tr>[/nav]]
+
+[[mail]]
+<tr id="mail{index}" class="item[[new_mail]]highlight[/new_mail]]">
+	<td width="1%" rowspan=1 align=center valign=top nowrap>
+	[[reply]]<a href="?to={sent_to}" title="Nouveau message à {sent_to}">[/reply]]
+	[[avatar]]<img src="{avatar_url}" width=64 height=64 class="avatar">[/avatar]]
+	[[noavatar]]<img src="{PATH_IMAGES}/interface/noavatar.gif" width=64 height=64 class="avatar">[/noavatar]]<br><b>[[admins]]Administrateurs[/admins]][[alliance]]Alliance[/alliance]][[nation]]{sent_to}[/nation]]</b>
+	[[reply]]</a>
+	[[alliance]]<br/><a href="alliance.asp?tag={alliancetag}">[{alliancetag}]</a><br/>[/alliance]][/reply]]
+	</td>
+	<td width="90%" valign=top>
+	<div class="subject">
+	{date:dd/mm/yyyy hh:nn:ss} | {subject:html}[[money]] | Somme envoyée : <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width=16 height=16> {moneyamount:n}[/money]]</div>
+	<div class="body">[[html]]{body}[/html]][[bbcode]]{bodybb:bbcode}[/bbcode]]</div>
+	</td>
+</tr>
+[/mail]]
+
+[[nav]]<tr class="nav"><td colspan=2 align=left>Page {page_display}, Messages {min}-{max}. Aller à
+[[p]]&nbsp;[[link]]<a href="?a=sent&start={page_link}">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td></tr>[/nav]]
+[[nomails]]<tr><td colspan=2 align=center>Aucun</td></tr>[/nomails]]
+
+</table>
+</div>

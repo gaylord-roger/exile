@@ -1,0 +1,62 @@
+<script>
+function jump(obj){eval("location='{url}" + obj.options[obj.selectedIndex].value + "'");}
+function nextplanet(){
+	var obj = document.getElementById("planetlist");
+	if(obj.selectedIndex<obj.options.length-1) obj.selectedIndex=obj.selectedIndex+1; jump(obj);
+}
+function previousplanet(){
+	var obj = document.getElementById("planetlist");
+	if(obj.selectedIndex>0) obj.selectedIndex=obj.selectedIndex-1; jump(obj);
+}
+</script>
+
+<style>
+table.tableheader {
+	background:url('{PATH_IMAGES}/interface/header-bg.png');
+}
+table.tableheader td { padding-right:8px; }
+</style>
+
+<div align=center>
+	<table class="tableheader" cellspacing=2>
+	<tr>
+		<td rowspan="3"><a href="#" onclick="previousplanet(); return false;"><img src="{PATH_IMAGES}/interface/left.gif" title="Planète précédente" width=10 height=34></a>&nbsp;</td>
+		<td nowrap>
+		<select id="planetlist" tabindex="1" onchange="jump(this)">
+			[[planet]]<option value="{id}"[[selected]] selected[/selected]]>{name} ({g}.{s}.{p})</option>[/planet]]
+		</select>
+		</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/ore.gif" title="Minerai" width=16 height=16 class=res><span[[medium_ore]] class=med2[/medium_ore]][[high_ore]] class=high2[/high_ore]]>{ore:n}</span> / <span[[medium_ore]] class=med2[/medium_ore]][[high_ore]] class=high2[/high_ore]]>{ore_capacity:n}</span> (<span class=[[normal_ore_production]]prod[/normal_ore_production]][[medium_ore_production]]medprod[/medium_ore_production]]>+{ore_production:n}</span>)</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/workers.gif" title="Travailleurs" width=16 height=16 class=res><span class=[[workers_low]]low[/workers_low]]>{workers:n}</span> / {workers_capacity:n} (<img src="{PATH_IMAGES}/interface/workers_idle.gif" title="oisifs" width="12" height="12" class="idleworkers">{workers_idle:n})</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/floor.gif" title="Terrain" width=16 height=16 class=res>{floor_occupied:n} / {floor:n}</td>
+[[special]]
+		<td>
+			[[special1]]<div class="left"><img src="{PATH_IMAGES}/interface/special.gif" title="Spécial" class=res width=16 height=16>{name}</div>[/special1]]
+		</td>
+[/special]]
+		<td rowspan=3>&nbsp;<a href="#" onclick="nextplanet(); return false;"><img src="{PATH_IMAGES}/interface/right.gif" title="Planète suivante" width=10 height=34></a></td>
+	</tr>
+	<tr>
+		<td nowrap><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" width=16 height=16 class=res>{money:n}</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/hydrocarbon.gif" title="Hydrocarbure" width=16 height=16 class=res><span[[medium_hydrocarbon]] class=med2[/medium_hydrocarbon]][[high_hydrocarbon]] class=high2[/high_hydrocarbon]]>{hydrocarbon:n}</span> / <span[[medium_hydrocarbon]] class=med2[/medium_hydrocarbon]][[high_hydrocarbon]] class=high2[/high_hydrocarbon]]>{hydrocarbon_capacity:n}</span> (<span class=[[normal_hydrocarbon_production]]prod[/normal_hydrocarbon_production]][[medium_hydrocarbon_production]]medprod[/medium_hydrocarbon_production]]>+{hydrocarbon_production:n}</span>)</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/scientists.gif" title="Scientifiques" width=16 height=16 class=res><span class=[[scientists_low]]low[/scientists_low]]>{scientists:n}</span> / {scientists_capacity:n}</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/space.gif" title="Espace" width=16 height=16 class=res>{space_occupied:n} / {space:n}</td>
+[[special]]
+		<td>
+			[[special2]]<div class="left"><img src="{PATH_IMAGES}/interface/special.gif" title="Spécial" class=res width=16 height=16>{name}</div>[/special2]]
+		</td>
+[/special]]
+	</tr>
+	<tr>
+		<td nowrap><img src="{PATH_IMAGES}/interface/prestige.gif" title="Prestige" width=16 height=16 class=res>{pp:n}</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/energy.gif" title="Energie" width=16 height=16 class=res>{energy:n} / {energy_capacity:n} (<span class="[[energy_production_minus]]minus[/energy_production_minus]][[energy_production_normal]]plus[/energy_production_normal]]">[[energy_production_normal]]+[/energy_production_normal]]{energy_production:n}</span>)</td>
+		<td nowrap><img src="{PATH_IMAGES}/interface/soldiers.gif" title="Soldats" width=16 height=16 class=res><span class=[[soldiers_low]]low[/soldiers_low]]>{soldiers:n}</span> / {soldiers_capacity:n}</td>
+		<td nowrap></td>
+[[special]]
+		<td>
+			[[special3]]<div class="left"><img src="{PATH_IMAGES}/interface/special.gif" title="Spécial" class=res width=16 height=16>{name}</div>[/special3]]
+		</td>
+[/special]]
+	</tr>
+	</table>
+</div>

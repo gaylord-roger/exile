@@ -1,0 +1,2 @@
+Rapport d'espionnage : nation
+L'espion de la Compagnie des Pirates de la Fosse est revenu avec son rapport sur la nation %description%.

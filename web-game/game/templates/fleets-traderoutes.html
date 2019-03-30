@@ -1,0 +1,38 @@
+<div id="traderoutes">
+<table class="default" width="350">
+<tr class="header">
+	<td>Nom</td>
+	<td width="1%">Ordres</td>
+	<td width="1%">Date de création</td>
+	<td width="1%">Date de modification</td>
+</tr>
+
+[[route]]
+<tr class="smallitem">
+	<td><a href="fleets-traderoute.asp?id={id}">{name}</a></td>
+	<td>{orders}</td>
+	<td>{created:dd/mm/yyyy}</td>
+	<td>{modified:dd/mm/yyyy}</td>
+</tr>
+[/route]]
+[[noroutes]]
+<tr class="smallitem">
+	<td colspan="2" align="center">Aucune route commerciale définie</td>
+</tr>
+[/noroutes]]
+</table>
+<br/>
+<form action="?" method="post">
+<table class="default" width="350">
+<tr class="header">
+	<td colspan="2">Nouvelle route commerciale</td>
+</tr>
+<tr>
+	<td>Nom</td><td><input type="text" name="name" maxlength="32" size="32"></td>
+</tr>
+<tr>
+	<td colspan="2" align="center"><input type="submit" value="Créer"></td>
+</tr>
+</table>
+</form>
+</div>

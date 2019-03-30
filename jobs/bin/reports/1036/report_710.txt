@@ -1,0 +1,2 @@
+Bulletin d'alerte : tempête solaire
+De violentes éruptions solaires provoquent des orages électromagnétiques sur la planète %planetname% (%g%:%s%:%p%). Ces orages chargent le sol et des courts-circuits peuvent se produire entre les appareils électriques et la terre. Afin d'éviter tout accident, nous sommes obligés de baisser notre production d'environ 60% jusqu'à ce que ces éruptions se terminent.

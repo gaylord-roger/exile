@@ -1,0 +1,210 @@
+<script type="text/javascript">
+function confirmFireCommander(name){
+	if(confirm('Êtes-vous sûr de vouloir vous séparer du commandant "' + name + '" ?')) {
+		if(confirm('Êtes-vous VRAIMENT sûr de vouloir vous séparer du commandant "' + name + '" ?\nNote: Les commandants renvoyés ne peuvent pas être récupérés !'))
+			return true;
+	}
+	return false;
+}
+
+function confirmTrain(prestige) {
+	return confirm('Êtes-vous sûr de vouloir effectuer un entraînement intensif pour ' + prestige + ' points de prestige ?');
+}
+</script>
+
+<div id="commanders">
+
+[[commanders]]
+[[commander]]
+<div id="renamebox{id}" class="hidden">
+	<form action='?' method='get'>
+	<input type='hidden' name='a' value='rename'>
+	<input type='hidden' name='id' value='{id}'>
+	<input type='text' class="editbox" name='name' size=28 maxlength=32 value='{name}'>
+	&nbsp;<input type='submit' value='OK' class="submitok">
+	&nbsp;<img src='{PATH_IMAGES}/interface/close.gif' width=12 height=12 title='Fermer' class=close onclick='hide();'>
+	</form>
+</div>
+[/commander]]
+[/commanders]]
+
+[[commanders]]
+<table class=default width=600>
+<tr class=title><td colspan=2>Les commandants de votre empire ({commanders}/{max_commanders})</td></tr>
+<tr class=header><td width=220>Commandant</td><td>Compétences</td></tr>
+
+[[commander]]
+<tr class=smallitem>
+	<td valign="top">
+	<div class=left id="renameref{id}"><img src="{PATH_IMAGES}/interface/commander.gif" width=10 height=6 class="smallicon" title="Commandant"><a name="{name}" onclick="return show('renameref{id}','renamebox{id}')">{name}</a></div>
+	<div class=right>[[can_fire]]<a href="?a=fire&id={id}" onclick="return confirmFireCommander({name:quote})">Renvoyer</a>[/can_fire]][[cant_fire]]<span class="cant_fire">Renvoyer</span>[/cant_fire]]</div>
+	<div class=clear></div>
+	<table class=clear style="margin-left:22px">
+	<tr><td>Salaire:</td><td><img src="{PATH_IMAGES}/interface/credits.gif" class=res title="Crédits" width=16 height=16> {salary:n}</td></tr>
+	<tr><td>Incorporé:</td><td>{recruited:dd mmm yyyy}</td></tr>
+	<tr><td>Affectation:</td><td nowrap>
+	[[not_assigned]]Aucune[/not_assigned]]
+	[[planet_command]]<img src="{PATH_IMAGES}/interface/planet.gif" width=16 height=16 class=res title="Planète"><script>putplanet("{planetid}","{commandment}","{g}","{s}","{p}",2);</script>[/planet_command]]
+	[[fleet_command]]<img src="{PATH_IMAGES}/interface/fleets.gif" width=16 height=16 class=res title="Flotte"><a href="fleet.asp?id={fleetid}">{commandment}</a>[/fleet_command]]
+	</td></tr>
+	</table>
+	</td>
+	<td valign=top>
+	<table class=clear>
+	[[bonus]]<tr><td class="[[positive]]plus[/positive]][[negative]]minus[/negative]]">
+	[[description14]]Production : Minerai[/description14]]
+	[[description15]]Production : Hydrocarbure[/description15]]
+	[[description16]]Production : Énergie[/description16]]
+	[[description17]]Formation : Travailleurs[/description17]]
+	[[description18]]Flottes : Vitesse[/description18]]
+	[[description19]]Flottes : Bouclier[/description19]]
+	[[description20]]Flottes : Manœuvrabilité[/description20]]
+	[[description21]]Flottes : Acquisition cibles[/description21]]
+	[[description22]]Flottes : Dégats augmentés[/description22]]
+	[[description23]]Flottes : Réduction signature[/description23]]
+	[[description24]]Bâtiments : Vitesse construction[/description24]]
+	[[description25]]Vaisseaux : Vitesse construction[/description25]]
+	&nbsp;{bonus}%</td></tr>
+	[/bonus]]
+	[[levelup]]<tr><td><a href="?a=skills&id={id}">Répartir les {points} points de compétences restants</a></td></tr>[/levelup]]
+	[[train]]<tr><td><a href="?a=train&id={id}" onclick="return confirmTrain('{prestige:n}')">Entrainement intensif pour <img src="{PATH_IMAGES}/interface/prestige.gif" width="16" height="16" class="res" title="Prestige">{prestige:n}</a></td></tr>[/train]]
+	[[cant_train]]<tr><td>Vous ne pouvez entrainer ce commandant qu'une fois par jour</td></tr>[/cant_train]]
+	[[cant_train_anymore]]<tr><td>Vous ne pouvez pas entrainer ce commandant plus</td></tr>[/cant_train_anymore]]
+	</table>
+	</td>
+</tr>
+[/commander]]
+[[nocommander]]<tr><td colspan=2 align=center>Aucun actuellement</td></tr>[/nocommander]]
+</table>
+[[recruitcommander]]Vous pouvez recruter un nouveau commandant.<br/><a href="?a=new">Veuillez remplir le profil que vous recherchez ici</a>.[/recruitcommander]]
+[/commanders]]
+
+[[available_commanders]]
+<br/>
+
+<table class="default" width="600">
+<tr class="title"><td colspan="2">Commandants pouvant être recrutés</td></tr>
+<tr class="header"><td width="220">Commandant</td><td>Compétences</td></tr>
+
+[[commander]]
+<tr class="smallitem">
+	<td valign="top">
+	<div class=left><img src="{PATH_IMAGES}/interface/commander.gif" width=10 height=6 class="smallicon" title="Commandant"><a name="{name}">{name}</a></div>
+	<div class=right>[[can_engage]]<a href="?a=engage&id={id}" onclick="return confirmEngageCommander({name:quote})">Embaucher</a>[/can_engage]][[cant_engage]]<span class="cant_engage">Embaucher</span>[/cant_engage]]</div><div class=clear></div>
+	<table class=clear style="margin-left:22px">
+	<tr><td>Salaire:</td><td><img src="{PATH_IMAGES}/interface/credits.gif" class=res title="Crédits" width=16 height=16> {salary:n}</td></tr>
+	<tr><td>Repéré le:</td><td>{added:dd mmm yyyy}</td></tr>
+	</table>
+	</td>
+	<td valign="top">
+	<table class="clear">
+	[[bonus]]<tr><td class="[[positive]]plus[/positive]][[negative]]minus[/negative]]">
+	[[description14]]Production : Minerai[/description14]]
+	[[description15]]Production : Hydrocarbure[/description15]]
+	[[description16]]Production : Énergie[/description16]]
+	[[description17]]Formation : Travailleurs[/description17]]
+	[[description18]]Flottes : Vitesse[/description18]]
+	[[description19]]Flottes : Bouclier[/description19]]
+	[[description20]]Flottes : Manœuvrabilité[/description20]]
+	[[description21]]Flottes : Acquisition cibles[/description21]]
+	[[description22]]Flottes : Dégats augmentés[/description22]]
+	[[description23]]Flottes : Réduction signature[/description23]]
+	[[description24]]Bâtiments : Vitesse construction[/description24]]
+	[[description25]]Vaisseaux : Vitesse construction[/description25]]
+	&nbsp;{bonus}%</td></tr>
+	[/bonus]]
+	[[levelup]]<tr><td>{points} points de compétences restants à distribuer</td></tr>[/levelup]]
+	</table>
+	</td>
+</tr>
+[/commander]]
+[[nocommander]]<tr><td colspan="2" align="center">Aucun actuellement</td></tr>[/nocommander]]
+</table>
+
+[/available_commanders]]
+</div>
+
+[[editcommander]]
+<script>
+function confirmAssign() {
+	var s = "";
+	var obj = document.getElementById('points');
+	if(obj.innerHTML != "0") s = "Note: Vous pourrez assigner les points restants plus tard.\r\n";
+	return confirm("Les compétences assignées à ce commandant seront définitives.\r\n"+s+"\r\nÊtes-vous sûr de votre choix ?");
+}
+
+var count=0;
+var skills=[];
+var points={maxpoints};
+
+function sk(i,j) {
+	var skill = skills[i];
+
+	var inp = $(skill.name);
+
+	if(points-j < 0) return false;
+
+	var pointsInSkill = parseInt(inp.value);
+
+	if(pointsInSkill + j >= 0 && points-j >= 0) {
+		pointsInSkill += j;
+
+		var obj = $('span'+skill.name);
+
+		if((skill.value + pointsInSkill*skill.inc).toFixed(2) > skill.max) {
+			alert('Limite atteinte pour cette compétence (' + ((skill.max-1)*100).toFixed(0) + ')');
+			return false;
+		}
+
+		obj.innerHTML = Math.round((skill.value + pointsInSkill*skill.inc - 1)*100);
+		inp.value = pointsInSkill;
+
+		points -= j;
+	}
+
+	$('points').innerHTML = points;
+
+	return false;
+}
+
+function addskill(name,label,increase,value,max) {
+	skills[count] = {
+					name:name,
+					inc:increase,
+					value:value,
+					max:max
+					};
+	document.write('<input type="hidden" id="'+name+'" name="'+name+'" value="0">');
+	document.write('<tr><td>'+label+' (max:' + Math.round((max-1)*100) + '%)'+'</td><td align="right" width="65" nowrap>+<span id="span'+name+'">' + Math.round((value-1)*100) + '</span> %</td><td width="1%" nowrap><a href="" onclick="return sk('+count+',1)" ondblclick="return sk('+count+',1)">+</a> <a href="" onclick="return sk('+count+',-1)" ondblclick="return sk('+count+',-1)">-</a></td></tr>');
+	count++;
+}
+</script>
+<div id="newcommander">
+<form action="?a=edit&id={commanderid}" method="post">
+<table class="default" width=550>
+<tr class="title"><td colspan=3><img src="{PATH_IMAGES}/interface/commander.gif" width=10 height=6 class="smallicon" title="Commandant">{name}</td></tr>
+<tr class="category"><td colspan=3>Flotte</td></tr>
+<script>
+	addskill('fleet_speed','Vitesse',0.02,{speed},{max_speed});
+	addskill('fleet_shield','Bouclier',0.02,{shield},{max_shield});
+	addskill('fleet_handling','Manœuvrabilité',0.05,{handling},{max_handling});
+	addskill('fleet_targeting','Acquisition cibles',0.05,{targeting},{max_targeting});
+	addskill('fleet_damages','Dégats augmentés',0.02,{damages},{max_damages});
+	addskill('fleet_signature','Atténuation signature',0.02,{signature},{max_signature});
+</script>
+<tr class="category"><td colspan="3">Planète</td></tr>
+<script>
+	addskill('ore','Production de Minerai',0.01,{ore},{max_ore});
+	addskill('hydrocarbon','Production d\'hydrocarbure',0.01,{hydrocarbon},{max_hydrocarbon});
+	addskill('energy','Production d\'énergie',0.1,{energy},{max_energy});
+	addskill('workers','Formation des travailleurs',0.1,{workers},{max_workers});
+
+	addskill('buildindspeed','Vitesse de construction des bâtiments',0.05,{build},{max_build});
+	addskill('shipconstructionspeed','Vitesse de construction des vaisseaux',0.05,{ship},{max_ship});
+</script>
+<tr><td colspan=3 align=right>Points restant: <span id="points">{maxpoints}</span></td></tr>
+<tr><td colspan=3 align=center><input type=submit value="Valider" onclick="return confirmAssign()"></td></tr>
+</table>
+</form>
+</div>
+[/editcommander]]

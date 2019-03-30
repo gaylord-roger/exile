@@ -1,0 +1,58 @@
+<script>
+var costs=new Array('{cost_lvl_0:n}','{cost_lvl_1:n}','{cost_lvl_2:n}','{cost_lvl_3:n}');
+
+function updateCost(obj)
+{
+	var selected = obj.selectedIndex;
+	document.getElementById("cost").innerHTML = costs[selected];
+}
+</script>
+<div id=intelligence>
+
+<div id=spyplanet>
+<table class=default width=650>
+<tr class=title><td>Espionner une planète</td></tr>
+<tr class=item>
+	<td><div class=indent>
+	Vous pouvez demander à espionner une planète en particulier.<br/>
+	En fonction du prix que vous êtes prêt à payer, vous pourrez obtenir de nombreux détails : vaisseaux au sol, bâtiments construits, présence d'un commandant et bien d'autres.
+	</div></td>
+</tr>
+<tr>
+	<td>
+	<dl class=spy>
+		<dt>Novice</dt><dd>Cet espion a 25% de chance de se faire repérer par la nation que vous espionnez,<br/>et aura peu de chance d'obtenir des informations stratégiques.</dd>
+		<dt>Initié</dt><dd>Cet espion a 10% de chance de se faire repérer par la nation que vous espionnez, <br/>et aura plus de chance d'obtenir des informations stratégiques.</dd>
+		<dt>Agent</dt><dd>Cet espion a 5% de chance de se faire repérer par la nation que vous espionnez, <br/>et obtiendra la plupart des informations possibles sur la planète.</dd>
+		<dt>Infiltrateur</dt><dd>Cet espion s'infiltrera au sein de la planète pour en connaître tous les secrets: <br/>Constructions en cours, nombre de bâtiments plus précis et bien plus.<br/>
+		Cette mission lui prendra du temps et le risque de se faire repérer est assez élevé.</dd>
+	</dl>
+	</td>
+</tr>
+<form method=post action="?a=spy">
+<tr>
+	<td align=center>Espionner la planète <input type="text" name="g" value="{g}" maxlength="2" size="2">&nbsp;<input type="text" name="s" value="{s}" maxlength="2" size="2">&nbsp;<input type="text" name="p" value="{p}" maxlength="2" size="2"> avec <select name="level" onchange="updateCost(this);">
+		<option value="0">Novice</option>
+		<option value="1">Initié</option>
+		<option value="2">Agent</option>
+		<option value="3">Infiltrateur</option>
+	</select> (<img src="{PATH_IMAGES}/interface/credits.gif" class="res" title="Crédits" width=16 height=16><span id="cost">{cost_lvl_0:n}</span>)
+	</td>
+</tr>
+<tr>
+	<td align=center><input type="submit" value="Espionner la planète"></td>
+</tr>
+</form>
+[[message]]
+<tr><td class="error">
+[[unexpected_error]]Erreur inattendue.[/unexpected_error]]
+[[not_enough_credits]]Vous n'avez pas assez de crédits.[/not_enough_credits]]
+[[planet_not_found]]Cette planète n'existe pas.[/planet_not_found]]
+[[own_planet]]Vous n'avez pas besoin de vous espionner.[/own_planet]]
+[[spying]]L'espionnage a déjà commencé, vous recevrez un rapport très prochainement.[/spying]]
+</td></tr>
+[/message]]
+</table>
+</div>
+
+</div>

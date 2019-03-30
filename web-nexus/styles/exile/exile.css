@@ -1,0 +1,412 @@
+@import 'reset.css';
+
+body {
+	background: url("/assets/space_bk.jpg") #4D4D57;
+/*	background: #4D4D57;*/
+	color:white;
+
+	font-family:Verdana,Arial;
+	font-size:11px;
+}
+
+
+/* link color */
+a { color: #ffa500; }
+a:link{ text-decoration: none; }
+a:visited{ text-decoration: none; }
+a:active{ text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3 { margin: 1em 0px; }
+h1 {
+	text-align:center; 
+	font-size:14px;
+}
+h2 {
+	font-size:13px; 
+	margin-top:2em;
+}
+h3 { font-size:12px; }
+
+p {
+	margin: 0.5em 0px;
+	padding:0;
+}
+p.submit {
+	text-align:center;
+}
+p.center {
+	text-align:center;
+}
+
+div.clearer { clear: both; }
+
+div.header {
+	font-size:12px;
+	font-weight:bold;
+	margin-top:2em;
+}
+div.header.first {
+	margin-top:4px;
+}
+
+table { font-family:Verdana,Arial; font-size:11px; }
+
+input {
+	background-color:#393939;
+	border:#556 1px solid;
+	color:#fff;
+}
+
+select {
+	background:#393939;
+	border:#556 1px solid;
+	color:#fff;
+}
+
+.checkbox, .radio { 
+	margin:0px 4px 0px 0px; padding:0;
+	border:0;
+	background-color: transparent;	
+}
+
+#page {
+	width:798px;
+	margin:6px auto;
+	border:#222 1px solid;
+	padding:0;
+}
+
+#header {
+	position:relative;
+	background: url("/assets/header.jpg") no-repeat #303030;
+	height:280px;
+	border-bottom:#222 1px solid;
+}
+
+#header div.form-login {
+	position:absolute;
+	top:50px;
+	left:474px;
+}
+
+#header div.form-logged {
+	position:absolute;
+	top:50px;
+	left:468px;
+}
+
+#header div.form-logged span.username {
+	font-weight:bold;
+}
+
+#header form table tr td {
+	padding:2px;
+}
+
+#header a.lostpassword {
+	font-size:9px;
+}
+
+#header div.hz-ad {
+	position:absolute;
+	top:187px;
+	left:34px;
+	width:730px;
+}
+
+#header div.topmenu {
+	position:absolute;
+	left:96px;
+	top:6px;
+}
+
+#header div.toprightmenu {
+	position:absolute;
+	left:700px;
+	top:6px;
+}
+
+#header input.logininput {
+	width:175px;
+}
+
+#content {
+	background:#303030;
+	padding:10px;
+}
+
+#content .main {
+	float:left;
+	width:650px;
+	padding:10px;
+}
+
+#content .rightad {
+	float:right;
+	width:120px;
+	margin-top:22px;
+	margin-bottom:4px;
+}
+
+#footer {
+	position:relative;
+	background: url("/assets/footer.jpg") no-repeat #303030;
+	height:128px;
+}
+#footer a.button {
+	position:absolute;
+	display:block;
+	left:308px;
+	top:36px;
+	width:176px;
+	height:20px;
+	color:#ffffff;
+	text-decoration: none;
+	text-align:center;
+	font-weight:bold;
+	padding-top:8px;
+	margin:0;
+}
+
+#footer .links {
+	position:absolute;
+	top:108px;
+	right:6px;
+}
+
+#footer .copyright {
+	position:absolute;
+	color:#777;
+	font-size:9px;
+	top:108px;
+	left:6px;
+}
+#footer .copyright a {
+	color:#777;
+	text-decoration: none;
+}
+
+input.email {
+	width:200px;
+}
+
+input.button {
+	width:100px;
+}
+
+input.registerinput {
+	width:250px;
+}
+
+/* fieldset */
+fieldset {
+	border:1px solid #aaa;
+	margin-top:5px; padding:10px 10px 5px 10px;
+}
+
+legend { color:#FFA500; }
+
+/* error on login/register */
+legend.error { color: #f00; }
+
+.error, .warning {
+	color:#f00;
+	font-weight:bold;
+	text-align:center;
+}
+
+dl {
+	margin-top:1em;
+	padding:1em 0 0 0;
+	border-top: solid 1px #999;
+}
+
+dl.first {
+	border-top:0;
+	margin-top:4px;
+	padding:0 0 0 0;
+}
+
+dl dt {
+	font-size:11px;
+	font-weight:bold;
+}
+
+dl dd {
+	padding-top:0.5em;
+}
+
+ul {
+	list-style-type:disc;
+	padding-top:5px;
+	padding-left: 20px;
+	margin-bottom:10px;
+	margin-left:0;
+}
+ul li { line-height:13px; }
+
+.screenshots {
+	margin:15px 15px;
+	padding:10px 5px;
+	border:1px solid #555;
+	background-color:#333;
+}
+
+.news { width:320px; }
+.left { float:left; }
+.right { float:right; }
+
+#register table tr td {
+	padding:2px;
+}
+
+#registered {
+	text-align:center;
+}
+
+#lostpassword {
+}
+
+#passwordsent {
+	text-align:center;
+}
+
+#passwordreset {
+	text-align:center;
+}
+
+/*
+ * Servers
+ */
+#servers {
+	border:1px solid #556;
+	background:#292929;
+	margin:0 auto;
+}
+
+#servers .title {
+	background:#292929;
+	text-align:center;
+	border-bottom:1px solid #556;
+	padding:4px;
+}
+
+#servers .server-list {
+	background:#292929;
+	border-right:1px solid #556;
+	width:300px;
+	padding:4px;
+}
+
+#servers .server-list table {
+	width:100%;
+}
+
+#servers .server-list table tr td {
+	padding-top:2px;
+	padding-bottom:2px;
+}
+
+#servers .server-list table tr.selected {
+	background:#353535;
+}
+
+#servers .server-list table tr:hover {
+	background:#3D3D3D;
+	cursor:pointer;
+}
+
+#servers .server-panel {
+	border-left:1px solid #556;
+	background:#292929;
+	width:450px;
+	padding:4px;
+}
+
+#servers #connect {
+	display:none;
+	margin-top:6px;
+	text-align:center;
+}
+
+/*
+ * Awards
+ */
+#awards {
+	border:1px solid #556;
+	background:#292929;
+	margin:0 auto;
+}
+
+#awards .title {
+	background:#292929;
+	text-align:center;
+	border-bottom:1px solid #556;
+	padding:4px;
+}
+
+
+#account-options {
+}
+
+#account-options table tr td {
+	padding:2px;
+}
+
+#password-changed {
+	text-align:center;
+}
+
+#password-validation {
+	text-align:center;
+}
+
+#email-changed {
+	text-align:center;
+}
+
+#email-validation {
+	text-align:center;
+}
+
+/*
+ * banners
+ */
+#banners div.bar-code {
+	margin-top:10px;
+}
+
+#banners div.bar-code img {
+	float:left;
+}
+#banners div.bar-code input {
+	background-color:#393939;
+	border:#556 1px solid;
+	color:#fff;
+	font-family:Verdana,Arial;
+	font-size:9px;
+	width:400px;
+	margin-left:16px;
+}
+
+
+#banners div.banner-code {
+	margin-top:25px;
+}
+
+#banners div.banner-code img {
+	float:left;
+}
+
+#banners div.banner-code textarea {
+	background-color:#393939;
+	border:#556 1px solid;
+	color:#fff;
+	font-family:Verdana,Arial;
+	font-size:9px;
+	overflow:auto;
+	float:right;
+	width:270px;
+	height:60px;
+}

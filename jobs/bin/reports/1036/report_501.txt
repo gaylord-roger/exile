@@ -1,0 +1,2 @@
+Cargaison reçue
+Une flotte alliée de "%username%" vient de décharger des ressources sur notre planète %planetname% (%g%:%s%:%p%).

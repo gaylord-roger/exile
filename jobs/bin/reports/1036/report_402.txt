@@ -1,0 +1,2 @@
+Plus de matériau à recycler
+La flotte "%fleetname%" a terminé le recyclage aux coordonnées (%g%:%s%:%p%), il n'y a plus de ressources dans les parages.

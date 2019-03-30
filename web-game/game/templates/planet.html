@@ -1,0 +1,245 @@
+<script>
+function confirmAbandon() { return window.confirm('Êtes-vous sûr de vouloir abandonner la planète "{planet_name}" ?'); }
+function confirmScientists(id) { return window.confirm('Êtes-vous sûr de vouloir renvoyer '+getval('scientists'+id)+' scientifiques ?'); }
+function confirmSoldiers(id) { return window.confirm('Êtes-vous sûr de vouloir renvoyer '+getval('soldiers'+id)+' soldats ?'); }
+function confirmWorkers(id) { return window.confirm('Êtes-vous sûr de vouloir renvoyer '+getval('workers'+id)+' travailleurs ?'); }
+</script>
+
+<div id="planet">
+
+<div id="renamebox" class="hidden">
+	<form action='?planet={planet_id}' method='post'>
+	<input type='hidden' name='action' value='rename'>
+	<input type='text' class=editbox name='name' size=28 maxlength=16 value='{planet_name}'>
+	&nbsp;<input type='submit' value='OK' class=submitok>
+	&nbsp;<img src='{PATH_IMAGES}/interface/close.gif' width=12 height=12 title='Fermer' class=close onclick='hide();'>
+	</form>
+</div>
+
+<div id="scientistsbox" class="hidden">
+	<form action='?planet={planet_id}' method='post'>
+	<input type='hidden' name='action' value='firescientists'>
+	<input type='hidden' name='planet' value='{planet_id}'>
+	<input type='text' class=editbox name='amount' id="scientistsXXX" size=8 maxlength=8 value='0'>
+	&nbsp;<input type='submit' value='OK' class=submitok onclick="return confirmScientists(XXX)">
+	&nbsp;<img src='{PATH_IMAGES}/interface/close.gif' width=12 height=12 title='Fermer' class=close onclick='hide();'>
+	</form>
+</div>
+
+<div id="soldiersbox" class="hidden">
+	<form action='?planet={planet_id}' method='post'>
+	<input type='hidden' name='action' value='firesoldiers'>
+	<input type='text' class=editbox name='amount' id="soldiersXXX" size=8 maxlength=8 value='0'>
+	&nbsp;<input type='submit' value='OK' class=submitok onclick="return confirmSoldiers(XXX)">
+	&nbsp;<img src='{PATH_IMAGES}/interface/close.gif' width=12 height=12 title='Fermer' class=close onclick='hide();'>
+	</form>
+</div>
+
+<div id="workersbox" class="hidden">
+	<form action='?planet={planet_id}' method='post'>
+	<input type='hidden' name='action' value='fireworkers'>
+	<input type='text' class=editbox name='amount' id="workersXXX" size=8 maxlength=8 value='0'>
+	&nbsp;<input type='submit' value='OK' class=submitok onclick="return confirmWorkers(XXX)">
+	&nbsp;<img src='{PATH_IMAGES}/interface/close.gif' width=12 height=12 title='Fermer' class=close onclick='hide();'>
+	</form>
+</div>
+
+<div id="commandersbox" class="hidden">
+	<form action='?planet={planet_id}' method='post'>
+	<input type='hidden' name='action' value='assigncommander'>
+	<select name='commander' class="editbox">
+	[[unassign]]<option value='0'>Renvoyer</option>[/unassign]]
+	[[none]]<option value='0'>Aucun</option>[/none]]
+	[[optgroup]]<optgroup label='[[fleet]]sur Flottes[/fleet]][[planet]]sur Planètes[/planet]][[none]]Non affectés[/none]]'>
+		[[cmd_option]]<option value={cmd_id}[[selected]] selected[/selected]]>&middot;&nbsp;{cmd_name}[[assigned]] ({name})[/assigned]][[unavailable]] (Indisponible)[/unavailable]]</option>[/cmd_option]]
+	</optgroup>[/optgroup]]
+	</select>
+	&nbsp;<input type='submit' value='OK' class=submitok>
+	&nbsp;<img src='{PATH_IMAGES}/interface/close.gif' width=12 height=12 title='Fermer' class=close onclick='hide()'>
+	</form>
+</div>
+	
+<table border="0" cellspacing="0" cellpadding="0">
+<tr><td align="center">
+
+<table class="default" width="650">
+<tr>
+	<td rowspan=9 width="1%" align="center"><img src="{PATH_IMAGES}/planets/p{planet_img}.gif" class="smallplanet" width=64 height=64><br/>
+	<div align="center">
+	<form method="post" action="planet.asp?planet={planet_id}">
+	<input type="hidden" name="action" value="abandon">
+	<input type="submit" value="Abandonner" onclick="return confirmAbandon()">
+	</form></div>
+	</td>
+	<td width="1%">Planète</td>
+	<td id="renameref">
+	<div style="float:left">{planet_name}</div>
+	<div align="right"><a href="#" title="Renommer la planète" onclick="return show('renameref','renamebox')">Renommer</a></div></td>
+</tr>
+<tr>
+	<td>Localisation</td>
+	<td><a href="map.asp?g={g}&s={s}">{g}.{s}.{p}</a></td>
+</tr>
+<tr>
+	<td>Commandant</td>
+
+	<td id="cmdref">
+	<div style="float:left"><img src="{PATH_IMAGES}/interface/commander.gif" class="smallicon" width=10 height=6 title="Commandant">[[nocommander]]-[/nocommander]][[commander]]{commander}[/commander]]</div>
+	<div align="right"><a href="#" title="Affecter un nouveau commandant" onclick="return show('cmdref','commandersbox')">Changer</a></div></td>
+</tr>
+<tr>
+	<td>Terrain</td>
+	<td>{floor_occupied:n} / {floor:n}</td>
+</tr>
+<tr>
+	<td>Espace</td>
+	<td>{space_occupied:n} / {space:n}</td>
+</tr>
+<tr>
+	<td>Scientifiques</td>
+	<td id="scientistsref">
+	<div style="float:left">{scientists:n} / {scientists_capacity:n}</div>
+	<div align="right"><a href="#" title="Renvoyer le nombre indiqué de scientifiques" onclick="return show('scientistsref','scientistsbox')">Renvoyer</a></div></td>
+</tr>
+<tr>
+	<td>Soldats</td>
+	<td id="soldiersref">
+	<div style="float:left">{soldiers:n} / {soldiers_capacity:n}</div>
+	<div align="right"><a href="#" title="Renvoyer le nombre indiqué de soldats" onclick="return show('soldiersref','soldiersbox')">Renvoyer</a></div></td>
+</tr>
+<tr>
+	<td>Travailleurs</td>
+	<td id="workersref">
+	<div style="float:left">{workers:n} / {workers_capacity:n}</div>
+	<div align="right"><a href="#" title="Renvoyer le nombre indiqué de travailleurs" onclick="return show('workersref','workersbox')">Renvoyer</a></div></td>
+</tr>
+<tr>
+	<td>Formation</td>
+	<td><div style="float:left">{growth:0.0}% par heure</div>
+	<div align="right">[[suspend]]<a href="?a=suspend" title="Suspendre le recrutement de nouveaux travailleurs">Suspendre</a>[/suspend]][[resume]]<a href="?a=resume" title="Reprendre le recrutement de nouveaux travailleurs">Reprendre</a>[/resume]]</div></td>
+</tr>
+
+[[rename_bad_name]]
+<tr><td colspan="3"><p class="error">Veuillez spécifier un nom de planète valide.</p></td></tr>
+[/rename_bad_name]]
+
+</table>
+
+</td></tr>
+
+<tr><td>
+<br/>
+
+<form action="?planet={planet_id}" method="post">
+<input type="hidden" name="action" value="resources_price"/>
+<table class="default" width="100%">
+<tr class="category">
+	<td colspan="2">Achat des ressources</td>
+</tr>
+<tr class="item" width="1%">
+	<td>Prix pour 1000 minerai</td><td><input type="text" name="buy_ore" value="{buy_ore}" maxlength="5"/></td>
+</tr>
+<tr class="item" width="1%">
+	<td>Prix pour 1000 hydrocarbure</td><td><input type="text" name="buy_hydrocarbon" value="{buy_hydrocarbon}" maxlength="5"/></td>
+</tr>
+<tr class="item">
+	<td colspan="2" align="center"><input type="submit" value="Envoyer"></td>
+</tr>
+</table>
+</form>
+
+<br/>
+
+</td></tr>
+
+<tr><td>
+
+<table class="default" width="100%">
+<tr class="category">
+	<td>Bâtiments en construction</td>
+</tr>
+<tr class="item">
+<td>
+	<table class="clear" width="100%">
+
+	[[building]]
+	<tr>
+		<td>[[destroy]]<span class="destroy">Destruction de [/destroy]]<a href="buildings.asp#{buildingid}" [[destroy]] class="destroy" [/destroy]] title="Voir les infrastructures">{building}</a> (<script>putcountdown1({time}, "terminé", "buildings.asp#{buildingid}");</script>)[[destroy]]</span>[/destroy]]</td>
+	</tr>
+	[/building]]
+	[[nobuilding]]
+	<tr>
+		<td><a href="buildings.asp" title="Voir les infrastructures">Aucune construction en cours</a></td>
+	</tr>
+	[/nobuilding]]
+
+	</table>
+</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td>
+
+<table class="default" width="100%">
+<tr class="category">
+	<td>Chantier spatial</td>
+</tr>
+<tr class="item">
+<td>
+	<table class="clear" width="100%">
+	[[ship]]
+	<tr>
+		<td>[[recycle]]Recyclage de [/recycle]]<a href="shipyard.asp#{shipid}" title="Voir le chantier spatial">{ship}</a> (<script>putcountdown1({time}, "terminé", "shipyard.asp#{shipid}");</script>)</td>
+	</tr>
+	[/ship]]
+	[[noship]]
+	<tr>
+		<td><a href="shipyard.asp" title="Voir le chantier spatial">Aucune construction en cours</a></td>
+	</tr>
+	[/noship]]
+	</table>
+</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td>
+
+<table class="default" width="100%">
+<tr class="category">
+	<td>Flottes en orbite</td>
+</tr>
+<tr class="item">
+<td>
+	<table class="clear" width="100%">
+
+	[[fleet]]
+	<tr>
+		<td nowrap>[[owner]]<a class="self" href="fleet.asp?id={id}" title="Inspecter la flotte {name}">{name}</a>[/owner]]
+			[[ally]]<span class="ally"><b>{name}</b></span>[/ally]]
+			[[friend]]<span class="friend"><b>{name}</b></span>[/friend]]
+			[[enemy]]<span class="enemy"><b>{name}</b></span>[/enemy]] ({signature:n})
+		</td>
+		<td>
+		[[fighting]]<span class="fighting">En combat</span>[/fighting]]
+		[[patrolling]]En patrouille[/patrolling]]
+		</td>
+
+		<td>
+		<img src="{PATH_IMAGES}/interface/commander.gif" class="smallicon" width=10 height=6 title="Commandant">[[nocommander]]-[/nocommander]][[commander]]<a href="commanders.asp#{commandername}">{commandername}</a>[/commander]]
+		</td>
+	</tr>
+	[/fleet]]
+	[[nofleet]]
+	<tr>
+		<td><a href="orbit.asp" title="Voir l'orbite de la planète">Aucune flotte près de la planète</a></td>
+	</tr>
+	[/nofleet]]
+	</table>
+</td></tr>
+</table>
+
+</td></tr>
+</table>
+</div>

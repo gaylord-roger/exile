@@ -1,0 +1,115 @@
+<script type="text/javascript">
+/* <![CDATA[ */
+var servers=[];
+<b:item>
+servers[<t:id/>] = <t:server/>;
+</b:item>
+var selectedServerId = null;
+function formatDate(d) {
+	var day = d.getDate();
+	var month = d.getMonth();
+	var year = d.getFullYear();
+
+	return day + ' ' + Language.shortMonthNames[month] + ' ' + year + ' ' + d.getHours().lz() + ':' + d.getMinutes().lz() + ':' + d.getSeconds().lz();
+}
+
+function selectServer(id, remember) {
+	if(selectedServerId != null) {
+		$('item'+selectedServerId).removeClassName('selected');
+		selectedServerId = null;
+	}
+
+	var item = $('item'+id);
+
+	if(item != null) {
+		item.addClassName('selected');
+		selectedServerId = id;
+
+		var srv = servers[id];
+		$('server-description').innerHTML = $L('servers.description', {srv: srv.name});
+
+		if(srv.start != null) {
+			$('server-starttime').innerHTML = $L('servers.starttime', {datetime: formatDate(srv.start)});
+			$('server-starttime').style.display = 'block';
+		}
+		else
+			$('server-starttime').style.display = 'none';
+
+		if(srv.stop != null) {
+			$('server-stoptime').innerHTML = $L('servers.stoptime', {datetime: formatDate(srv.stop)});
+			$('server-stoptime').style.display = 'block';
+		}
+		else
+			$('server-stoptime').style.display = 'none'
+
+		$('stats-players').style.display = 'none';
+		$('stats-online').style.display = 'none';
+
+		new Ajax.Request('/servers.asp', {
+			method: 'get',
+			parameters: {getstats:id},
+			onSuccess: function(transport) {
+				var result = transport.responseText.evalJSON();
+				if(result.players) {
+					$('stats-players').innerHTML = $L('stats.players', {players: result.players});
+					$('stats-players').style.display = 'block';
+
+					$('stats-online').innerHTML = $L('stats.online', {players: result.players_online});
+					$('stats-online').style.display = 'block';
+				}
+			},
+			onFailure: function() {
+			}
+		});
+
+		if(srv.redirect)
+			$('connect-link').href = srv.url;
+		else
+			$('connect-link').href = srv.url + '/connect.asp';
+
+		$('connect').style.display = 'block';
+
+		if(remember)
+			new Ajax.Request('/servers.asp', { method: 'get', parameters: {setsrv:id} });
+	}
+	else
+		$('connect').style.display = 'none';
+
+	return false;
+}
+/* ]]> */
+</script>
+<table id="servers">
+	<tr><td colspan="2" class="title">Selectionnez un serveur dans la liste</td></tr>
+	<tr>
+		<td class="server-list">
+			<table>
+			<b:item>
+			<tr id="item<t:id/>" onclick="return selectServer(<t:id/>, true)">
+				<td align="left"><a href="#" onclick="return selectServer(<t:id/>, true)"><t:name format='html'/></a></td>
+				<td align="right"><b:type0>Continue</b:type0><b:type1>Continue</b:type1><b:type2>Par round</b:type2></td>
+			</tr>
+			</b:item>
+			</table>
+		</td>
+		<td class="server-panel" valign="top">
+			<div id="server-description"></div>
+			<div id="server-starttime"></div>
+			<div id="server-stoptime"></div>
+			<div id="stats-players"></div>
+			<div id="stats-online"></div>
+			<div id="connect"><a id="connect-link" href="#" target="_top">Se connecter</a></div>
+		</td>
+	</tr>
+</table>
+<br/>
+<div><small>
+Continue: Serveur de type classique<br/>
+Par round: Serveur rapide à durée limitée, le Game Over est définitif et tous les joueurs commencent en même temps.
+</small>
+</div>
+<script type="text/javascript">
+/* <![CDATA[ */
+selectServer(<t:lastserverid/>, false);
+/* ]]> */
+</script>

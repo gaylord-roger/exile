@@ -1,0 +1,32 @@
+<table width=750>
+<tr>
+<td align=center>
+	<div>
+	<table class="default">
+	<tr class="item"><td>
+	<table class="clear">
+		<tr>
+			<td align=left rowspan=4><img src="{PATH_IMAGES}/interface/wallet.jpg" class="wallet" width=64 height=64></td>
+			<td>Solde: {credits:n}</td>
+		</tr>
+		<tr><td>Dernière 24 heures: {last24h:n}</td></tr>
+		<tr><td>Taxes: {tax:0.0}%[[notax]] (exonéré)[/notax]]</td></tr>
+	</table>
+	</td></tr>
+	</table>
+	</div>
+
+	<ul class="htabs">
+		[[cat1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Journal</a></li>[/cat1]]
+		[[cat2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Financement</a></li>[/cat2]]
+		[[cat3]]<li[[selected]] class="active"[/selected]]><a href="?cat=3">Don</a></li>[/cat3]]
+		[[cat4]]<li[[selected]] class="active"[/selected]]><a href="?cat=4">Taxes</a></li>[/cat4]]
+	</ul>
+	</div>
+
+	<div>
+	{content}
+	</div>
+</td>
+</tr>
+</table>

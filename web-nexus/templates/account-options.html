@@ -1,0 +1,74 @@
+<script type="text/javascript">
+/* <![CDATA[ */
+function submitNewPassword() {
+	if(!validatePassword($('new_password').value)) {
+		alert($L('options.password_invalid'));
+		return false;
+	}
+
+	if($('new_password').value != $('new_password2').value) {
+		alert($L('options.password_dont_match'));
+		return false;
+	}
+
+	return true;
+}
+<t:validatePassword/>
+/* ]]> */
+</script>
+<div id="account-options">
+	<b:error>
+		<fieldset>
+		<legend class="error">&nbsp;Erreur&nbsp;</legend>
+		<div>
+			<p class="error">
+			<b:email_banned>Les emails provenant de ce nom de domaine ne sont pas autorisés</b:email_banned>
+			<b:email_exists>Cette adresse e-mail est déjà utilisée pour un autre compte</b:email_exists>
+			<b:email_invalid>Veuillez vérifier votre adresse e-mail</b:email_invalid>
+			<b:password_invalid>Veuillez vérifier votre mot de passe</b:password_invalid>
+			<b:newpassword_invalid>Votre nouveau mot de passe doit être composé de 6 à 16 caractères</b:newpassword_invalid>
+			<b:password_dont_match>Les mots de passe ne correspondent pas, veuillez vérifier votre nouveau mot de passe</b:password_dont_match>
+			<b:unknown>Une erreur est survenue. <t:error/></b:unknown>
+			</p>
+		</div>
+		</fieldset>
+	</b:error>
+
+	<fieldset>
+	<legend>&nbsp;Modification de votre e-mail&nbsp;</legend>
+	<div>
+		<form method="post" action="/account-options.asp" autocomplete="off">
+		<p>
+		Veuillez utiliser ce formulaire pour modifier votre adresse e-mail.
+		</p>
+		<table>
+			<tr><td align="right"><label for="email_password">Votre mot de passe: </label></td><td><input type="password" class="registerinput" name="old_password" id="email_password" value="<t:password format='html'/>" maxlength="16"/></td></tr>
+			<tr><td align="right"><label for="email">Votre nouvelle adresse e-mail: </label></td><td><input type="text" class="registerinput" name="email" id="email" value="<t:email format='html'/>" maxlength="64"/></td></tr>
+		</table>
+		<p class="submit">
+			<input type="submit" name="changeemail" class="button" value="Valider"/>
+		</p>
+		</form>
+	</div>
+	</fieldset>
+
+	<fieldset>
+	<legend>&nbsp;Modification de votre mot de passe&nbsp;</legend>
+	<div>
+		<form method="post" action="/account-options.asp" onsubmit="return submitNewPassword()" autocomplete="off">
+		<p>
+		Veuillez utiliser ce formulaire pour modifier votre mot de passe.
+		</p>
+		<table>
+			<tr><td align="right"><label for="old_password">Votre mot de passe: </label></td><td><input type="password" class="registerinput" name="old_password" id="old_password" value="<t:password format='html'/>" maxlength="16"/></td></tr>
+			<tr><td align="right"><label for="new_password">Votre nouveau mot de passe: </label></td><td><input type="password" class="registerinput" name="new_password" id="new_password" value="<t:new_password format='html'/>" maxlength="16"/></td></tr>
+			<tr><td align="right"><label for="new_password2">Confirmation du mot de passe: </label></td><td><input type="password" class="registerinput" name="new_password2" id="new_password2" value="<t:new_password2 format='html'/>" maxlength="16"/></td></tr>
+		</table>
+		<p class="submit">
+			<input type="submit" name="changepassword" class="button" value="Valider"/>
+		</p>
+		</form>
+	</div>
+	</fieldset>
+
+</div>

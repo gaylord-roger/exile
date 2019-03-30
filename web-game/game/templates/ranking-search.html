@@ -1,0 +1,22 @@
+<script>
+[[comment]]Show/hide nation editbox[/comment]]
+function checkOptions(b){ document.getElementById("searchnation").style.display = (display = b?"none":""); }
+</script>
+
+<form name="ranksearch" method="post" action="ranking-search.asp">
+<table class="default">
+<tr class="smallitem">
+<td>Rechercher :</td>
+<td>
+	<input type="radio" class="radio" name="type" value="nation" id="nation" checked onClick=checkOptions(false);><label for="nation">Nation</label>&nbsp;
+	<input type="radio" class="radio" name="type" value="alliance" id="alliance" onClick=checkOptions(true);><label for="alliance">Alliance</label>
+</td></tr>
+<tr class="item"><td colspan="2">
+<table class="clear">
+<tr id="searchnation"><td align="left">Par nom :</td><td><input type="text" name="nationword" size="14" maxlength="12" value=""></td></tr>
+<tr><td>Par alliance/tag :</td><td><input type="text" name="allianceword" size="14" maxlength="12" value=""></td></tr>
+</table>
+</td></tr>
+<tr class="smallitem"><td colspan="2" align="center"><input type="submit" value="Rechercher"></td></tr>
+</table>
+</form>

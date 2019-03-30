@@ -1,0 +1,220 @@
+<script>
+function confirmAbandon() { return window.confirm('Êtes-vous sûr de vouloir abandonner la planète "{planet}" ?'); }
+
+
+function get_left(obj)
+{
+	var left = obj.offsetLeft;
+	while((obj = obj.offsetParent) != null){ left += obj.offsetLeft; }
+	return left;
+}
+
+function get_top(obj)
+{
+	var top = obj.offsetTop;
+	while((obj = obj.offsetParent) != null){ top += obj.offsetTop; }
+	return top;
+}
+
+function showmenu(objet,infos)
+{	
+	var menu = document.getElementById("popup2");
+	menu.style.visibility = "hidden";
+
+	var obj = document.getElementById(objet);
+
+	menu.innerHTML = "<table class='default' cellpadding=0 cellspacing=0 style='background:none;margin:0;padding:0;border:0'><tr style='margin:0;padding:0;border:0;'><td nowrap  style='margin:0;padding:2px 0px 1px 0px;border:0'>"+infos+"</td></tr></table>"
+
+	menu.style.left = get_left(obj)+10;
+	menu.style.top = get_top(obj)+1;
+
+	document.getElementById("commanderAssign").style.visibility = "hidden";
+	menu.style.visibility = "visible";
+}
+
+function hidemenu()
+{
+	var menu = document.getElementById("popup2");
+	menu.style.visibility = "hidden";
+	menu.style.left = 0;
+	menu.style.top = 0;
+	menu.style.width = 0;
+	menu.innerHTML = "";
+	document.getElementById("commanderAssign").style.visibility = "visible";
+}
+
+function changemenu(objet,infos)
+{
+	var menu = document.getElementById("popup2");
+	if (menu.style.visibility=="visible" )
+	{ hidemenu(); }
+	else { showmenu(objet,infos); }
+}
+
+window.onresize=hidemenu;
+
+</script>
+
+<div id="popup2" style="position:absolute; z-index:100"></div>
+
+<div id="planet">
+<table border=0 cellspacing=0 cellpadding=0>
+<tr><td align=center>
+
+<table class="default" width="100%">
+<tr>
+	<form method="post" action="planet.asp">
+	<input type="hidden" name="action" value="rename">
+	<td rowspan=8><img src="{PATH_IMAGES}/planets/01.jpg"></td>
+	<td>Planète</td>
+	<td><input type="text" name="name" size=28 maxlength=16 value="{planet}"></td>
+	<td><input type="submit" value="Renommer"></td>
+	</form>
+</tr>
+<tr>
+	<td>Localisation</td>
+	<td colspan=2><a href="map.asp?g={g}&s={s}">{g}:{s}:{p}</a></td>
+</tr>
+<tr>
+	<td>Commandant</td>
+	<script>
+	var cmdlist="<form action='planet.asp' method='post'>"+
+	"<input type='hidden' name='action' value='assigncommander'>"+
+	"<select name='commander'>"+
+	"[[unassign]]<option value='0'>Renvoyer</option>[/unassign]][[none]]<option value='0'>Aucun</option>[/none]]"+
+	"[[optgroup]]<optgroup label='[[fleet]]sur Flottes[/fleet]][[planet]]sur Planètes[/planet]][[none]]Non affectés[/none]]'>"+
+	"[[cmd_option]]<option value={cmd_id}[[selected]] selected[/selected]]>&middot;&nbsp;{cmd_name}[[assigned]] ({name})[/assigned]][[unavailable]] (Indisponible)[/unavailable]]</option>[/cmd_option]]"+
+	"</optgroup>[/optgroup]]"+
+	"</select>&nbsp;<input type='submit' value='OK' style='font-size:10;margin:0;padding:0;'>&nbsp;<img src='{PATH_IMAGES}/interface/close.gif' width=12 height=12 title='Fermer' style='vertical-align:center;' onclick='hidemenu();'></form>"
+	</script>
+	<td colspan=2 id="cmdref"><div width="100%"><div style="float:left"><img src="{PATH_IMAGES}/interface/commander.gif" width=10 height=6 class="smallicon" title="Commandant">[[nocommander]]-[/nocommander]][[commander]]{commander}[/commander]]</div><div style="float:right" align="right">
+	[[ondev]]<div id="commanderAssign"><a href="#" onclick="changemenu('cmdref',cmdlist)">Affecter</a></div>[/ondev]]</div></div></td>
+</tr>
+<tr>
+	<td>Terrain</td>
+	<td colspan=2>{floor_occupied:n}/{floor:n}</td>
+</tr>
+<tr>
+	<td>Espace</td>
+	<td colspan=2>{space_occupied:n}/{space:n}</td>
+</tr>
+<tr>
+	<td>Scientifiques</td>
+	<td colspan=2>{scientists:n}/{scientists_capacity:n}</td>
+</tr>
+<tr>
+	<td>Soldats</td>
+	<td colspan=2>{soldiers:n}/{soldiers_capacity:n}</td>
+</tr>
+<tr>
+	<td>Travailleurs</td>
+	<td colspan=2>{workers:n}/{workers_capacity:n}</td>
+</tr>
+<tr>
+	<form method="post" action="planet.asp">
+	<input type="hidden" name="action" value="abandon">
+	<td align=center><input type="submit" value="Abandonner" onclick="return confirmAbandon()"></td>
+	</form>
+	<td>Croissance</td>
+	<td colspan=2>{growth:0.0}% par heure</td>
+</tr>
+
+[[rename_bad_name]]
+<tr><td colspan="4"><p class="error">Veuillez spécifier un nom de planète valide.</p></td></tr>
+[/rename_bad_name]]
+
+</table>
+
+</td></tr>
+<tr><td>
+
+<table class="default" width="100%">
+<tr class="category">
+	<td>Bâtiments en construction</td>
+</tr>
+<tr class="item">
+<td>
+	<table class="clear" width="100%">
+
+	[[building]]
+	<tr>
+		<td><a href="buildings.asp#{buildingid}" title="Voir les infrastructures">{building}</a> (<script>putcountdown1({time}, "terminé", "buildings.asp#{buildingid}");</script>)</td>
+	</tr>
+	[/building]]
+	[[nobuilding]]
+	<tr>
+		<td><a href="buildings.asp" title="Voir les infrastructures">Aucune construction en cours</a></td>
+	</tr>
+	[/nobuilding]]
+
+	</table>
+</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td>
+
+<table class="default" width="100%">
+<tr class="category">
+	<td>Vaisseaux en construction</td>
+</tr>
+<tr class="item">
+<td>
+	<table class="clear" width="100%">
+	[[ship]]
+	<tr>
+		<td><a href="shipyard.asp#{shipid}" title="Voir le chantier spatial">{ship}</a> (<script>putcountdown1({time}, "terminé", "shipyard.asp#{shipid}");</script>)</td>
+	</tr>
+	[/ship]]
+	[[noship]]
+	<tr>
+		<td><a href="shipyard.asp" title="Voir le chantier spatial">Aucune construction en cours</a></td>
+	</tr>
+	[/noship]]
+	</table>
+</td>
+</tr>
+</table>
+
+</td></tr>
+<tr><td>
+
+<table class="default" width="100%">
+<tr class="category">
+	<td>Flottes en orbite</td>
+</tr>
+<tr class="item">
+<td>
+	<table class="clear" width="100%">
+
+	[[fleet]]
+	<tr>
+		<td nowrap>[[owner]]<a class="self" href="fleet.asp?id={id}" title="Inspecter la flotte {name}">{name}</a>[/owner]]
+			[[ally]]<span class="ally"><b>{name}</b></span>[/ally]]
+			[[friend]]<span class="friend"><b>{name}</b></span>[/friend]]
+			[[enemy]]<span class="enemy"><b>{name}</b></span>[/enemy]] ({signature})
+		</td>
+		<td>
+		[[fighting]]<span class="fighting">En combat</span>[/fighting]]
+		[[patrolling]]En patrouille[/patrolling]]
+		</td>
+
+		<td>
+		[[commander]]<a href="commanders.asp#{commandername}">{commandername}</a>[/commander]]
+		[[nocommander]]-[/nocommander]]
+		</td>
+	</tr>
+	[/fleet]]
+	[[nofleet]]
+	<tr>
+		<td><a href="orbit.asp" title="Voir l'orbite de la planète">Aucune flotte près de la planète</a></td>
+	</tr>
+	[/nofleet]]
+	</table>
+</td></tr>
+</table>
+
+</td></tr>
+</table>
+</div>

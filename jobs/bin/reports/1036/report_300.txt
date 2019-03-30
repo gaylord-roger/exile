@@ -1,0 +1,3 @@
+Recherche terminée
+Nos scientifiques ont terminé la recherche sur "%researchname%".
+Ils sont prêts pour de nouvelles recherches.

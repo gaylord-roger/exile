@@ -1,0 +1,3 @@
+Rapport de bataille (vainqueur)
+Une bataille a eu lieu près de la planète %planetname% (%g%:%s%:%p%).
+Nos forces en présence s'en sont sorties victorieuses.

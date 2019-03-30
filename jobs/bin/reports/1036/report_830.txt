@@ -1,0 +1,2 @@
+Rapport d'espionnage : planète
+L'espion de la Compagnie des Pirates de la Fosse est revenu avec son rapport sur la planète %planetname% (%g%:%s%:%p%).

@@ -1,0 +1,35 @@
+<div id="fleets">
+[[planet]]
+<table class=default width="500">
+<tr class=category><td align=left><a href="orbit.asp?planet={planetid}">{planetname}</a>&nbsp;<a href="map.asp?g={g}&s={s}&p={p}">({g}.{s}.{p})</a></tr>
+<tr><td>
+[[selling]]
+	<table class=clear width='100%'>
+	<tr><td>En vente</td></tr>
+	[[ship]]
+	<tr>
+		<td width=150>{ship_name}</td>
+		<td width=40 align=right>x{quantity:n}</td>
+		<td>&nbsp;</td>
+		<td width=200><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> {credits:n}</td></tr>
+	</tr>
+	[/ship]]
+	</table>
+[/selling]]
+[[can_sell]]
+	<table class=clear width='100%'>
+	<tr><td>Disponible</td></tr>
+	[[ship]]
+	<tr>
+		<td width=150>{ship_name}</td>
+		<td width=40 align=right>x{quantity:n}</td>
+		<td><input type=text value="0" id="s{id}" name="s{id}"> <a href="#" onclick="setval('s{id}', {quantity}); return false;">max</a></td>
+		<td width=200><img src="{PATH_IMAGES}/interface/credits.gif" class="icon" title="Credits" width=16 height=16> <input type=text value="" id="p{id}" name="s{id}"></td></tr>
+	</tr>
+	[/ship]]
+	</table>
+[/can_sell]]
+</td></tr>
+</table>
+[/planet]]
+</div>

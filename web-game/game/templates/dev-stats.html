@@ -1,0 +1,86 @@
+<div id="adminstats">
+
+[[tabnav]]
+<div style="width:650px">
+<ul class="htabs">
+     [[0]]<li[[selected]] class="active"[/selected]]><a href="?cat=0">Galaxies</a></li>[/0]]
+     [[1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Général</a></li>[/1]]
+     [[2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Alliances production</a></li>[/2]]
+     [[3]]<li[[selected]] class="active"[/selected]]><a href="?cat=3">Stats serveur</a></li>[/3]]
+</ul>
+</div>
+[/tabnav]]
+[[galaxies]]
+<div id="stats">
+<table class="default" width="650">
+<tr class="header"><td>galaxie</td><td>Colonies</td><td>vortex</td></tr>
+[[galaxy]]
+<tr class="smallitem"><td>{galaxy}</td><td nowrap>{colonies:n} / {planets:n} ({colonies_pct:0.000}%)</td><td nowrap>{vortex:n}</td></tr>
+[/galaxy]]
+</table>
+</div>
+[/galaxies]]
+[[general]]
+<div id="stats">
+<table class="default" width="650">
+<tr class="smallitem"><td><span class="label">Joueurs: </span><span class="value">{players:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Joueurs récemment connectés: </span><span class="value">{recent_players:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Colonies: </span><span class="value">{colonies:n} / {planets:n} : {colonized:0.000}%</span></td></tr>
+<tr class="smallitem"><td><span class="label">Moyenne de colonies par joueur: </span><span class="value">{colonies_per_player:0.00}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Joueur avec le plus de colonies: </span><span class="value">{max_colonies:n} - <a href="/game/nations.asp?name={max_colonies_playername}">{max_colonies_playername}</a></span></td></tr>
+
+<tr class="smallitem"><td><span class="label">Bâtiments: </span><span class="value">{buildings:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Moyenne de bâtiments par colonie: </span><span class="value">{buildings_average:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Constructions en cours: </span><span class="value">{buildings_pending:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Moyenne de constructions en cours par planète: </span><span class="value">{buildings_pending_average:n}</span></td></tr>
+
+<tr class="smallitem"><td><span class="label">Scientifiques: </span><span class="value">{scientists:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Soldats: </span><span class="value">{soldiers:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Travailleurs: </span><span class="value">{workers:n}</span></td></tr>
+
+
+<tr class="smallitem"><td><span class="label">Flottes: </span><span class="value">{fleets:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Vaisseaux: </span><span class="value">{ships:n} ({ships_signature:n})</span></td></tr>
+<tr class="smallitem"><td><span class="label">Moyenne de vaisseaux par flotte: </span><span class="value">{ships_average:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Vaisseaux non affectés: </span><span class="value">{ships_not_in_fleet:n} ({ships_not_in_fleet_signature:n}) : {ships_not_in_fleet_percent:0.00}% des vaisseaux</span></td></tr>
+<tr class="smallitem"><td><span class="label">Flottes en patrouille: </span><span class="value">{fleets_patrolling:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Flottes en déplacement: </span><span class="value">{fleets_moving:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Flottes en train de recycler: </span><span class="value">{fleets_recycling:n}</span></td></tr>
+
+<tr class="smallitem"><td><span class="label">Combats aujourd'hui: </span><span class="value">{battles:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Invasions aujourd'hui: </span><span class="value">{invasions:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Alertes aujourd'hui: </span><span class="value">{alerts:n}</span></td></tr>
+
+<tr class="smallitem"><td><span class="label">Pubs affichées: </span><span class="value">{displayed_ads:n} : {ads_pct:0.00}%</span></td></tr>
+<tr class="smallitem"><td><span class="label">Pages affichées: </span><span class="value">{displayed_pages:n}</span></td></tr>
+<tr class="smallitem"><td><span class="label">Joueurs bloquant les pubs: </span><span class="value">{players_blocking_ads:n}/{players:n} : {players_blocking_ads_pct:0.00}%</span></td></tr>
+</table>
+</div>
+[/general]]
+[[alliances_production]]
+<div id="stats">
+<table class="default" width="650">
+<tr class="header"><td>Alliance</td><td>Minerai</td><td>Hydrocarbure</td></tr>
+[[alliance]]
+<tr class="smallitem"><td>[{tag}]{name}</td><td nowrap>{ore:n} ({ore_pct:0.000}%)</td><td nowrap>{hydrocarbon:n} ({hydrocarbon_pct:0.000}%)</td></tr>
+[/alliance]]
+</table>
+</div>
+[/alliances_production]]
+[[server]]
+<table class="default" width="650">
+<tr class="category"><td>Cache refresh</td></tr>
+<tr class="smallitem"><td><span class="label">db_buildings: </span><span class="value">{db_buildings:n} - {db_buildings_lastupdate}</span></td></tr>
+<tr class="smallitem"><td><span class="label">db_buildings_req: </span><span class="value">{db_buildings_req:n} - {db_buildings_req_lastupdate}</span></td></tr>
+<tr class="smallitem"><td><span class="label">db_ships: </span><span class="value">{db_ships:n} - {db_ships_lastupdate}</span></td></tr>
+<tr class="smallitem"><td><span class="label">db_ships_req: </span><span class="value">{db_ships_req:n} - {db_ships_req_lastupdate}</span></td></tr>
+<tr class="smallitem"><td><span class="label">db_research: </span><span class="value">{db_research:n} - {db_research_lastupdate}</span></td></tr>
+</table>
+<table class="default" width="650">
+<tr class="category"><td colspan="4">Update procedures</td></tr>
+[[procedure]]
+<tr class="item[[error]]del[/error]]"><td>[[disabled]]<s>[/disabled]]{procedure}[[disabled]]</s>[/disabled]]</td><td>{last_runtime}</td><td>{last_result}&nbsp;</td><td>{average_executetime}</td></tr>
+[/procedure]]
+</table>
+[/server]]
+</div>

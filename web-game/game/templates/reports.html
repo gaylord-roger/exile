@@ -1,0 +1,345 @@
+<script>function LinkFleet(id, name){ if(id != "") document.write('<a href="fleet.asp?id=' + id + '">'+name+'</a>'); else document.write(name); }</script>
+
+<div id="reports">
+
+[[tabnav]]
+<div>
+<ul class="htabs">
+	[[000]]<li[[selected]] class="active"[/selected]]><a href="?cat=0">Tout[[new]]&nbsp;({total_newreports})[/new]]</a></li>[/000]]
+	[[100]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Alliance[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/100]]
+	[[200]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Combats[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/200]]
+	[[300]]<li[[selected]] class="active"[/selected]]><a href="?cat=3">Développement[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/300]]
+	[[400]]<li[[selected]] class="active"[/selected]]><a href="?cat=4">Flottes[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/400]]
+	[[500]]<li[[selected]] class="active"[/selected]]><a href="?cat=5">Echanges[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/500]]
+	[[600]]<li[[selected]] class="active"[/selected]]><a href="?cat=6">Colonisations[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/600]]
+	[[700]]<li[[selected]] class="active"[/selected]]><a href="?cat=7">Événements[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/700]]
+	[[800]]<li[[selected]] class="active"[/selected]]><a href="?cat=8">Mercenaires[[new]]&nbsp;({cat_newreports})[/new]]</a></li>[/800]]
+</ul>
+</div>
+[/tabnav]]
+<table class="default" width="100%">
+[[message]]
+<tr class="item[[new]]highlight[/new]]">
+	<td width="1%" valign="top"><img src="{PATH_IMAGES}/reports/{type}.jpg" width="64" height="64" class="report"></td>
+	<td width="90%" valign="top">
+	<div class="subject">{date:d}[[nation]] | <a href="nation.asp?name={nation}">{nation}</a>[/nation]] |
+	[[100]]Invitation d'alliance.[/100]]
+	[[110]]Demande de financement.[/110]]
+	[[111]]Modification de la demande de financement.[/111]]
+	[[112]]Annulation de la demande de financement.[/112]]
+	[[120]]Invitation d'un nouveau membre.[/120]]
+	[[122]]Invitation déclinée.[/122]]
+	[[130]]Invitation acceptée.[/130]]
+	[[131]]Départ de membre.[/131]]
+	[[132]]Exclusion de membre.[/132]]
+	[[150]]Impossibilité de payer le tribut.[/150]]
+	[[151]]Tribut non payé.[/151]]
+	[[160]]Nous entrons en guerre ![/160]]
+	[[161]]Demande de fin de guerre.[/161]]
+	[[162]]Guerre terminée.[/162]]
+	[[163]]Guerre annulée.[/163]]
+	[[171]]PNA rompu.[/171]]
+	[[200]]Rapport de bataille.[/200]]
+	[[201]]Rapport de bataille (vainqueur).[/201]]
+	[[202]]Rapport de bataille.[/202]]
+	[[210]]Invasion ennemie : perte d'une planète.[/210]]
+	[[211]]Invasion ennemie repoussée ![/211]]
+	[[212]]Invasion repoussée.[/212]]
+	[[213]]Résistance éliminée[/213]]
+	[[214]]Invasion réussie ![/214]]
+	[[220]]Prime de destruction[/220]]
+	[[300]]Eurêka ![/300]]
+	[[302]]Ralliement d'une planète.[/302]]
+	[[310]]Production et coût d'entretien.[/310]]
+	[[311]]Commerce intra-alliance.[/311]]
+	[[320]]Un commandant a récemment eu une augmentation[/320]]
+	[[400]]Flotte arrivée à destination.[/400]]
+	[[401]]Récolteurs pleins.[/401]]
+	[[402]]Plus de matériau à recycler.[/402]]
+	[[403]]Détection d'une flotte.[/403]]
+	[[500]]Vente effectuée.[/500]]
+	[[501]]Cargaison reçue.[/501]]
+	[[502]]Versement reçu.[/502]]
+	[[503]]Vente effectuée.[/503]]
+	[[504]]Vente effectuée sur planète alliée.[/504]]
+	[[505]]Achat effectué sur une de nos planètes.[/505]]
+	[[510]]Vente de la production.[/510]]
+	[[600]]Nouvelle planète.[/600]]
+	[[601]]Abandon de planète.[/601]]
+	[[602]]Soulèvement.[/602]]
+	[[700]]Vaisseaux marchands détruits.[/700]]
+	[[701]]Vaisseaux marchands détruits.[/701]]
+	[[702]]Inventaire des stocks après vente.[/702]]
+	[[710]]Bulletin d'alerte : tempête solaire ![/710]]
+	[[711]]Fin d'alerte : tempête solaire.[/711]]
+	[[720]]Vol de ressources.[/720]]
+	[[721]]Des émeutes éclatent.[/721]]
+	[[722]]Un accident est survenu sur un chantier.[/722]]
+	[[723]]Une expérience a mal tourné.[/723]]
+	[[724]]Flotte retardée par une avarie.[/724]]
+	[[725]]Soulèvement ![/725]]
+	[[726]]Un bâtiment s'est effondré ![/726]]
+	[[730]]Perte du signal d'une flotte ![/730]]
+	[[731]]Rétablissement du contact avec une flotte.[/731]]
+	[[750]]Baby-boom ![/750]]
+	[[751]]Baby-boom terminé.[/751]]
+	[[752]]Découverte de riches filons de minerai ![/752]]
+	[[753]]Épuisement des filons de minerai.[/753]]
+	[[754]]Découverte de riches gisements d'hydrocarbure ![/754]]
+	[[755]]Épuisement des gisements d'hydrocarbure.[/755]]
+	[[790]]Séisme.[/790]]
+	[[791]]Ver de sable.[/791]]
+	[[795]]Gestion du budget de la nation.[/795]]
+	[[796]]Gestion du budget de la nation.[/796]]
+	[[797]]Gestion du budget de la nation.[/797]]
+	[[798]]Gestion du budget de la nation.[/798]]
+	[[800]]Contre-espionnage : tentative d'espionnage.[/800]]
+	[[801]]Contre-espionnage : notre Nation est espionnée ![/801]]
+	[[802]]Contre-espionnage : nos Flottes sont espionnées ![/802]]
+	[[803]]Contre-espionnage : une de nos planètes est espionnée ![/803]]
+	[[810]]Rapport d'espionnage : nation.[/810]]
+	[[820]]Rapport d'espionnage : flottes.[/820]]
+	[[830]]Rapport d'espionnage : planète.[/830]]
+	</div>
+	
+	<div class="body">
+	[[100]]L'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a> nous propose de les rejoindre.<br/>
+	Vous devriez réfléchir à cette offre et répondre en accédant à <a href="alliance-invitations.asp">cette page</a>.
+	[/100]]
+	[[110]]La nation <a href="nation.asp?name={username}">{username}</a> a formulé une demande de financement s'élevant à <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits<script>var d={description:quote}; if(d!='') document.write(' pour la raison suivante : '+d);</script>.<br/>
+	Vous pouvez accéder à toutes les demandes en cours sur <a href="alliance-wallet.asp?cat=2">cette page</a>.[/110]]
+	[[111]]La nation <a href="nation.asp?name={username}">{username}</a> a modifié sa demande de financement et demande désormais <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16">  {credits:n} crédits<script>var d={description:quote}; if(d!='') document.write(' pour la raison suivante : '+d);</script>.<br/>
+	Vous pouvez accéder à toutes les demandes en cours sur <a href="alliance-wallet.asp?cat=2">cette page</a>.[/111]]
+	[[112]]La nation <a href="nation.asp?name={username}">{username}</a> a annulé sa demande de financement.[/112]]
+	[[120]]Le recruteur <a href="nation.asp?name={nation}">{nation}</a> a invité la nation <a href="nation.asp?name={invitedusername}">{invitedusername}</a> à rejoindre notre alliance.[/120]]
+	[[121]]L'invitation de la nation <a href="nation.asp?name={invitedusername}">{invitedusername}</a> à rejoindre notre alliance a été retirée par <a href="nation.asp?name={nation}">{nation}</a>.[/121]]
+	[[122]]La nation <a href="nation.asp?name={nation}">{nation}</a> a décliné notre invitation.[/122]]
+	[[130]]La nation <a href="nation.asp?name={nation}">{nation}</a> a rejoint notre alliance.[/130]]
+	[[131]]La nation <a href="nation.asp?name={nation}">{nation}</a> a décidé de quitter notre alliance.[/131]]
+	[[132]]La nation <a href="nation.asp?name={nation}">{nation}</a> va être exclue de l'alliance<script>if({username:quote}!='') document.write(' (action décidée par <a href="nation.asp?name={username}">{username}</a>)');</script>.[/132]]
+	[[150]]Notre alliance n'a pas pu honorer son contrat et payer les <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits à l'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a>.[/150]]
+	[[151]]Il semblerait que l'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a> ait oublié de nous verser les <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16">  {credits:n} crédits prévus.[/151]]
+	[[160]]L'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a> vient de nous déclarer la guerre.[/160]]
+	[[161]]L'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a> propose d'arrêter la guerre.[/161]]
+	[[162]]L'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a> a décidé de mettre un terme à la guerre.[/162]]
+	[[163]]La nation <a href="nation.asp?name={username}">{username}</a> a annulée la guerre avec l'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a>.[/163]]
+	[[171]]L'alliance <a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a> a décidé de rompre le pacte de non-aggression que nous avions.[/171]]
+	[[200]]Une bataille a eu lieu près de la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	Vous pouvez accéder au <a href="battle.asp?id={battleid}&v={ownerid}">rapport du combat</a>.
+	[/200]]
+	[[201]]Une bataille a eu lieu près de la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	Vous pouvez accéder au <a href="battle.asp?id={battleid}&v={ownerid}">rapport du combat</a>.
+	[/201]]
+	[[202]]Une bataille a eu lieu près de la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>. La bataille s'est déroulée très rapidement et nous n'avons pu établir une quelconque évaluation des forces ennemies en présence.
+	Vous pouvez accéder au <a href="battle.asp?id={battleid}&v={ownerid}">rapport des pertes</a>.
+	[/202]]
+	[[210]]Une flotte ennemie de <a href="nation.asp?name={username}">{username}</a> s'est emparée d'une de nos planètes. Elle est désormais connue sous le nom de <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	Vous pouvez accéder au <a href="invasion.asp?id={invasionid}">rapport d'invasion</a>.
+	[/210]]
+	[[211]]Une flotte ennemie de <a href="nation.asp?name={username}">{username}</a> a tenté d'envahir notre planète <a href="training.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>, mais nos vaillantes troupes l'ont repoussée !<br/>
+	Vous pouvez accéder au <a href="invasion.asp?id={invasionid}">rapport d'invasion</a>.
+	[/211]]
+	[[212]]Notre tentative pour prendre la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a> a lamentablement échoué.<br/>
+	Vous pouvez accéder au <a href="invasion.asp?id={invasionid}">rapport d'invasion</a> que nous avons pu établir suite aux indications de nos soldats tombés vaillament au combat.
+	[/212]]
+	[[213]]Nous avons exterminé toute résistance ennemie sur la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	Vous pouvez accéder au <a href="invasion.asp?id={invasionid}">rapport d'invasion</a>.
+	[/213]]
+	[[214]]Nous avons pris la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a> !<br/>
+	Vous pouvez accéder au <a href="invasion.asp?id={invasionid}">rapport d'invasion</a>.
+	[/214]]
+	[[220]]La destruction récente de flottes de fossoyeur nous a rapporté la somme de <img src="{PATH_IMAGES}/interface/credits.gif" class="res" width="16" height="16"> {credits:n}.[/220]]
+	[[300]]Nos scientifiques ont terminé la recherche sur "{researchname}".<br/>
+	Ils sont prêts pour de <a href="research.asp">nouvelles recherches</a>.[/300]]
+	[[302]]Les dirigeants de la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a> ont décidé de se rallier à nous.[/302]]
+	[[310]]Les coûts d'entretien et de fonctionnement concernant la dernière période s'élèvent à <img src="{PATH_IMAGES}/interface/credits.gif" class="res" width="16" height="16"> {credits:n}.<br/><br/>
+	<table class=clear>
+	<tr><td><img src="{PATH_IMAGES}/interface/upkeep_commander.gif" class="res" width="16" height="16">Commandants: {upkeep_commanders:n}</td></tr>
+	<tr><td><img src="{PATH_IMAGES}/interface/planet.gif" class="res" width="16" height="16">Planètes: {upkeep_planets:n}</td></tr>
+	<tr><td><img src="{PATH_IMAGES}/interface/scientists.gif" class="res" width="16" height="16">Scientifiques: {upkeep_scientists:n}</td></tr>
+	<tr><td><img src="{PATH_IMAGES}/interface/soldiers.gif" class="res" width="16" height="16">Soldats: {upkeep_soldiers:n}</td></tr>
+	<tr><td><img src="{PATH_IMAGES}/interface/fleets.gif" class="res" width="16" height="16">Vaisseaux: {upkeep_ships:n}</td></tr>
+	<tr><td><img src="{PATH_IMAGES}/interface/fleets.gif" class="res" width="16" height="16">Vaisseaux en position: {upkeep_ships_in_position:n}</td></tr>
+	<tr><td><img src="{PATH_IMAGES}/interface/fleets.gif" class="res" width="16" height="16">Vaisseaux posés: {upkeep_ships_parked:n}</td></tr>
+	</table><br/><br/>
+	Nos infrastructures ont généré <img src="{PATH_IMAGES}/interface/prestige.gif" class="res" width="16" height="16"> {scientists:n} et <img src="{PATH_IMAGES}/interface/credits.gif" class="res" width="16" height="16"> {soldiers:n}[/310]]
+	[[311]]Le commerce entre nos planètes et celles de nos alliés nous a rapporté <img src="{PATH_IMAGES}/interface/credits.gif" class="res" width="16" height="16"> {credits:n}.[/311]]
+	[[320]]Le commandant {commandername} s'est récemment distingué et a obtenu une promotion. Vous devriez vous rendre sur la page de gestion des commandants afin de lui attribuer son nouveau point de compétence.[/320]]
+	[[400]]La flotte <script>LinkFleet('{fleetid}','{fleetname}')</script> est arrivée aux alentours de la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.[/400]]
+	[[401]]Les récolteurs de la flotte <script>LinkFleet('{fleetid}','{fleetname}')</script> ne peuvent plus recycler car leurs soutes sont pleines. Videz leurs soutes avant de recycler à nouveau.[/401]]
+	[[402]]La flotte <script>LinkFleet('{fleetid}','{fleetname}')</script> a terminé le recyclage aux coordonnées suivantes <a href="map.asp?g={g}&s={s}">({g}.{s}.{p})</a>, il n'y a plus de ressources dans les parages.[/402]]
+	[[403]]Une flotte de la nation <a href="nation.asp?name={username}">{username}</a> vient d'être détectée à proximité de notre planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.[/403]]
+	[[500]]Le commerçant venu acheter nos ressources mises en vente sur <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a> est arrivé à sa destination sans rencontrer de problème.<br/>
+	Pour rappel, <script>if({ore} > 0){ document.write('{ore:n} unités de minerai'); if({hydrocarbon} > 0) document.write(" et {hydrocarbon:n} unités d'hydrocarbure");} else document.write("{hydrocarbon:n} unités d'hydrocarbure")</script> ont été vendues pour un total de <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits.<br/>Nous venons de recevoir la seconde moitié du paiement (la première moitié a été payée à la vente).
+	[/500]]
+	[[501]]Une flotte de <a href="nation.asp?name={username}">{username}</a> vient de décharger des ressources sur notre planète <a href="buildings.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	<script>if({ore} > 0 || {hydrocarbon} > 0) {
+	document.write('Nos stocks ont augmenté de '); if({ore} > 0){ document.write('{ore:n} unités de minerai'); if({hydrocarbon} > 0) document.write(" et de {hydrocarbon:n} unités d'hydrocarbure");} else document.write("{hydrocarbon:n} unités d'hydrocarbure"); document.write('.<br/>'); }
+	if({scientists}>0 || {soldiers}>0 || {workers} > 0) {
+		document.write('Nous notons'+(({ore}>0 || {hydrocarbon}>0)?' aussi':'') +' l\'arrivée de personnel : ');
+		if({scientists}>0) document.write('{scientists:n} scientifiques, ');
+		if({soldiers}>0) document.write('{soldiers:n} soldats, ');
+		if({workers}>0) document.write('{workers:n} travailleurs, ');
+		document.write('ils se sont parfaitement intégrés et travaillent désormais sous nos ordres.');
+		}
+	</script>
+	[/501]]
+	[[502]]Vous avez reçu la somme de <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits par messagerie de la part de <a href="nation.asp?name={username}">{username}</a>.[/502]]
+	[[503]]Suite au dépôt de 
+	<script>
+		var s = "";
+
+		if({ore} > 0) s += '{ore:n} unités de minerai';
+		if({hydrocarbon} > 0) s += (s!=''?', ':'')+'{hydrocarbon:n} unités d\'hydrocarbure'; 
+		
+		if({scientists} > 0) s += (s!=''?', ':'')+'{scientists:n} scientifiques';
+		if({soldiers} > 0) s += (s!=''?', ':'')+'{soldiers:n} soldats';
+		if({workers} > 0) s += (s!=''?', ':'')+'{workers:n} travailleurs';
+		document.write(s);
+	</script> 
+	
+	sur une de leurs planètes, les marchands nous ont payé la somme de <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits.[/503]]
+	[[504]]Suite au dépôt de 
+	<script>
+		var s = "";
+
+		if({ore} > 0) s += '{ore:n} unités de minerai';
+		if({hydrocarbon} > 0) s += (s!=''?', ':'')+'{hydrocarbon:n} unités d\'hydrocarbure'; 
+		
+		if({scientists} > 0) s += (s!=''?', ':'')+'{scientists:n} scientifiques';
+		if({soldiers} > 0) s += (s!=''?', ':'')+'{soldiers:n} soldats';
+		if({workers} > 0) s += (s!=''?', ':'')+'{workers:n} travailleurs';
+		document.write(s);
+	</script>
+	sur la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>, nous avons été payé la somme de <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits.[/504]]
+	[[505]]Une flotte de <a href="nation.asp?name={username}">{username}</a> vient de décharger des ressources sur notre planète <a href="buildings.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	<script>if({ore} > 0 || {hydrocarbon} > 0) {
+	document.write('Nos stocks ont augmenté de '); if({ore} > 0){ document.write('{ore:n} unités de minerai'); if({hydrocarbon} > 0) document.write(" et de {hydrocarbon:n} unités d'hydrocarbure");} else document.write("{hydrocarbon:n} unités d'hydrocarbure"); document.write('.<br/>'); }
+	if({scientists}>0 || {soldiers}>0 || {workers} > 0) {
+		document.write('Nous notons'+(({ore}>0 || {hydrocarbon}>0)?' aussi':'') +' l\'arrivée de personnel : ');
+		if({scientists}>0) document.write('{scientists:n} scientifiques, ');
+		if({soldiers}>0) document.write('{soldiers:n} soldats, ');
+		if({workers}>0) document.write('{workers:n} travailleurs, ');
+		document.write('ils se sont parfaitement intégrés et travaillent désormais sous nos ordres.');
+		}
+	</script>
+	Nous avons payé la somme de <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits.
+	[/505]]
+	[[510]]La production de la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a> a rapporté la somme de <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> {credits:n} crédits.[/510]]
+	[[600]]Nous occupons désormais la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	Nous devrions vérifier les installations et <a href="buildings.asp?planet={planetid}">construire les bâtiments</a> dont nous avons besoin.
+	[/600]]
+	[[601]]
+	Suite à votre ordre, la planète <a href="map.asp?g={g}&s={s}">({g}.{s}.{p})</a> a été abandonnée. Il y a eu quelques mouvements de foules mais finalement la décision a été acceptée par la majorité.<br/>
+	Bien qu'une partie infime de la population soit restée sur la planète, la plupart de la population a préféré partir vers d'autres planètes proches. Tous les bâtiments ont pu être détruit sans résistance de la part de la population.<br/>
+	Nous perdons 20 points de contrôle sur toutes nos planètes.
+	[/601]]
+	[[602]]
+	Suite à votre ordre, nous avons essayé d'abandonner la planète <a href="map.asp?g={g}&s={s}">({g}.{s}.{p})</a>, malheureusement, d'importantes manifestations se sont déclarées dans toute la colonie pour montrer leur indignation face à cette décision.<br/>
+	Les travailleurs qui étaient censés détruire les bâtiments de la colonie ont été arrêtés avant même de commencer. Il s'en est suivi un coup d'état et une déclaration d'indépendance émanant des dirigeants temporaires de la planète.<br/>
+	Nous ne contrôlons plus la planète et les bâtiments sont restés fonctionnels ! Une autre nation pourrait s'en emparer et s'en servir contre nous.<br/>
+	Nous perdons 20 points de contrôle sur toutes nos planètes.
+	[/602]]
+	[[700]]
+	La flotte de vaisseaux marchands venue prendre nos ressources a disparu de nos radars. La guilde des marchands parle d'une avarie dans un des moteurs des vaisseaux qui aurait fait exploser toute la flotte. Celle-ci se refuse par la même occasion à payer les <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> <script>document.write({credits}/2);</script> crédits restant de la vente.
+	[/700]]
+	[[701]]
+	La flotte de vaisseaux marchands venue prendre nos ressources a disparu de nos radars. La guilde des marchands parle d'une attaque de pirates. Celle-ci se refuse par la même occasion à payer les <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> <script>document.write({credits}/2);</script> crédits restant de la vente.
+	[/701]]
+	[[702]]
+	Un rapide inventaire a été effectué et il semblerait que le vaisseau marchand ait oublié une partie de sa cargaison sur la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.<br/>Après vérification, nous avons retrouvé <script>
+	if({ore} > 0){
+		document.write('{ore:n} unités de minerai'); 
+		if({hydrocarbon} > 0) document.write(" et {hydrocarbon:n} unités d'hydrocarbure.");
+	}
+	else
+		document.write(" {hydrocarbon:n} unités d'hydrocarbure.");</script>
+	[/702]]
+	[[710]]De violentes éruptions solaires provoquent des orages électromagnétiques sur la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>. Ces orages chargent le sol et des courts-circuits peuvent se produire entre les appareils électriques et la terre. Afin d'éviter tout accident, nous sommes obligés de baisser notre production d'environ 60% jusqu'à ce que ces éruptions se terminent.
+	[/710]]
+	[[711]]Les éruptions solaires ont cessé sur <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>. Nous reprenons une activité normale.
+	[/711]]
+	[[720]]
+	Une intrusion a eu lieu dans nos entrepôts de <a href="training.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>. Après inventaire des stocks, il semblerait <script>
+	if({ore} > 0 || {hydrocarbon} > 0) {
+		if({ore} > 0){
+			document.write('que {ore:n} unités de minerai'); 
+			if({hydrocarbon} > 0) document.write(" et {hydrocarbon:n} unités d'hydrocarbure");
+		}
+		else
+			document.write("que {hydrocarbon:n} unités d'hydrocarbure");
+
+		document.write(" aient été volées.<br/>Nous ");
+	}
+	else
+		document.write("que rien n'ait été volé.<br/>Cependant, nous "); </script>
+	devrions augmenter nos effectifs de <a href="training.asp?planet={planetid}">soldats</a> afin de prévenir ce genre d'agissement dans le futur.<br/>Nous perdons 3 points de contrôle sur cette planète.
+	[/720]]
+	[[721]]
+	Des rassemblements se sont formés sur <a href="training.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a> pour manifester contre le manque de sécurité et ont dégénéré en émeutes générales. Les gens sont devenus incontrôlables et s'en sont pris aux bâtiments administratifs.
+	<script>
+	if({scientists} > 0 || {soldiers} > 0 || {workers} > 0) {
+		document.write("Il y a eu beaucoup de blessés dont plusieurs morts. Il y a à déplorer la mort de ");
+
+		if({scientists} > 0){
+			document.write("{scientists:n} scientifiques"); 
+			if({soldiers} > 0) document.write(", {soldiers:n} soldats");
+			if({workers} > 0) document.write(" et {workers:n} travailleurs");
+		}
+		else
+		if({soldiers} > 0){
+			document.write("{soldier:n} soldats");
+			if({workers} > 0) document.write(" et {workers:n} travailleurs");
+		}
+		else
+		if({workers} > 0) document.write("{workers:n} travailleurs");
+
+		document.write(".<br/>La population est encore sous le choc.");
+	}
+	else
+	{
+		document.write("Il y a eu beaucoup de blessés mais heureusement aucun mort n'est à déplorer.");
+	}
+	</script><br/>Nous perdons 17 points de contrôle sur cette planète et 2 points sur toutes les autres planètes.
+	[/721]]
+	[[722]]
+	Une mauvaise manoeuvre sur un chantier ..
+	[/722]]
+	[[723]]
+	Un accident est survenu dans un laboratoire de recherche sur <a href="training.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>.<br/>
+	Plusieurs <a href="training.asp?planet={planetid}"> scientifiques</a> ont été blessés dont {scientists:n} mortellement.
+	[/723]]
+	[[724]]La flotte <script>LinkFleet('{fleetid}','{fleetname}')</script> a subi une avarie. Le temps que les techniciens de bord réparent les vaisseaux endommagés, la flotte a perdu une heure sur l'horaire prévu.[/724]]
+	[[725]]Excédé par le peu de soutien et d'attention que vous pretez à la planète <a href="map.asp?g={g}&s={s}">({g}.{s}.{p})</a>, les dirigeants de la colonie ont décidé de déclarer leur indépendance !<br/>Nous n'avons désormais plus aucun contrôle sur cette planète.[/725]]
+	[[726]]Le bâtiment "{building}"[/726]]
+	[[730]]Nous venons de perdre le contact avec la flotte {fleetname} ! Nos techniciens ne sont pas en mesure de nous en expliquer la cause et nous n'avons reçu aucun signalement de cette flotte à propos d'un quelconque problème.[/730]]
+	[[731]]Une flotte connue sous le nom de {fleetname} vient de nous transmettre qu'elle vient d'arriver à destination ! Nous avions perdu le contact avec cette flotte précédemment.[/731]]
+	[[750]]La population de <a href="planet.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a> est contente et la croissance de la population augmente.[/750]]
+	[[751]]Le baby-boom sur <a href="planet.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a> est terminé et la croissance de la population est revenue à son niveau normal.[/751]]
+	[[752]]De riches filons de minerai ont été découverts sur <a href="planet.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>, la production de minerai est augmentée.[/752]]
+	[[753]]Nous avons épuisé les filons de minerai que nous avions localisés sur <a href="planet.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>, la production de minerai est redescendue au niveau normal.[/753]]
+	[[754]]De riches gisements d'hydrocarbure ont été découverts sur <a href="planet.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>, la production en hydrocarbure est augmentée.[/754]]
+	[[755]]Nous avons épuisé les riches gisements d'hydrocarbure que nous avions localisés sur <a href="planet.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>, la production en hydrocarbure est redescendue au niveau normal.[/755]]
+	[[780]]Un de nos hommes a récemment obtenu le grade de commandant.<br/>Le commandant {commandername} a juré fidélité et se tient prêt à vous servir.<br/>Vous devriez inspecter <a href="commanders.asp">ses compétences</a> et l'affecter à une place qui lui conviendrait.[/780]]
+	[[790]]D'importants séismes ont eu lieu sur la planète <a href="buildings.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>. Beaucoup de bâtiments ont souffert et le bâtiment "{building}" s'est effondré. Nous déplorons la mort de {workers:n} travailleurs. Nous perdons 100 points de contrôle sur cette planète.[/790]]
+	[[791]]Un énorme ver de sable a été aperçu près de la colonie de la planète <a href="buildings.asp?planet={planetid}">{planetname} ({g}.{s}.{p})</a>, il s'est attaqué à plusieurs bâtiments avant de se focaliser sur le bâtiment "{building}" puis il est reparti.<br/>Les ruines du bâtiment sont en train d'être déblayées, les autres bâtiments sont encore fonctionnels et sont en train d'être réparés.<br/> Les personnes sur place ont pu être évacuées à temps et aucun mort n'est à déplorer.<br/>Nous perdons 20 points de contrôle sur cette planète.[/791]]
+	[[795]]Le ministère des finances n'approuve pas vos dépenses et vous le fait savoir.[/795]]
+	[[796]]Le ministère des finances prévoit une banqueroute prochainement si le déficit n'est pas comblé d'ici quelques jours.[/796]]
+	[[797]]L'opposition dénonce publiquement votre pitoyable gestion de l'argent de la nation.[/797]]
+	[[798]]Cette situation n'est plus tenable, vous devez réagir très rapidement. Vos propres partisans commencent à se désolidariser de vous.[/798]]
+	[[800]]Nos services de contre-espionnage ont repéré un espion et l'ont maîtrisé. Malheureusement, celui-ci s'est suicidé en cellule avant de pouvoir nous révéler le nom de son employeur.[/800]]
+	[[801]]Nos services de contre-espionnage ont capté un message codé provenant certainement d'un espion, destiné à <a href="nation.asp?name={description}">{description}</a>, contenant des informations sur l'ensemble de notre nation.[/801]]
+	[[802]]Nos services de contre-espionnage ont capté un message codé provenant certainement d'un espion, destiné à <a href="nation.asp?name={description}">{description}</a>, contenant des données tactiques sur l'ensemble de nos flottes. Nous devrions les redéployer discrètement afin que l'ennemi ait des informations périmées.[/802]]
+	[[803]]Nos services de contre-espionnage ont capté un message codé provenant certainement d'un espion, destiné à <a href="nation.asp?name={description}">{description}</a>, contenant des informations capitales sur la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>. Il est possible que l'ennemi connaisse nos forces de défenses.[/803]]
+	[[810]]L'espion de la Compagnie des Pirates de la Fosse est revenu avec <a href="spy-report.asp?id={spyid}&key={spykey}" title="Rapport">son rapport</a> sur la nation <a href="nation.asp?name={description}">{description}</a>.[/810]]
+	[[820]]L'espion de la Compagnie des Pirates de la Fosse est revenu avec <a href="spy-report.asp?id={spyid}&key={spykey}" title="Rapport">son rapport</a> sur les flottes de <a href="nation.asp?name={description}">{description}</a>.[/820]]
+	[[830]]L'espion de la Compagnie des Pirates de la Fosse est revenu avec <a href="spy-report.asp?id={spyid}&key={spykey}" title="Rapport">son rapport</a> sur la planète <a href="map.asp?g={g}&s={s}">{planetname} ({g}.{s}.{p})</a>.[/830]]
+	</div>
+	</td>
+</tr>
+[/message]]
+[[noreports]]
+<tr class="header" ><td colspan="2">Aucun rapport</td></tr>
+[/noreports]]
+</table>
+</div>

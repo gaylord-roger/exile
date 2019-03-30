@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="pragma" content="no-cache">
+
+		<title>Exile</title>
+
+		<link rel="stylesheet" href="{PATH_IMAGES}/styles/s_transparent/style.css" type="text/css" media="all">
+
+		<script>var timers_enabled=true;</script>
+
+		<script type="text/javascript" src='/scripts/lang.js'></script>
+		<script type="text/javascript" src='/scripts/time.js'></script>
+	</head>
+
+	<body>
+		<div align="center">
+		<div id="container">
+
+		<div id="gameover">Compte suspendu</div>
+		<div id="playername">{login}</div>
+		<br/>
+		Votre compte a été suspendu suite à une sanction prise par un des administrateurs de l'univers de jeu.<br/>
+		[[reason]]
+		<br/>
+		<b>La raison donnée est:</b> {reason:html}<br/>
+		[/reason]]
+		<br/>
+		Pour plus de renseignements ou contestation, vous pouvez contacter directement l'administrateur qui vous a sanctionné à cette adresse:<div align=center><a href="mailto:{admin_email:html}?subject=Compte suspendu ({universe}/{login})">{admin_email:html}</a></div>Dans ce cas, vérifiez que le nom du serveur (s00, s01, ...) et le nom de votre compte apparaissent bien dans le sujet de votre email.<br/>Par exemple: Compte suspendu ({universe}/{login}).<br/>
+		<br/>
+		<div align="center">
+		<br/>
+		[[unlock]]
+		<form method="post" action="?">
+		<input type="submit" name="unlock" value="Débloquer">
+		</form>
+		[/unlock]]
+		[[cant_unlock]]
+		Temps restant avant déblocage: <script>putcountdown1({remaining_time_before_unlock},"", "");</script><br/>
+		<script>putcountdown2({remaining_time_before_unlock},"", "<br/><form method='post' action='?'><input type='submit' name='unlock' value='Débloquer'></form>");</script>
+		[/cant_unlock]]
+		</div>
+
+		</div>
+		</div>
+	</body>
+</html>

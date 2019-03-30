@@ -1,0 +1,2 @@
+Invasion ennemie repoussée !
+Une flotte ennemie de %username% a tenté d'envahir notre planète %planetname% (%g%:%s%:%p%), mais nos vaillantes troupes l'ont repoussée !

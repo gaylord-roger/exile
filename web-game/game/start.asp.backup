@@ -1,0 +1,109 @@
+<% option explicit %>
+
+<!--#include virtual="/lib/exile.asp"-->
+<!--#include virtual="/lib/template.asp"-->
+<!--#include virtual="/lib/accounts.asp"-->
+<%
+
+'ConnectDB()
+
+dim query, oRs, content, UserId
+dim reset_result: reset_result = 0
+
+UserId = ToInt(Session("user"), "")
+
+if UserId = "" then
+	response.redirect "/"
+	response.end
+end if
+
+' check if it is the first login of the player
+set oRs = oConn.Execute("SELECT login FROM users WHERE resets=0 AND id=" & UserId)
+if oRs.EOF then
+	response.redirect "/"
+	response.end
+end if
+
+if isNull(oRs(0).value) then
+	dim newname
+	newname = Request.Form("name")
+	if newname <> "" then
+		' try to rename user and catch any error
+		on error resume next
+
+		if isValidName(newname) then
+			oConn.Execute "UPDATE users SET login=" & dosql(newname) & " WHERE id=" & UserId, adExecuteNoRecords
+			if err.Number <> 0 then
+				reset_result = 10
+			end if
+		else
+			reset_result = 11
+		end if
+
+		on error goto 0
+	end if
+end if
+
+if reset_result = 0 then
+	' retreive player username
+	dim username, orientation
+	username = oRs(0)
+
+	orientation = ToInt(Request.Form("orientation"), 0)
+
+	if orientation >= 1 and orientation <= 3 then
+
+		oConn.BeginTrans
+
+		err.clear
+
+		oConn.Execute "UPDATE users SET orientation=" & orientation & " WHERE id=" & UserId, , adExecuteNoRecords
+
+		set oRs = oConn.Execute("SELECT sp_reset_account(" & UserId & ", 0)")
+		reset_result = oRs(0)
+
+		if reset_result = 0 then
+			select case orientation
+				case 1	' merchant
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",10,1)", , adExecuteNoRecords
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",11,1)", , adExecuteNoRecords
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",12,1)", , adExecuteNoRecords
+				case 2	' military
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",20,1)", , adExecuteNoRecords
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",21,1)", , adExecuteNoRecords
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",22,1)", , adExecuteNoRecords
+				case 3	' scientist
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",30,1)", , adExecuteNoRecords
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",31,1)", , adExecuteNoRecords
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",32,1)", , adExecuteNoRecords
+				case 4	' war lord
+					oConn.Execute "INSERT INTO researches(userid, researchid, level) VALUES(" & UserId & ",40,1)", , adExecuteNoRecords
+			end select
+
+			oConn.Execute "SELECT sp_update_researches(" & UserId & ")", , adExecuteNoRecords
+
+			if Err.Number <> 0 then
+				oConn.RollbackTrans
+			else
+				oConn.CommitTrans
+
+				response.redirect "/game/overview.asp"
+				response.end
+			end if
+		else
+			oConn.RollbackTrans
+		end if
+	end if
+end if
+
+' display start page
+set content = GetTemplate("start")
+content.AssignValue "login", username
+
+if reset_result <> 0 then content.Parse "error_" & reset_result
+
+content.Parse ""
+
+Response.write content.Output
+
+%>

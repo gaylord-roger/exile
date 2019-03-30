@@ -1,0 +1,2 @@
+Bâtiment terminé
+Le bâtiment "%buildingname%" est maintenant opérationnel sur %planetname% (%g%:%s%:%p%).

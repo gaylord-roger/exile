@@ -1,0 +1,2 @@
+Flotte arrivée à destination
+La flotte "%fleetname%" est arrivée aux alentours de la planète %planetname% (%g%:%s%:%p%).

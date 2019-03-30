@@ -1,0 +1,730 @@
+<script>
+var currGalaxy="";
+var currSector="";
+
+function setLocGalaxy(g){ $("locgalaxy").value=g; }
+function setLocSector(s){ $("locsector").value=s; }
+function setLoc(g,s) { currGalaxy = g; currSector = s; setLocGalaxy(g); setLocSector(s); }
+
+function openGalaxy(g){	window.location="?g="+g; }
+function openSector(g,s){ window.location="?g="+g+"&s="+s; }
+[[t]]
+function hideAll() {
+	var obj = $('mapuniverseview');
+	obj.innerHTML = '';
+
+	var obj = $('mapuniverse');
+	obj.style.display = 'none';
+	obj.style.visibility = 'hidden';
+
+}
+[/t]]
+
+[[universe]]
+[[comment]]universe[/comment]]
+
+function displayUniverse(u) {
+	var s = "";
+
+	for(var i=1; i<u.length; i++) {
+		var g = u[i];
+
+		var c = "";
+		if(g[1]) c = "hasplanets";
+		else
+		if(g[2]) c = "hasallies";
+		else
+		if(g[3]) c = "hasfriends";
+		else
+		if(g[4]) c = "hasenemies";
+		else
+			c = "hasnothing";
+
+		s += '<div class="gal"><div onmouseover="setLocGalaxy('+g[0]+')" onclick="openGalaxy('+g[0]+')"><img src="{PATH_IMAGES}/galaxies/01.jpg" title="'+g[0]+'" class="'+c+'"></div><div class=galtext>'+g[0]+'</div></div>';
+	}
+
+	$('mapuniverseview').innerHTML = s;
+
+	var obj = $('mapuniverse');
+	obj.style.display = 'block';
+	obj.style.visibility = 'visible';
+}
+[/universe]]
+
+[[galaxy]]
+[[comment]]galaxy[/comment]]
+
+var blinklist = new Array();
+
+function getCssRule(name){
+	for(var i=0; i<document.styleSheets.length; i++) {
+
+		var theRules = new Array();
+		if(document.styleSheets[i].cssRules)
+			theRules = document.styleSheets[i].cssRules;
+		else 
+		if(document.styleSheets[i].rules)
+			theRules = document.styleSheets[i].rules;
+		else
+			return null;
+
+		for(var j=0; j<theRules.length; j++) 
+			if(theRules[j].selectorText && theRules[j].selectorText.toLowerCase() == '#mapgalaxyview div.sector div.'+name)
+				return theRules[j];
+	}
+
+	return null;
+}
+
+var isFF = navigator.userAgent.indexOf("Firefox") != -1;
+function stopblink(name) {
+	if(isFF) {
+		for(var x in blinklistFF[name]) {
+			rule = $(blinklistFF[name][x]);
+			if(rule) rule.style.display = "block";
+		}
+
+		CurrentBlink = false;
+	}
+	else {
+		var rule = blinklist[name];
+		if(rule) rule.style.visibility = "visible";
+		blinklist[name] = null;	
+	}
+	
+
+}
+function startblink(name) {
+	if(isFF)
+		CurrentBlink = name;
+	else
+		blinklist[name] = getCssRule(name);
+}
+
+if(isFF){ 
+	var CurrentBlink = false; 
+	var blinklistFF = new Array();
+}
+
+function doblinkFF() {
+	if(CurrentBlink){
+		for(var x in blinklistFF[CurrentBlink]) {
+			//alert('blink:'+x);
+			rule = $(blinklistFF[CurrentBlink][x]);
+			if(rule) rule.style.display = (rule.style.display=="block")?"none":"block";
+		}
+	}
+
+	window.setTimeout("doblinkFF()", 1000);
+}
+
+function doblink() {
+	for(var x in blinklist)	{
+		rule = blinklist[x];
+		if(rule) rule.style.visibility = (rule.style.visibility=="visible")?"hidden":"visible";
+	}
+
+	window.setTimeout("doblink()", 1000);
+}
+
+if(isFF)
+	window.setTimeout("doblinkFF()", 1000);
+else
+	window.setTimeout("doblink()", 1000);
+
+
+
+var pl=new Array();
+pl['0']='hostile';
+pl['1']='uninhabited';
+pl['2']='friend';
+pl['3']='ally';
+pl['4']='player';
+pl['5']='resource';
+pl['6']='resource';
+pl['7']='vortex';
+pl['8']='nothing';
+
+function displayGalaxy(galaxy, m, open, ore, hydro, sov_tag_1, sov_perc_1, sov_tag_2, sov_perc_2, sov_tag_3, sov_perc_3) {
+	var res = "";
+
+	var pos = 0;
+	for(var i=1; i<100; i++)
+	{
+		var s = '<div class="sector" onmouseover="setLocSector('+i+')" onclick="openSector('+galaxy+','+i+')">';
+
+		for(var j=0; j<25; j++){
+			c = pl[m.charAt(pos)];
+			s += '<div class="p'+j+' '+c+'" id="'+i+'-'+j+'"></div>';
+			pos++;
+
+			if(isFF) {
+				if(!blinklistFF[c]) blinklistFF[c] = new Array();
+				blinklistFF[c].push(i+'-'+j);
+			}
+		}
+
+		s += '</div>';
+
+		res += s;
+	}
+
+	$('mapgalaxyview').innerHTML = res;
+
+	$('market_ore').innerHTML = ore;
+	$('market_hydrocarbon').innerHTML = hydro;
+	$('market').className = "default";
+
+
+	if (sov_tag_1 != '')
+	{
+		$('sov_tag_1').innerHTML = sov_tag_1;
+		$('sov_perc_1').innerHTML = sov_perc_1 + "%";
+
+		if(sov_tag_2 != '')
+		{
+			$('sov_tag_2').innerHTML = sov_tag_2;
+			$('sov_perc_2').innerHTML = sov_perc_2 + "%";
+		}
+
+		if(sov_tag_3 != '')
+		{
+			$('sov_tag_3').innerHTML = sov_tag_3;
+			$('sov_perc_3').innerHTML = sov_perc_3 + "%";
+		}
+
+		$('sovereignty').className = "default";
+	}
+
+	if(open > 0) {
+		$('gal_open_dt').innerHTML = formattime(open);
+		$('gal_open').className = "default";
+	}
+
+	var obj = $('mapgalaxy');
+	obj.style.display = 'block';
+	obj.style.visibility = 'visible';
+}
+[/galaxy]]
+
+[[sector]]
+[[comment]]sector things[/comment]]
+function get_left(obj) {
+	var left = obj.offsetLeft;
+	while((obj = obj.offsetParent) != null){ left += obj.offsetLeft; }
+	return left;
+}
+
+function get_top(obj) {
+	var top = obj.offsetTop;
+	while((obj = obj.offsetParent) != null){ top += obj.offsetTop; }
+	return top;
+}
+
+function showmenu(objet,title,txt) {	
+	var hint = $("hint");
+	var hinttext = $("hinttext");
+	hint.style.visibility = "hidden";
+
+	var obj = $(objet);
+	var max = $("map").offsetWidth + get_left($("map"));
+	var x = (get_left(obj)+16);
+	var y = (get_top(obj)-2);
+
+	hinttext.innerHTML = "<h1>" + title + "</h1>" + txt;
+
+	if (x + hint.offsetWidth > max) {
+		x = x - hint.offsetWidth-16;
+	}
+	
+	hint.style.left = x + 'px';
+	hint.style.top = y + 'px';
+	hint.style.visibility = "visible";
+}
+
+function hidemenu() {
+	var menu = $("hint");
+	menu.style.visibility = "hidden";
+	menu.style.left = 0;
+	menu.style.top = 0;
+}
+
+document.onclick=hidemenu;
+
+
+function getRelationClass(rel) {
+	switch(rel){
+		case 2: return "self"; break;
+		case 1: return "ally"; break;
+		case 0:	return "friend"; break;
+		case -1: return "enemy"; break;
+		case -2: return "enemy"; break;
+		case -3: return "neutral"; break;
+	}
+	return "";
+}
+
+
+function Fl(id,name,tag,owner,rel,signature,fleeing) {
+	if(rel==2 || id != 0)
+		var s= '<a title="Inspecter la flotte '+name+'" href="fleet.asp?id=' + id + '" class="self">'+(tag!=''?'['+tag+'] ':'')+name+'</a>';
+	else
+	{
+		var c = getRelationClass(rel);
+
+		var s = '<a title="Écrire à '+owner+'" href="mails.asp?subject=À propos de la flotte '+name+'&to='+owner+'" class="' + c+ '">' +(tag!=''?'['+tag+'] ':'')+name+'</a>';
+	}
+
+	if(signature > 0)
+		s += ' ('+formatnumber(signature)+')';
+	else
+		s += ' (indéterminé)';
+
+	if(fleeing)	s += ' en fuite';
+	return s+'<br/>';
+}
+
+function descOrbit(idx,planetid,rel,parked) {
+	var s="";
+	var orbit=orb[idx];
+
+	for(var i=1; i<orbit.length; i++)
+		s += Fl(orbit[i][0], orbit[i][1], orbit[i][2], orbit[i][3], orbit[i][4], orbit[i][5], orbit[i][6]);
+
+	if(parked > 0) {
+		if(rel == 2)
+			s += '<a href="orbit.asp?planet='+planetid+'" class="' + getRelationClass(rel) + '">Au sol: ' + formatnumber(parked) + '</a>';
+		else
+			s += '<span class="' + getRelationClass(rel) + '">Au sol: ' + formatnumber(parked) + '</span>';
+	}
+
+	return s;
+}
+
+function descSpecials(idx) {
+	var s="";
+	var elements=elem[idx];
+
+	for(var i=1; i<elements.length; i++)
+		s += elements[i] + "<br/>";
+
+	return s;
+}
+
+var elem=new Array();
+var orb=new Array();
+var idx=1;
+
+function loc(img,alliancetag,id,owner,name,rel,radar,jammer,ore,hydrocarbon,floor,space,a_ore,a_hydrocarbon,vortex_strength,frozen,parked,orbit,elements,b_ore,b_hydrocarbon) {
+	var c = getRelationClass(rel);
+
+	s = '<div class="planet">'+
+		'<table border="0" cellspacing="0" cellpadding="0" width="140">'+
+		'<tr>'+
+
+		[[comment]]display ore & hydrocarbon on the planet[/comment]]
+		'<td align=right width="38">';
+		if(ore!='0' || hydrocarbon!='0')
+		{
+			s+= '<a href="#" class="none" onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'resources.'+idx+'\',\'Ressources\',\'Minerai: '+ore+'<br>Hydrocarbure: '+hydrocarbon+'\')">'+
+				'<img id="resources.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/resource.gif">'+
+				'</a>';
+		}
+		else
+			s+= '<img width=1 height=16 src="{PATH_IMAGES}/interface/spacer.gif">';
+
+		s+= '</td>';
+
+		[[comment]]display planet image or vortex[/comment]]
+		s+=	'<td align=center rowspan=4 width="64">'+
+			'<div><img class="planet" src="{PATH_IMAGES}/planets/p'+img+'.gif" width=64 height=64></div><div class=planettext>'+idx+'</div>'+
+			'</td>';
+
+		[[comment]]display planet info: floor & space of the planet[/comment]]
+		s+= '<td width="38">';
+
+		if(floor!='' || space!='')
+		{
+			s+= '<a href="#" class=none onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'planet.'+idx+'\',\'Planète\',\'Terrain: '+floor+'<br>Espace: '+space+'<br>Abondance minerai: '+a_ore+'%<br>Abondance hydrocarbure: '+a_hydrocarbon+'%' + (vortex_strength>0?('<br>Stabilité vortex:' + vortex_strength):'') + '\')">'+
+				'<img id="planet.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/info.gif">'+
+				'</a>';
+		}
+		else
+		if(vortex_strength!='0')
+		{
+			s+= '<a href="#" class=none onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'planet.'+idx+'\',\'Vortex\',\'Stabilité vortex:' + vortex_strength + '\')">'+
+				'<img id="planet.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/info.gif">'+
+				'</a>';
+		}
+		else
+			s+= '<img width=1 height=16 src="{PATH_IMAGES}/interface/spacer.gif">';
+
+		s+= '</td></tr>';
+
+
+		s+= '<tr>'+
+			'<td align=right><img width=1 height=16 src="{PATH_IMAGES}/interface/spacer.gif"></td>'+
+			'<td align=left>';
+		if(radar>0 || jammer!=0)
+		{
+			if(jammer==-1)
+			{
+				s+= '<a href="#" class="none" onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'radar.'+idx+'\',\'Radar brouillé\',\'\')">'+
+					'<img id="radar.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/radarjammed.gif">';
+			} else
+			if(radar>0 && jammer==0)
+			{
+				s+= '<a href="#" class="none" onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'radar.'+idx+'\',\'Radar détecté\',\'Puissance: '+radar+'\')">'+
+					'<img id="radar.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/radar.gif">';
+			} else
+			if(jammer>0)
+			{
+				s+= '<a href="#" class="none" onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'radar.'+idx+'\',\'Radar brouillé détecté\',\'Puissance radar: '+radar+'<br/>Brouillage: '+jammer+'\')">'+
+					'<img id="radar.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/radarjammed-known.gif">';
+			}
+					
+			s+= '</a>';
+		}
+		else
+			s+= '<img width=1 height=16 src="{PATH_IMAGES}/interface/spacer.gif">';
+		s+= '</td></tr>';
+
+		s+= '<tr>';
+
+		[[comment]]display frozen/sleep icon[/comment]]
+		s+= '<td align=right>';
+		if(frozen)
+			s+= '<a href="#" class="none" title="En vacances"><img width=16 height=16 src="{PATH_IMAGES}/map/sector/sleeping.gif"></a>';
+		else
+		if(b_ore != '0' || b_hydrocarbon != '0')
+			s+= '<a href="#" class="none" title="Prix d\'achat" onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'price.'+idx+'\',\'Achat de ressources\',\'' + (b_ore != '0'?'Minerai: ' + b_ore + '<br/>':'') + (b_hydrocarbon != '0'?'Hydrocarbure: ' + b_hydrocarbon + '<br/>':'') + '\')">' +
+				'<img id="price.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/interface/credits.gif"></a>';
+		else
+			s+= '<img width=1 height=16 src="{PATH_IMAGES}/interface/spacer.gif">';
+		s+= '</td>';
+
+		[[comment]]display fleets icon[/comment]]
+
+		orb[idx] = orbit;
+
+		s+= '<td align=left valign=top>';
+
+		if(parked > 0 || orbit.length > 0)
+		{
+			var enemyfleets = false;
+			for(var k=1; k<orbit.length; k++)
+				if(orbit[k][4] < 0)
+					enemyfleets = true;
+
+			if(enemyfleets)
+				f = "-enemy";
+			else if(orbit.length > 0)
+				f = "-fleets";
+			else
+				f = "";
+
+			s+= '<a href="#" class="none" onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'fleets.'+idx+'\',\'Flottes\',descOrbit('+idx+','+id+','+rel+','+parked+'))">'+
+				'<img id="fleets.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/orbit'+f+'.gif">'+
+				'</a>';
+		}
+		else
+			s+= '<img width=1 height=16 src="{PATH_IMAGES}/interface/spacer.gif">';
+
+		s+= '</td></tr>';
+
+		s+= '<tr>';
+
+		[[comment]]display planets building elements[/comment]]
+
+		elem[idx] = elements;
+
+		s+= '<td align="right">';
+		if(elements.length > 0)
+		{
+			s+= '<a href="#" class=none onclick="return donothide(event)" onfocus="this.onmouseover()" onmouseover="showmenu(\'elements.'+idx+'\',\'Spécial\',descSpecials('+idx+'))">'+
+				'<img id="elements.'+idx+'" width=16 height=16 src="{PATH_IMAGES}/map/sector/special.gif">'+
+				'</a>';
+		}
+		else
+			s+= '<img width="1" height="16" src="{PATH_IMAGES}/interface/spacer.gif">';
+		s+= '</td>';
+
+		s+= '<td align="left" valign="top"><img width="1" height="16"></td>'+
+			'</tr>';
+
+
+		[[comment]]display planet name/alliance[/comment]]
+		s+= '<tr><td colspan="3" align="center" class="planetname">';
+
+		var n='';
+
+		if(alliancetag != '') n+='<a href="alliance.asp?tag='+alliancetag+'" class="'+c+'">['+alliancetag+']</a>';
+
+		if(rel==2)
+		{
+			if(floor>0 && space>0)
+				n+= '<a href="planet.asp?planet='+id+'" class="'+c+'" title="Inspecter la planète '+name+'">'+name+'</a>';
+			else
+				n+= '<span class="'+c+'">'+name+'</span>';
+		}
+		else
+		if(rel==-3 && isNaN(parseInt(img))) n+= '';
+		else
+		if(rel==-3) n+= '<span class="grey">inhabitée</span>';
+		else
+		{
+			if(name=='') name=owner;
+			if(owner=='')
+				n+= '<span class="'+c+'" title="Planète occupée">Occupée</span>';
+			else
+				n+= '<a href="nation.asp?name='+owner+'" class="'+c+'" title="Voir les informations sur '+owner+'">'+name+'</a>';
+		}
+
+		if(n=='') n = '&nbsp;';
+
+		s += n;
+
+		s+= '</td></tr>'+
+			'</table>'+
+		'</div>';
+
+	idx++;
+
+	return s;
+}
+
+function displaySector(arr) {
+	idx = 1;
+
+	var s = "";
+	for(var i=1; i<arr.length; i++) {
+		var p = arr[i];
+		s += loc(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8], p[9], p[10], p[11], p[12], p[13], p[14], p[15], p[16], p[17], p[18], p[19], p[20]);
+	}
+
+	s += '<div class="clear"></div>';
+
+	var obj = $('mapsectorview');
+	obj.innerHTML = s;
+
+	var obj = $('mapsector');
+	obj.style.display = 'block';
+	obj.style.visibility = 'visible';
+}
+
+function r(rel,tag,owner,fleetid,fleet,sig,f_id,f_name,f_g,f_s,f_p,f_rel,t_id,t_name,t_g,t_s,t_p,t_rel,time,losing) {
+	var c = getRelationClass(rel);
+
+	var s = '<tr class="smallitem"><td>';
+	if(tag != '') s+= '<a href="alliance.asp?tag='+tag+'" class='+c+'>['+tag+']</a> ';
+	s+= '<a href="nation.asp?name='+owner+'" title="Voir les informations sur '+owner+'" class="'+c+'">'+owner+'</a></td><td>';
+	if(rel==2)
+		s+= '<a href="fleet.asp?id='+fleetid+'" class="self">'+fleet+'</a>';
+	else
+		s+= '<a href="mails.asp?to='+owner+'" class="'+c+'" title="Envoyer un message à '+owner+'">'+fleet+'</a>';
+
+	if(sig > 0)
+		s+= ' ('+formatnumber(sig)+')';
+	else
+		s+= ' (indéterminé)';
+	s+= '</td><td>';
+
+	if(f_id != '')
+		s+= planet_str(f_id,f_name,f_g,f_s,f_p,f_rel);
+	else
+		s+= '<span class="grey">Inconnue</span>';
+	
+	s+= '</td><td>';
+	
+	if(t_id != '')
+		s+= planet_str(t_id,t_name,t_g,t_s,t_p,t_rel);
+	else
+		s+= '<span class="grey">Inconnue</span>';
+
+	s+= '</td><td>'
+	
+	if(losing)
+		s+= 'Perte du signal :&nbsp;<script>putcountdown1('+time+', "Signal perdu", "overview.asp");</'+'script>';
+	else
+		s+= '<script>putcountdown1('+time+', "Arrivé", "overview.asp");</'+'script>';
+		
+	s+= '</td></tr>';
+
+	document.write(s);
+}
+
+function displayRadar() {
+	var obj = $('mapradar');
+	obj.style.display = 'block';
+	obj.style.visibility = 'visible';
+}
+[/sector]]
+</script>
+
+<div id="map">
+<p align="center">
+
+<table>
+<tr valign="top">
+<td width="120">
+	<table class="default" width="100%">
+	<tr><td>
+	<form method="get" action="?">
+	<table class="clear">
+		<tr><td nowrap colspan="2"><a href="#" onclick="openGalaxy(''); return false;">Univers</a></td></tr>
+		<tr><td nowrap>[[galaxy_link]]<a href="#" onclick="openGalaxy(currGalaxy); return false;">[/galaxy_link]]Galaxie[[galaxy_link]]</a>[/galaxy_link]]</td><td><input type="text" name="g" id="locgalaxy" size="2" maxlength="2" autocomplete="off" value="{galaxy}"></td></tr>
+		<tr><td nowrap>Secteur</td><td><input type="text" name="s" id="locsector" size="2" maxlength="2" autocomplete="off" value="{sector}"></td></tr>
+		<tr><td colspan="2"><br/></td></tr>
+		<tr><td align="center" colspan="2"><input type="submit" value="Localiser"></td></tr>
+	</table>
+	</form>
+	</td></tr>
+	</table>
+
+	<br/>
+
+	<table id="market" class="default hidden" width="100%">
+	<tr><td>
+	<table class="clear" width="100%">
+		<tr><td colspan="2" style="text-align:center; font-weight:bold;">Marché</td></tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		<tr><td>Min.</td><td><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> <span id="market_ore"></span></td></tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		<tr><td>Hydro.</td><td><img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width="16" height="16"> <span id="market_hydrocarbon"></span></td></tr>
+	</table>
+	</td></tr>
+	</table>
+
+	<br/>
+
+	<table id="sovereignty" class="default hidden" width="100%">
+	<tr><td>
+	<table class="clear" width="100%">
+		<tr><td colspan="2" style="text-align:center; font-weight:bold;">Souveraineté</td></tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		<tr><td id="sov_tag_1"></td><td id="sov_perc_1" align="right"></td></tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		<tr><td id="sov_tag_2"></td><td id="sov_perc_2" align="right"></td></tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		<tr><td id="sov_tag_3"></td><td id="sov_perc_3" align="right"></td></tr>
+	</table>
+	</td></tr>
+	</table>
+
+	<br/>
+
+	<table id="gal_open" class="default hidden" width="100%">
+	<tr><td>
+	<table class="clear">
+		<tr><td style="text-align:center; font-weight:bold;">Ouverture</td></tr>
+		<tr><td >&nbsp;</td></tr>
+		<tr><td><span id="gal_open_dt"></span></td></tr>
+	</table>
+	</td></tr>
+	</table>
+</td>
+<td align="center">
+	[[universe]]
+	<div id="mapuniverse">
+		<div id="mapuniverseview"></div>
+	</div>
+	<script>displayUniverse(new Array(0[[galaxy]], new Array({galaxyid}, 0[[hasplanet]]1[/hasplanet]], 0[[hasally]]1[/hasally]], 0[[hasfriend]]1[/hasfriend]], 0[[hasenemy]]1[/hasenemy]])[/galaxy]]) );</script>
+	[/universe]]
+
+	[[galaxy]]
+	<div id="mapgalaxy">
+		<div id="mapgalaxyview"></div>
+		<div class="clear"></div>
+		<table width="450" id="maplegend">
+		<tr><td onmouseover="startblink('nothing')" onmouseout="stopblink('nothing')"><img src="{PATH_IMAGES}/map/galaxy/nothing.gif" width=3 height=3> Système vide</td><td onmouseover="startblink('uninhabited')" onmouseout="stopblink('uninhabited')"><img src="{PATH_IMAGES}/map/galaxy/uninhabited.gif" width=3 height=3> Planète inhabitée</td><td onmouseover="startblink('hostile')" onmouseout="stopblink('hostile')"><img src="{PATH_IMAGES}/map/galaxy/hostile.gif" width=3 height=3> Planète hostile</td><td onmouseover="startblink('resource')" onmouseout="stopblink('resource')"><img src="{PATH_IMAGES}/map/galaxy/resource.gif" width=3 height=3> Ressources</td></tr>
+		<tr><td onmouseover="startblink('friend')" onmouseout="stopblink('friend')"><img src="{PATH_IMAGES}/map/galaxy/friend.gif" width=3 height=3> Planète en PNA</td><td onmouseover="startblink('ally')" onmouseout="stopblink('ally')"><img src="{PATH_IMAGES}/map/galaxy/ally.gif" width=3 height=3> Planète alliée</td><td onmouseover="startblink('player')" onmouseout="stopblink('player')"><img src="{PATH_IMAGES}/map/galaxy/player.gif" width=3 height=3> Planète controlée</td><td onmouseover="startblink('vortex')" onmouseout="stopblink('vortex')"><img src="{PATH_IMAGES}/map/galaxy/vortex.gif" width=3 height=3> Vortex</td></tr>
+		</table>
+	</div>
+	<script>displayGalaxy({galaxy},{mapgalaxy:quote},{protected_until},{price_ore},{price_hydrocarbon}, '{sov_tag_1}', '{sov_perc_1}', '{sov_tag_2}', '{sov_perc_2}', '{sov_tag_3}', '{sov_perc_3}');</script>
+	[/galaxy]]
+
+	[[sector]]
+	<div id="mapsector">
+	<table>
+	<tr class="border">
+		<td><img src="{PATH_IMAGES}/map/arrow_nw.gif" class=arrow onclick="openSector({galaxy},{sector0})"></td>
+		<td align=center class=borderup><img src="{PATH_IMAGES}/map/arrow_n.gif" class=arrow onclick="openSector({galaxy},{sector1})"></td>
+		<td><img src="{PATH_IMAGES}/map/arrow_ne.gif" class=arrow onclick="openSector({galaxy},{sector2})"></td>
+	</tr>
+	<tr>
+		<td valign="middle" class="borderleft"><img src="{PATH_IMAGES}/map/arrow_w.gif" class=arrow onclick="openSector({galaxy},{sector7})"></td>
+		<td>
+		<div class="map" id="mapsectorview"></div>
+		</td>
+		<td valign="middle" class="borderright"><img src="{PATH_IMAGES}/map/arrow_e.gif" class=arrow onclick="openSector({galaxy},{sector3})"></td>
+	</tr>
+	<tr class="border">
+		<td><img src="{PATH_IMAGES}/map/arrow_sw.gif" class=arrow onclick="openSector({galaxy},{sector6})"></td>
+		<td align="center" class="borderdown"><img src="{PATH_IMAGES}/map/arrow_s.gif" class=arrow onclick="openSector({galaxy},{sector5})"></td>
+		<td><img src="{PATH_IMAGES}/map/arrow_se.gif" class=arrow onclick="openSector({galaxy},{sector4})"></td>
+	</tr>
+	</table>
+	</div>
+		<script>
+			displaySector(new Array(0
+				[[planet]],new Array('[[planet]]{planet_img}[/planet]][[vortex]]vortex[/vortex]][[asteroids]]asteroids[/asteroids]][[clouds]]clouds[/clouds]]', '{alliancetag}','{planetid}','{ownername}','{planetname}',{relation},{radarstrength},{radarjamming},'{ore:n}','{hydrocarbon:n}','{floor}','{space}', '{a_ore}','{a_hydrocarbon}','{vortex_strength}',[[frozen]]true[/frozen]][[active]]false[/active]],{parked}
+				,new Array([[orbit]]0[[fleet]],new Array({fleetid},{fleetname:quote},{alliancetag:quote},{fleetowner:quote},{relation},{signature},0[[fleeing]]1[/fleeing]])[/fleet]][/orbit]])
+				,new Array([[elements]]0[[element]],{element:quote}[/element]][/elements]])
+				,'{buy_ore:n}','{buy_hydrocarbon:n}'
+				)[/planet]]
+			));
+		</script>
+	[/sector]]
+</td></tr>
+
+[[radar]]
+<tr><td colspan="2">
+	<div id="mapradar">
+	<table class="default" width="100%">
+	<tr class="title"><td colspan="5">Activité Radar</td></tr>
+	<tr class="header"><td>Nation</td><td>Flotte</td><td>Origine</td><td>Destination</td><td>Temps restant</td></tr>
+
+	[[moving]]
+	<tr class="category"><td colspan="5">Mouvements des flottes</td></tr>
+	<script>
+	[[fleet]]r({relation},"{alliancetag}","{name}","{fleetid}","{fleetname}",{signature},"{f_planetid}","{f_planetname}","{f_g}","{f_s}","{f_p}",{f_relation},"{t_planetid}","{t_planetname}","{t_g}","{t_s}","{t_p}",{t_relation},{time}, [[losing]]true[/losing]][[timeleft]]false[/timeleft]]);[/fleet]]
+	</script>
+	[[nofleets]]
+	<tr class="smallitem"><td colspan="5" align="center">Aucun mouvement détecté</td></tr>
+	[/nofleets]]
+	[/moving]]
+
+	[[entering]]
+	<tr class="category"><td colspan="5">Flottes entrant dans le secteur</td></tr>
+	<script>
+	[[fleet]]r({relation},"{alliancetag}","{name}","{fleetid}","{fleetname}",{signature},"{f_planetid}","{f_planetname}","{f_g}","{f_s}","{f_p}",{f_relation},"{t_planetid}","{t_planetname}","{t_g}","{t_s}","{t_p}",{t_relation},{time}, [[losing]]true[/losing]][[timeleft]]false[/timeleft]]);[/fleet]]
+	</script>
+	[[nofleets]]
+	<tr class="smallitem"><td align="center" colspan="5">Aucune flotte détectée</td></tr>
+	[/nofleets]]
+	[/entering]]
+
+	[[leaving]]
+	<tr class="category"><td colspan="5">Flottes sortant du secteur</td></tr>
+	<script>
+	[[fleet]]r({relation},"{alliancetag}","{name}","{fleetid}","{fleetname}",{signature},"{f_planetid}","{f_planetname}","{f_g}","{f_s}","{f_p}",{f_relation},"{t_planetid}","{t_planetname}","{t_g}","{t_s}","{t_p}",{t_relation},{time}, [[losing]]true[/losing]][[timeleft]]false[/timeleft]]);[/fleet]]
+	</script>
+	[[nofleets]]
+	<tr class="smallitem"><td colspan="5" align="center">Aucune flotte détectée</td></tr>
+	[/nofleets]]
+	[/leaving]]
+	</table>
+	</div>
+	<script>
+	displayRadar();
+	</script>
+</td></tr>
+[/radar]]
+</table>
+
+</p>
+</div>
+
+<script>
+setLoc('{galaxy}','{sector}');
+</script>

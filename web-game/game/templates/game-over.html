@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">
+	<meta http-equiv="pragma" content="no-cache">
+
+	<title>Exile</title>
+
+	<link rel="stylesheet" href="{PATH_IMAGES}/styles/s_transparent/style.css" type="text/css" media="all">
+	<script type="text/javascript" src='/scripts/common.js'></script>
+
+	<script type="text/javascript">
+	function alertAbandon(){window.alert("Attention ! En validant vous supprimerez définitivement votre compte.");}
+	[[changename]]
+	[[galaxies]]
+	var rec=[];
+	[[galaxy]]rec[{id}]={recommendation};[/galaxy]]
+	function showRecommendation(obj){
+		var r=rec[obj.options[obj.selectedIndex].value];
+		if(r == 2) {
+			$("recommendation").innerHTML = 'Galaxie recommandée';
+			$("recommendation").className = 'recommanded';
+		}
+		else
+		if(r == 1) {
+			$("recommendation").innerHTML = '';
+			$("recommendation").className = '';
+		}
+		else {
+			$("recommendation").innerHTML = 'Galaxie non recommandée';
+			$("recommendation").className = 'notrecommanded';
+		}
+	}
+	[/galaxies]]
+	[/changename]]
+	</script>
+</head>
+
+<body>
+<div align="center">
+<div id="container">
+
+<div id="gameover">GAME OVER</div>
+<div id="playername">{login}</div>
+[[gameover]]
+Malgré tous vos efforts pour développer votre Nation, vous n'avez pu faire face aux puissants ennemis qui vous ont mené à la destruction.<br/>
+<br/>
+[/gameover]]
+
+[[bankrupt]]
+Malgré tous vos efforts pour développer votre Nation, vous n'avez su gérer correctement le budget de celui-ci ce qui a amené votre peuple à choisir un autre dirigeant.<br/>
+Vous finissez votre vie dans une des prisons coloniales comme un vulgaire voleur.
+<br/>
+[/bankrupt]]
+
+[[choice]]
+[[retry]]
+<br/>
+L'univers d'Exile est grand, et si vous le décidez, une chance supplémentaire vous sera donnée de montrer au monde votre courage et votre sagacité.<br/>
+En choisissant de Rejouer, une nouvelle planète libre vous sera allouée. Vos Rapports et Messages seront conservés ainsi que certaines de vos Recherches. Vous aurez la possibilité de changer de nom à la page suivante.<br/>
+<br/>
+<br/>
+[/retry]]
+<div align="center">
+<form method="post" action="?">
+[[retry]]
+<input type="radio" class="radio" name="action" id="continue" value="continue" checked><label for="continue">Rejouer</label><br/>
+[/retry]]
+<input type="radio" class="radio" name="action" id="abandon" value="abandon" onclick="alertAbandon()"><label for="abandon">Supprimer le compte</label><br/>
+<br/>
+<input type="submit" value="Valider">
+</form>
+</div>
+[/choice]]
+
+[[changename]]
+Si vous le souhaitez, vous pouvez changer de nom. Ceci peut vous aider à prendre un nouveau départ de manière anonyme.<br/>
+L'ancien nom deviendra alors disponible aux nouveaux joueurs ou aux joueurs souhaitant modifier leur nom suite à un game over.<br/>
+<br/>
+<br/>
+	[[error]]
+<div align="center" class="error">
+	[[check_username]]Le nom d'utilisateur doit être composé de 2 à 12 lettres, chiffres ou tiret, vérifiez votre entrée.[/check_username]]
+	[[username_exists]]Cet utilisateur existe déjà, choisissez un nouveau nom.[/username_exists]]
+</div>
+	<br/>
+	[/error]]
+<div align="center">
+<form method="post" action="?">
+<input type="hidden" name="action" value="retry">
+Nouveau nom <input type="text" name="login" value="{login:html}" maxlength="12"><br/>
+[[galaxies]]
+<br/>
+Galaxie de départ <select name="galaxy" id="galaxies" onchange="showRecommendation(this)">[[galaxy]]<option value="{id}"[[selected]] selected[/selected]]>{id}</option>[/galaxy]]</select><br/>
+<span id="recommendation"></span><br/>
+[/galaxies]]
+<br/>
+<input type="submit" value="Valider">
+</form>
+</div>
+[[galaxies]]
+<script>
+showRecommendation($("galaxies"));
+</script>
+[/galaxies]]
+[/changename]]
+
+[[no_free_planet]]
+<div align="center" class="error">
+	Aucune planète n'est disponible dans la galaxie choisie.
+</div>
+[/no_free_planet]]
+
+[[reset_error]]
+<div align="center" class="error">
+	Une erreur est survenue, veuillez envoyer un email à info@exil.pw en spécifiant votre nom de compte et ce code : R-{userid}-{reset_error}.
+</div>
+[/reset_error]]
+
+</div>
+</div>
+</body>
+</html>

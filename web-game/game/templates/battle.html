@@ -1,0 +1,40 @@
+<div id="battle">
+
+<table width="100%" class="default">
+<tr class="title"><td colspan="5">{planet} [{g}.{s}.{p}] - {time:dddd d mmmm yyyy hh:mm:ss} en {rounds}&nbsp;round(s)</td></tr>
+
+<tr class="header">
+<td>Flotte</td><td>Vaisseaux</td><td>Perdus</td><td>Détruits</td><td>Après combat</td>
+
+[[opponent]]
+<tr class="category [[self]]self[/self]][[friend]]friend[/friend]][[ally]]ally[/ally]][[enemy]]enemy[/enemy]]"><td>[[attack]]<img src="{PATH_IMAGES}/interface/stance_attack.gif" alt="Attaque" class="stance">[/attack]][[defend]]<img src="{PATH_IMAGES}/interface/stance_defend.gif" alt="Rispote" class="stance">[/defend]]<a href="?id={battleid}&v={view}[[public]]&by={userid}&key={key}[/public]]" class="[[self]]self[/self]][[friend]]friend[/friend]][[ally]]ally[/ally]][[enemy]]enemy[/enemy]]">[[alliance]][{alliancetag}] [/alliance]]{opponent}[[won]] (vainqueur)[/won]]</a></td><td>{ships}</td><td>{lost}</td><td>{killed}</td><td>{after}</td></tr>
+[[fleet]]
+<tr class="category [[self]]self[/self]][[friend]]friend[/friend]][[ally]]ally[/ally]][[enemy]]enemy[/enemy]]"><td>{fleet} (B:{mod_shield} M:{mod_handling} C:{mod_tracking_speed} D:{mod_damage})</td><td>{ships}</td><td>{lost}</td><td>{killed}</td><td>{after}</td></tr>
+[[ship]]
+<tr class="smallitem">
+<td><span class="dot">&middot;</span>
+[[name]]{label}[/name]]
+[[category10]]Vaisseaux utilitaires[/category10]]
+[[category11]]Vaisseaux de déploiement[/category11]]
+[[category15]]Vaisseaux tactiques[/category15]]
+[[category20]]Vaisseaux légers[/category20]]
+[[category30]]Corvettes[/category30]]
+[[category40]]Frégates[/category40]]
+[[category50]]Croiseurs[/category50]]
+[[category60]]Dreadnought[/category60]]
+[[category80]]Titan[/category80]]
+[[category90]]Plateforme de défense[/category90]]
+</td>
+<td>{ships}</td><td>{lost}</td><td>[[killed]]{killed_name} x{killed_count:n}<br/>[/killed]][[killed_total]]Total: {killed}[/killed_total]][[killed_zero]]0[/killed_zero]]</td><td>{after}</td></tr>
+[/ship]]
+[/fleet]]
+<tr class="smallitem"><td colspan=5>&nbsp;</td></tr>
+[/opponent]]
+[[publiclink]]
+<tr class="title"><td colspan="5"><p>Un rapport de ce combat est visible par tous à cette adresse publique:<br/>
+<a href="https://{baseurl}/game/battle-view.asp?id={battleid}&by={userid}&v={userid}&key={key}">https://{baseurl}/game/battle-view.asp?id={battleid}&v={userid}&by={userid}&key={key}</a></p>
+<p class=error>Veillez à ne pas laisser l'ennemi s'en emparer.</p></td></tr>
+[/publiclink]]
+</table>
+
+</div>

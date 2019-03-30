@@ -1,0 +1,120 @@
+<script>
+var senders=new Array();
+[[mail]][[reply]]senders.push(new Array({from:quote},{index},[[ignore]]false[/ignore]][[ignored]]true[/ignored]]));[/reply]][/mail]]
+
+function updatebg(index, event) {
+	var list = document.getElementsByName("checked_mails");
+	var obj = list[index];
+	document.getElementById("mail"+index).className = (obj.checked?"itemdel":"item");
+}
+function check(index, event) {
+	var list = document.getElementsByName("checked_mails");
+
+	if(event.ctrlKey)
+	{
+		for(;index<list.length;index++)
+		{
+			var obj=list[index];
+			obj.checked=true;
+			updatebg(index);
+		}
+	}
+	else
+	{
+		var obj=list[index];
+		obj.checked=!obj.checked;
+		updatebg(index);
+	}
+}
+function donotclick(index, event){ updatebg(index, event); event.cancelBubble = true; }
+
+function ignore(name){
+	if(confirm('Êtes-vous sûr de vouloir bloquer les messages en provenance du joueur "' + name + '" ?'))
+		openURL("/game/mails.asp?a=ignore&user="+name, evalResponse);
+	return false;
+}
+function unignore(name){
+	openURL("/game/mails.asp?a=unignore&user="+name, evalResponse);
+	return false;
+}
+[[comment]]reset ignored status of senders[/comment]]
+function resetIgnoredUsers(){ for(var i=0;i<senders.length;i++) senders[i][2] = false; }
+
+[[comment]]set the status of a user to ignored[/comment]]
+function setIgnored(name){ for(var i=0;i<senders.length;i++) if(senders[i][0] == name) senders[i][2] = true; }
+
+function updateUsers() {
+	var i,obj;
+
+	for(i=0;i<senders.length;i++)
+	{
+		obj = document.getElementById("ignore_"+senders[i][1]);
+		if(obj) obj.className = (senders[i][2]?"hidden":"");
+
+		obj = document.getElementById("ignored_"+senders[i][1]);
+		if(obj) obj.className = (senders[i][2]?"":"hidden");
+	}
+}
+
+function keydown(event) {
+	if(document.all)
+		var x = window.event.keyCode;
+	else
+		var x = event.keyCode;
+	if(x == 46) document.getElementById("delbtn").click();
+}
+document.onkeydown = keydown;
+</script>
+
+<div id="mails">
+<form method="post" action="?start={offset}" id="mailsform">
+<table class="default" width="100%">
+
+<tr class="title"><td colspan=3>Messages reçus</td></tr>
+
+[[nav]]<tr class="nav"><td colspan=3 align=left>Page {page_display}, Messages {min}-{max}. Aller à
+[[p]]&nbsp;[[link]]<a href="?start={page_link}">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td></tr>[/nav]]
+
+[[mail]]
+<tr id="mail{index}" class="item[[new_mail]]highlight[/new_mail]]">
+	<td width="1%" rowspan=1 align=center valign=top onclick="check({index},event)">
+		<input type="checkbox" class="checkbox" name="checked_mails" value="{mailid}" onclick="donotclick({index},event)">
+	</td>
+	<td width="1%" rowspan=1 align=center valign=top nowrap>
+	[[reply]]<a href="nation.asp?name={from}" title="Informations sur {from}">[/reply]]
+	[[avatar]]<img src="{avatar_url}" width=64 height=64 class="avatar">[/avatar]]
+	[[noavatar]]<img src="{PATH_IMAGES}/interface/noavatar.gif" width=64 height=64 class="avatar">[/noavatar]]
+	<br/><b>{from}</b>
+	[[reply]]</a>
+	[[alliance]]<br/><a href="alliance.asp?tag={alliancetag}">[{alliancetag}]</a><br/>[/alliance]]
+	<div id="ignore_{index}"[[ignored]] class=hidden[/ignored]]><a href="#" onclick="return ignore({from:quote})" title="Bloque les futurs messages provenant de ce joueur">Bloquer</a></div>
+	<div id="ignored_{index}"[[ignore]] class=hidden[/ignore]]><a href="#" onclick="return unignore({from:quote})"><span class=error>Bloqué</span></a></div>
+	[/reply]]
+	[[admin]]
+	<div><a href="dev-playas.asp?player={from}">Impersonate</a></div>
+	[/admin]]
+	</td>
+	<td valign="top">
+	<div class="subject">
+	{date:dd/mm/yyyy hh:nn:ss} | {subject:html}[[money]] | Somme reçue : <img src="{PATH_IMAGES}/interface/credits.gif" title="Crédits" class="icon" width=16 height=16> {moneyamount:n}[/money]] [[to_admins]](Aux administrateurs)[/to_admins]][[to_alliance]](À l'alliance)[/to_alliance]]</div>
+	<div class="body[[from_admin]][/from_admin]]">[[html]]{body}[/html]][[bbcode]]{bodybb:bbcode}[/bbcode]]</div>
+	<hr/><a href="?a=reply&mailid={mailid}" title="Répondre à {from}">Répondre</a>
+	</td>
+</tr>
+[/mail]]
+[[nomails]]<tr><td colspan=3 align=center>Aucun</td></tr>[/nomails]]
+
+<tr>
+	<td colspan=3 class=buttons>
+		<input type="submit" class="button100" name="delete" value="Supprimer" id="delbtn">&nbsp;<input type="button" class="button100" name="compose" value="Nouveau >" onclick="javascript:window.location.href='?a=new'">
+	</td>
+</tr>
+
+[[nav]]<tr class="nav"><td colspan=3 align=left>Page {page_display}, Messages {min}-{max}. Aller à
+[[p]]&nbsp;[[link]]<a href="?start={page_link}">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td></tr>[/nav]]
+
+</table>
+</form>
+</div>

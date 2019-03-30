@@ -1,0 +1,135 @@
+<script>
+function confirmBreakPact(tag,name) {
+	var s = "Êtes-vous sûr de vouloir rompre le pacte avec ["+tag+"] "+name+" ?";
+	return confirm(s);
+}
+</script>
+
+<table width=750 cellpadding=0 cellspacing=0>
+<tr>
+<td align="center">
+	[[nav]]
+	<div>
+	<ul class="htabs">
+		[[cat1]]<li[[selected]] class="active"[/selected]]><a href="?cat=1">Pactes signés</a></li>[/cat1]]
+		[[cat2]]<li[[selected]] class="active"[/selected]]><a href="?cat=2">Propositions[[propositions]] ({propositions})[/propositions]]</a></li>[/cat2]]
+		[[cat3]]<li[[selected]] class="active"[/selected]]><a href="?cat=3">Demandes de pactes[[requests]] ({requests})[/requests]]</a></li>[/cat3]]
+	</ul>
+	</div>
+	[/nav]]
+	<div>
+
+[[naps]]
+<table class="default" width="100%">
+<tr class="title"><td colspan="5">Pacte(s) de non-agression</td></tr>
+<tr class="header">
+<td><a href="?col=1[[r1]]&r=1[/r1]]">Alliance</a></td>
+[[score]]<td><a href="?col=2[[r2]]&r=1[/r2]]">Score</a></td>[/score]]
+<td><a href="?col=3[[r3]]&r=1[/r3]]">Date de l'accord</a></td>
+<td><a href="?col=4[[r4]]&r=1[/r4]]">Délai d'éxecution</a></td>
+<td><a href="?col=5[[r5]]&r=1[/r5]]">Vision planètes</a></td>
+<td><a href="?col=6[[r6]]&r=1[/r6]]">Partage radars</a></td>
+[[break]]<td>Pacte</td>[/break]]
+</tr>
+[[nap]]
+<tr><td>{place}. <a href="alliance.asp?tag={tag}">[{tag}] {name}</a></td>
+[[score]]<td align=right>{score:n}</td>[/score]]
+<td>{created:dd mmm yyyy hh:mm:ss}</td>
+<td align=right><script>
+[[countdown]]putcountdown1({break_interval}, "Rompu", "?")[/countdown]]
+[[time]]document.write(formattime({break_interval}))[/time]]
+</script></td>
+<td>
+[[toggle_share_locs]]<a href="?cat={cat}&a=sharelocs&tag={tag}">[/toggle_share_locs]][[locs_shared]]Oui[/locs_shared]][[locs_not_shared]]Non[/locs_not_shared]][[toggle_share_locs]]</a>[/toggle_share_locs]]
+</td>
+<td>
+[[toggle_share_radars]]<a href="?cat={cat}&a=shareradars&tag={tag}">[/toggle_share_radars]][[radars_shared]]Oui[/radars_shared]][[radars_not_shared]]Non[/radars_not_shared]][[toggle_share_radars]]</a>[/toggle_share_radars]]
+</td>
+[[break]]<td><a href="?cat={cat}&a=break&tag={tag}" onclick="return confirmBreakPact('{tag}','{name}')">Rompre</a></td>[/break]]
+[[broken]]<td>Rompu</td>[/broken]]
+</tr>
+[/nap]]
+[[nonaps]]
+<tr><td colspan=6 align=center>Aucun</td></tr>
+[/nonaps]]
+[[message]]<tr><td colspan=5 class="error">
+[[norights]]Vous n'êtes pas en droit de faire une telle demande[/norights]]
+[[unknown]]Aucune alliance avec un tel tag n'a été trouvé[/unknown]]
+[[nap_not_found]]Nous n'avons aucun pacte avec cette alliance[/nap_not_found]]
+[[not_enough_credits]]L'alliance ne dispose pas d'assez de crédits pour rompre le pacte[/not_enough_credits]]
+</td></tr>
+[/message]]
+</table>
+[/naps]]
+
+[[propositions]]
+<table class="default" width="100%">
+<tr class="title"><td colspan="6">Propositions de pactes de non-agression</td></tr>
+<tr class="header">
+<td>Alliance</td><td>Date de demande</td><td>Demandé par</td><td>Délai d'exécution</td><td>Réponse</td>
+[[proposition]]
+<tr class="smallitem"><td nowrap><a href="alliance.asp?tag={tag}">[{tag}] {name}</a></td>
+<td nowrap>{date:dd/mm/yyyy hh:mm:ss}</td><td><a href="mails.asp?to={recruiter}" title="Envoyer un message à {recruiter}">{recruiter}</a>&nbsp;</td>
+<td nowrap><script>document.write(formattime({break_interval}))</script></td>
+<td nowrap><a href="?cat={cat}&a=accept&tag={tag}">Accepter</a> - <a href="?cat={cat}&a=decline&tag={tag}">Refuser</a></td></tr>
+[/proposition]]
+[[nopropositions]]
+<tr><td colspan=6 align=center>Aucune proposition</td></tr>
+[/nopropositions]]
+</td>
+[[message]]<tr><td colspan=2 class="error">
+[[ok]]PNA créé[/ok]]
+[[too_many]]Trop de PNA sont déjà en cours par une des alliances concernées[/too_many]]
+</td></tr>
+[/message]]
+</table>
+[/propositions]]
+
+[[newnaps]]
+<form action="?cat={cat}&a=new" method="post">
+<table class="default">
+<tr class="title"><td colspan=2>Établir un pacte de non-agression</td></tr>
+<tr><td colspan=2>Veuillez indiquer le tag de l'alliance avec laquelle créer un PNA.<br/>
+Vous pouvez spécifier un délai d'exécution lorsqu'une alliance décidera de rompre le pacte. Maximum 72 heures : 3 jours.</td></tr>
+<tr><td>Alliance (tag)</td><td><input type="text" name="tag" value="{tag:html}" maxlength=4></td></tr>
+<tr><td>Délai d'exécution</td><td><input type="text" name="hours" value="{hours:html}" maxlength="2"> heures</td></tr>
+<tr><td colspan=2 align=center><input type="submit" name="submit" value="Envoyer"></td></tr>
+[[message]]<tr><td colspan=2 class="error">
+[[ok]]Demande envoyée[/ok]]
+[[norights]]Vous n'êtes pas en droit de faire une telle demande[/norights]]
+[[unknown]]Aucune alliance avec un tel tag n'a été trouvé[/unknown]]
+[[already_naped]]Cette alliance a déjà un pacte avec notre alliance ![/already_naped]]
+[[request_waiting]]Cette alliance nous a déjà offert un pacte, acceptons leur pacte[/request_waiting]]
+[[already_requested]]Nous avons déjà essayé d'établir un pacte avec cette alliance récemment[/already_requested]]
+</td></tr>
+[/message]]
+</table>
+</form>
+
+<br/>
+
+<table class="default" width="100%">
+<tr class="title"><td colspan="7">Nos demandes de pacte aux autres alliances</td></tr>
+<tr class="header">
+<td>Alliance</td><td>Date de demande</td><td>Demandé par</td><td>Délai d'exécution</td><td>Réponse</td><td></td>
+[[request]]
+<tr class="smallitem"><td><a href="alliance.asp?tag={tag}">[{tag}] {name}</a></td>
+<td>{date:dd/mm/yyyy hh:mm:ss}</td>
+<td>{recruiter}</td>
+<td nowrap><script>document.write(formattime({break_interval}))</script></td>
+<td nowrap>[[waiting]]En attente[/waiting]][[declined]]Refusée[/declined]]</td>
+<td><a href="?cat={cat}&a=cancel&tag={tag}">Annuler</a></td>
+</tr>
+[/request]]
+[[norequests]]
+<tr><td colspan=6 align=center>Aucune demande</td></tr>
+[/norequests]]
+</td>
+</table>
+[/newnaps]]
+
+</div>
+
+</td>
+</tr>
+</table>

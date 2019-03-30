@@ -1,0 +1,15 @@
+Ouverture le 1er Septembre 2007
+Nous vous rappelons que le serveur x01 ouvre le 1er Septembre 2007 à 19h00 et une fois démarré, les inscriptions sont closes.
+
+Voici un résumé des principales caractéristiques de jeu :
+
+- Durée limitée de 6 mois
+- Pas de mode vacances
+- Game Over définitif (pas de respawn)
+- Protection de 2 semaines au départ du jeu
+- Limite du nombre maximum de planètes, flottes et commandants améliorables en fonction des recherches
+- Production des matières premières variable suivant les planètes (la 1ere planète est identique pour tous)
+- Système de maintenance : un coût d'entretien des flottes, planètes, soldats, scientifiques sera prélevé tous les jours
+- Changement à propos du temps des recherches et de construction pour s'accorder avec la durée limite du round
+- Classement public
+- Pas d'orientation marchand, militaire, scientifique

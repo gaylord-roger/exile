@@ -1,0 +1,29 @@
+<table class="default" width="100%">
+
+<tr><td colspan=7><form action="?" method=post><div style="float:left">
+<input type=checkbox class=checkbox id=gifts name=gifts value=1[[gifts_checked]] checked[/gifts_checked]]><label for=gifts>Financements et dons</label>&nbsp;
+<input type=checkbox class=checkbox id=settax name=settax value=1[[settax_checked]] checked[/settax_checked]]><label for=settax>Modifications de taxe</label>&nbsp;
+<input type=checkbox class=checkbox id=taxes name=taxes value=1[[taxes_checked]] checked[/taxes_checked]]><label for=taxes>Taxes collectées</label>&nbsp;
+<input type=checkbox class=checkbox id=kicksbreaks name=kicksbreaks value=1[[kicksbreaks_checked]] checked[/kicksbreaks_checked]]><label for=kicksbreaks>Exclusions et Ruptures de pacte</label></div>
+<div align=right><input type=submit name=refresh value="Actualiser"></div>
+</form>
+</td></tr>
+
+<tr class="header"><td>Date</td><td>Type</td><td>Source</td><td>Destinataire</td><td>Crédit</td><td>Débit</td><td>Description</td></tr>
+[[entry]]
+<tr class="[[gift]]gift[/gift]][[taxchanged]]taxchanged[/taxchanged]][[member_left]]memberleft[/member_left]]item">
+<td>{date:dd/mm/yyyy hh:nn:ss}</td>
+<td nowrap>[[gift]]Don[/gift]]
+[[tax]]Taxe[/tax]]
+[[member_left]]Départ du membre[/member_left]]
+[[member_kicked]]Exclusion du membre[/member_kicked]]
+[[money_request]]Financement[/money_request]]
+[[taxchanged]]Taxe changée[/taxchanged]]
+[[nap_broken]]PNA rompu[/nap_broken]]
+[[war_bill]]Guerre[/war_bill]]
+[[tribute]]Tribut[/tribute]]</td>
+<td nowrap>{source:%s!-}</td><td nowrap>{destination:%s!-}</td><td align=right nowrap>{income:n}</td><td align=right nowrap>{outcome:n}</td><td>[[taxchanged]]Nouvelle taxe: [/taxchanged]]{description:%s!-}</td>
+</tr>
+[/entry]]
+[[noentries]]<tr><td colspan=7 align=center>Aucun mouvement effectué récemment</td></tr>[/noentries]]
+</table>

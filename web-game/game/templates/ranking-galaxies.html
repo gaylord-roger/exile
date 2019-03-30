@@ -1,0 +1,26 @@
+<script>function chgal(obj){eval("location='?g=" + obj.options[obj.selectedIndex].value + "'");}
+function previousgal(){
+	var obj = document.getElementById("galaxies");
+	if(obj.selectedIndex>0){obj.selectedIndex=obj.selectedIndex-1; chgal(obj);}
+}
+function nextgal(){
+	var obj = document.getElementById("galaxies");
+	if(obj.selectedIndex<obj.options.length-1){obj.selectedIndex=obj.selectedIndex+1; chgal(obj);}
+}
+</script>
+<style>
+.arrow { margin-top:5px; }
+.left { float:left; }
+.right { float:right; }
+</style>
+<table class="default" width="450">
+<tr><td colspan="3" align="center"><div class="left arrow"><a href="javascript:previousgal()">&lt;&lt;</a></div><div class="right arrow"><a href="javascript:nextgal()">&gt;&gt;</a></div><div>Galaxie <select id="galaxies" onchange="chgal(this)">[[galaxy]]<option value="{galaxyid}"[[selected]] selected[/selected]]>{galaxyid}</option>[/galaxy]]</select></div>
+</td></tr>
+[[player]]
+<tr class="item[[self]]highlight[/self]][[ally]]ally[/ally]]">
+<td width="1%" nowrap><div align=center><a href="/game/nation.asp?name={name}" title="Afficher les informations sur {name}"><img src="[[avatar]]{avatar_url}[/avatar]][[noavatar]]{PATH_IMAGES}/interface/noavatar.gif[/noavatar]]" width=64 height=64 class="avatar"></a></div>{place}. <a href="/game/nation.asp?name={name}" title="Afficher les informations sur {name}">{name}</a></td>
+<td>[[alliance]]<a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a>[/alliance]][[noalliance]]&nbsp;[/noalliance]]</td>
+<td align=right width="1%" nowrap>{score:n}</td>
+</tr>
+[/player]]
+</table>

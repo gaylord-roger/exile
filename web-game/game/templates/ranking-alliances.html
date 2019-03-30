@@ -1,0 +1,32 @@
+<table class="default" width="600">
+
+<tr class="header">
+<td><a href="?col=7[[r7]]&r=7[/r7]][[search_params]]&a={param_a}[/search_params]]">Tag</a>&nbsp;<a href="?col=1[[r1]]&r=1[/r1]][[search_params]]&a={param_a}[/search_params]]">Alliance</a></td>
+[[hide]]
+<td><a href="?col=2[[r2]]&r=2[/r2]][[search_params]]&a={param_a}[/search_params]]">Score</a></td>
+<td><a href="?col=5[[r5]]&r=5[/r5]][[search_params]]&a={param_a}[/search_params]]">Moyenne</a></td>
+[/hide]]
+<td><a href="?col=3[[r3]]&r=3[/r3]][[search_params]]&a={param_a}[/search_params]]">Membres</a></td>
+<td><a href="?col=4[[r4]]&r=4[/r4]][[search_params]]&a={param_a}[/search_params]]">Colonies</a></td>
+<td><a href="?col=6[[r6]]&r=6[/r6]][[search_params]]&a={param_a}[/search_params]]">Date de création</a></td>
+</tr>
+
+[[nav]]<tr class="nav"><td colspan=4 align=left>Page {page_displayed}, Alliances {page_first}-{page_last}. Aller à
+[[p]]&nbsp;[[link]]<a href="?start={page_link}[[search_params]]&a={param_a}[/search_params]]&col={sort_column}[[reversed]]&r=1[/reversed]]">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td>
+</tr>[/nav]]
+[[noresult]]<tr><td colspan=4 align=center>Aucune alliance trouvée.</td></tr>[/noresult]]
+[[alliance]]
+<tr[[playeralliance]] class=ranking_alliance[/playeralliance]][[nap]] class=ranking_nap[/nap]][[war]] class=ranking_war[/war]]>
+	<td>{place}. <a href="/game/alliance.asp?tag={tag}">[{tag}] {name}</a></td>
+	[[hide]]<td align="right">{score:n}<br/><span[[plus]] class="plus"[/plus]][[minus]] class="minus"[/minus]]>[[plus]]+[/plus]]{score_delta:n}</span></td><td align=right>{score_average:n}</td>[/hide]]
+	<td align=right>{members} / {max_members}</td>
+	<td align=right>{stat_colonies}</td>
+	<td>{created:dd mmm yyyy hh:mm:ss}</td>
+</tr>
+[/alliance]]
+[[nav]]<tr class="nav"><td colspan=4 align=left>Page {page_displayed}, Alliances {page_first}-{page_last}. Aller à
+[[p]]&nbsp;[[link]]<a href="?start={page_link}[[search_params]]&a={param_a}[/search_params]]&col={sort_column}[[reversed]]&r=1[/reversed]]">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td>
+</tr>[/nav]]
+</table>

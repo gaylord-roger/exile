@@ -1,0 +1,10 @@
+<style>
+.user1 td { background-color: #303030; }
+.user2 td { background-color: #404040; }
+</style>
+<table class="default" width="1050">
+<tr class="title"><td colspan="4">Connexions</td></tr>
+[[connection]]
+<tr [[user1]]class="user1"[/user1]][[user2]]class="user2"[/user2]]><td width="1%" nowrap>{disconnected:yyyy/mm/dd hh:nn:ss}<br/>{connected:yyyy/mm/dd hh:nn:ss}</td><td width="1%" nowrap>{username} [<a href="dev-playas.asp?player={username}">I</a>]</td><td nowrap><b>Address: </b><span class="grey"><a href="?address={address}">{address}</a></span>[[forwarded]]/{forwarded_address}[/forwarded]]<br/><b>Browser: </b><span class="grey"><a href="?browser={browser:http}">{browser}</a></span></td><td><a href="?browserid={browserid:http}">{browserid:n!-}</a></td></tr>
+[/connection]]
+</table>

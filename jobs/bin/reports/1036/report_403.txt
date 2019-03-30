@@ -1,0 +1,2 @@
+Flotte étrangère détectée
+Une flotte de la nation "%username%" a été détectée à proximité de notre planète %planetname% (%g%:%s%:%p%).

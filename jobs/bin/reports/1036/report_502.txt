@@ -1,0 +1,2 @@
+Versement reçu
+Nous venons de recevoir %credits% crédits de la part de %username%.

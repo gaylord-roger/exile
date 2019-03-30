@@ -1,0 +1,3 @@
+Une expérience a mal tourné
+Un accident est survenu dans un laboratoire de recherche sur %planetname% (%g%:%s%:%p%).
+Les secours sont actuellement sur place pour soigner les blessés.

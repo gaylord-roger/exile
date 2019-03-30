@@ -1,0 +1,49 @@
+<div id="register">
+	<b:error>
+		<fieldset>
+		<legend class="error">&nbsp;Erreur&nbsp;</legend>
+		<div>
+			<p class="error">
+			<b:email_banned>Les emails provenant de ce nom de domaine ne sont pas autorisés</b:email_banned>
+			<b:email_exists>Cette adresse e-mail est déjà utilisée pour un autre compte, le multi compte est interdit !</b:email_exists>
+			<b:email_invalid>Veuillez vérifier votre adresse e-mail</b:email_invalid>
+			<b:username_banned>Ce nom d'utilisateur est réservé, choisissez un nouveau nom</b:username_banned>
+			<b:username_exists>Ce nom d'utilisateur existe déjà, choisissez un nouveau nom</b:username_exists>
+			<b:username_invalid>Votre nom d'utilisateur doit être composé de 2 à 12 caractères, lettres et chiffres acceptés, vérifiez votre entrée</b:username_invalid>
+			<b:accept_conditions>Vous devez accepter les conditions générales pour vous inscrire</b:accept_conditions>
+			<b:unknown>Une erreur est survenue. <t:error/></b:unknown>
+
+			<b:register_disabled><t:register_msg/></b:register_disabled>
+			<b:register_disabled_maintenance>Les inscriptions sont temporairement désactivées pour maintenance</b:register_disabled_maintenance>
+			</p>
+		</div>
+		</fieldset>
+	</b:error>
+
+	<fieldset>
+	<legend>&nbsp;Inscription en ligne à Exile&nbsp;</legend>
+	<div>
+	<p>L'inscription vous accordera l'accès au jeu Exile, vous pourrez modifier les options de votre compte dans la partie Options. Pour toute question, contactez l'administrateur.</p>
+	<p>Ci-dessous le formulaire à remplir afin de vous inscrire. Après vous êtres inscrit, vous recevrez un e-mail contenant le mot de passe à utiliser pour commencer à jouer.</p>
+	</div>
+	<p class="warning">Nous vous rappelons qu'il est interdit de posséder plus d'un compte.<br/>En cas d'infraction les comptes seront supprimés sans avertissement.</p>
+	</fieldset>
+
+	<form method="post" action="/register.asp">
+
+	<fieldset>
+	<legend>&nbsp;Saisissez les informations de votre compte&nbsp;</legend>
+	<div>
+		<table>
+		<tr><td align="right"><label for="username">Votre nom d'utilisateur: </label></td><td><input type="text" class="registerinput" name="username" id="username" value="<t:username format='html'/>" maxlength="12"/></td></tr>
+		<tr><td align="right"><label for="email">Votre adresse e-mail: </label></td><td><input type="text" class="registerinput" name="email" id="email" value="<t:email format='html'/>" maxlength="64"/></td></tr>
+		<tr><td></td><td><input class="checkbox" type="checkbox" name="conditions" id="conditions" value="1"/><label for="conditions">J'ai lu et j'accepte les </label><a href="/conditions.asp" title="Conditions générales" target="_blank">conditions générales.</a></td></tr>
+		</table>
+	</div>
+	<p class="submit">
+		<input type="submit" name="create" class="button" value="Valider"/>
+	</p>
+	</fieldset>
+
+	</form>
+</div>

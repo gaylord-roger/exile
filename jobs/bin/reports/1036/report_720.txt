@@ -1,0 +1,2 @@
+Vol de ressources
+Une intrusion a eu lieu dans nos entrepôts de %planetname% (%g%:%s%:%p%). Un inventaire des stocks est en cours pour savoir ce qui a été volé.

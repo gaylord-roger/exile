@@ -1,0 +1,92 @@
+<script>
+function check(obj){ document.getElementById(obj).checked=true; return true; }
+</script>
+
+<form method="get" action="?">
+<input type=hidden name=userid value="{userid}">
+<table class="default">
+<tr class="title"><td colspan=2>Choisissez une action ...</td></tr>
+<tr class="item">
+<td><input type="radio" class="radio" name="action" value="rename" id="rename"><label for="rename">Renommer</label></td>
+<td><input type="text" name="newname" value="{name}" onfocus="return check('rename')"></td></tr>
+[[stopholidays]]
+<tr class="item"><td colspan=2><input type="radio" class="radio" name="action" value="stopholidays" id="stopholidays"><label for="stopholidays">Arrêt des vacances</label></td></tr>
+[/stopholidays]]
+[[unban]]
+<tr class="item"><td colspan=2><input type="radio" class="radio" name="action" value="unban" id="unban"><label for="unban">Débannir</label></td></tr>
+[/unban]]
+<tr class="item"><td>Pénalité</td>
+<td>
+<table class=clear>
+<tr><td colspan=2><input type="radio" class="radio" name="action" value="ban" id="ban"><label for="ban">Bannir</label></td></tr>
+<tr><td colspan=2><input type="radio" class="radio" name="action" value="penalty" id="penalty">
+<select name="type" onfocus="return check('penalty')">
+<option value=0 [[type_0]] selected[/type_0]]>Tempête électromagnétique sur toutes les planètes</option>
+<option value=1 [[type_1]] selected[/type_1]]>Suspension de 1 jour</option>
+<option value=2 [[type_2]] selected[/type_2]]>Suspension de 2 jours</option>
+<option value=3 [[type_3]] selected[/type_3]]>Suspension de 4 jours</option>
+<option value=4 [[type_4]] selected[/type_4]]>Suspension de 7 jours</option>
+<option value=5 [[type_5]] selected[/type_5]]>Vacances immédiates (2 semaines max)</option>
+<option value=6 [[type_6]] selected[/type_6]]>Vacances immédiates (3 semaines max)</option>
+</select></td></tr>
+<tr><td>Raison:</td><td><input type="text" name="reason" value="{reason}" size=64 maxlength=128></td></tr>
+<tr><td>Raison publique:</td><td><input type="text" name="reasonpublic" value="{reasonpublic}" size=64 maxlength=128></td></tr>
+</table>
+</td></tr>
+<tr class=item><td><input type="radio" class="radio" name="action" value="notes" id="notes"><label for="notes">Notes</label></td><td><textarea name=notes cols="60" rows="10" onfocus="return check('notes')">{notes:html}</textarea></td></tr>
+<tr class="item"><td colspan="2" align="center"><input type="submit" value="Envoyer" name="submit"></td></tr>
+</table>
+</form>
+
+<table class="default">
+[[history]]
+<tr>
+<td>{h_date:dddd d mmmm yyyy hh:mm:ss}</td>
+<td>
+[[action0]]Tempête électromagnétique sur toutes les planètes[/action0]]
+[[action1]]Suspension 1 jour[/action1]]
+[[action2]]Suspension 2 jours[/action2]]
+[[action3]]Suspension 4 jours[/action3]]
+[[action4]]Suspension 7 jours[/action4]]
+[[action5]]Vacances immédiates (2 semaines max)[/action5]]
+[[action6]]Vacances immédiates (3 semaines max)[/action6]]
+[[action-1]]Rename[/action-1]]
+[[action-2]]Ban[/action-2]]
+[[action-3]]Unban[/action-3]]
+[[action-4]]Fin mode vacances[/action-4]]
+[[action-5]]Notes[/action-5]]
+</td>
+[[action0]]
+<td>{h_reason}</td>
+<td>{h_reason_public}</td>
+[/action0]]
+[[action1]]
+<td>{h_reason}</td>
+<td>{h_reason_public}</td>
+[/action1]]
+[[action2]]
+<td>{h_reason}</td>
+<td>{h_reason_public}</td>
+[/action2]]
+[[action3]]
+<td>{h_reason}</td>
+<td>{h_reason_public}</td>
+[/action3]]
+[[action4]]
+<td>{h_reason}</td>
+<td>{h_reason_public}</td>
+[/action4]]
+[[action-1]]
+<td>{h_reason}</td>
+<td>{h_reason_public}</td>
+[/action-1]]
+[[action-2]]
+<td>{h_reason}</td>
+<td>{h_reason_public}</td>
+[/action-2]]
+[[action-5]]
+<td colspan="2">{h_admin_notes}</td>
+[/action-5]]
+</tr>
+[/history]]
+</table>

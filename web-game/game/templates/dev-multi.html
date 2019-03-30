@@ -1,0 +1,13 @@
+<form method="get" action="?">
+<table class="default">
+<tr class="title"><td colspan="4">Multi-compte</td></tr>
+[[item]]<tr class="item[[samebrowserid]]del[/samebrowserid]]">
+
+<td>[{alliance1}]<a href="nation.asp?name={login}">{login}</a> [<a href="dev-playas.asp?player={login}">I</a>][[can_ban_multi]] [<a href="dev-options.asp?action=ban&reason=Multicompte&reasonpublic=Suspension+pour+multicompte&submit=Envoyer&userid={userid}&close=1" target=_blank>multi</a>] [<a href="dev-options.asp?action=ban&reason=Exploit&reasonpublic=Suspension+pour+exploitation+de+bug&submit=Envoyer&userid={userid}&close=1" target=_blank>exploit</a>][/can_ban_multi]]<br/><a href="https://www.dnsstuff.com/tools/tracert.ch?ip={address}" target=_blank>{address}</a>/{forwarded_address} ({browserid})<br/>{browser}<br/>Reg: {regdate:d}<br/>Email: {email}[[samealliance]]<br/>don: {given1:n} / pris:{taken1:n}[/samealliance]]<br/>FROM: {timestamp:d} [[disconnected]]TO {disconnected:d}[/disconnected]]</td>
+<td>&gt; {sent_to:n!0}<br/>&lt; {received_from:n!0}<br/><a href="dev-connections.asp?u1={userid}&u2={userid2}">Compare</a></td>
+<td>[{alliance2}]<a href="nation.asp?name={login2}">{login2}</a> [<a href="dev-playas.asp?player={login2}">I</a>][[can_ban_multi2]] [<a href="dev-options.asp?action=ban&reason=Multicompte&reasonpublic=Suspension+pour+multicompte&submit=Envoyer&userid={userid2}&close=1" target=_blank>multi</a>] [<a href="dev-options.asp?action=ban&reason=Exploit&reasonpublic=Suspension+pour+exploitation+de+bug&submit=Envoyer&userid={userid2}&close=1" target=_blank>exploit</a>][/can_ban_multi2]]<br/><a href="https://www.dnsstuff.com/tools/tracert.ch?ip={address2}" target=_blank>{address2}</a>/{forwarded_address2} ({browserid2})<br/>{browser2}<br/>Reg: {regdate2:d}<br/>Email: {email2}[[samealliance]]<br/>don: {given2:n} / pris:{taken2:n}[/samealliance]]<br/>FROM: {timestamp2:d} [[disconnected2]]TO {disconnected2:d}[/disconnected2]]</td>
+<td>[[samepassword]]Même password[/samepassword]][[samealliance]]<br/>Même alliance[/samealliance]]<br/></td>
+
+</tr>[/item]]
+</table>
+</form>

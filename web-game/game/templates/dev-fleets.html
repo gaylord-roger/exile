@@ -1,0 +1,49 @@
+<form method="get" action="?">
+<table>
+<tr valign="top"><td>
+<table class="default" id="tblFleets">
+<tr class="title"><td colspan=2>Générer de nouvelles flottes ...</td></tr>
+<tr class="item"><td>Nom: </td><td><input type="text" name="name" maxlength=18 size=18 value="{name}"></tr>
+<tr class="item"><td>Position: </td><td><input type="text" name="g" maxlength=3 size=2 value="{g}"> <input type="text" name="s" maxlength=3 size=2 value="{s}"> <input type="text" name="p" maxlength=3 size=2 value="{p}"></tr>
+<tr class="item"><td>Destination: </td><td><input type="text" name="to_g" maxlength=3 size=2 value="{to_g}"> <input type="text" name="to_s" maxlength=3 size=2 value="{to_s}"> <input type="text" name="to_p" maxlength=3 size=2 value="{to_p}"></tr>
+<tr class="item"><td>Attitude: </td><td><input type="checkbox" class="checkbox" name="attack" id="attack" maxlength=3 size=2 value="1"[[attack]] checked[/attack]]><label for="attack">Offensive</label></tr>
+<tr class="item"><td>Type: </td><td><select name="type" onchange="change(this)">
+<option value=0[[type_0]] selected[/type_0]]>Petite</option>
+<option value=1[[type_1]] selected[/type_1]]>Moyenne</option>
+<option value=2[[type_2]] selected[/type_2]]>Grosse</option>
+<option value=3[[type_3]] selected[/type_3]]>Large</option>
+<option value=4[[type_4]] selected[/type_4]]>Invasion</option>
+<option value=10[[type_10]] selected[/type_10]]>Cargo (petit)</option>
+<option value=11[[type_11]] selected[/type_11]]>Cargo (moyen)</option>
+<option value=12[[type_12]] selected[/type_12]]>Cargo (gros)</option>
+<option value=13[[type_13]] selected[/type_13]]>Impérial</option>
+<option value=15[[type_15]] selected[/type_15]]>Sonde</option>
+<option value=99[[type_99]] selected[/type_99]]>Personnalisé</option>
+</select></tr>
+<tr class="item"><td colspan=2 align=center><input type=submit value="Déployer" name="submit"></td></tr>
+</table>
+</td><td>
+<table class="default" id="custom">
+<tr class="title"><td colspan="2">Flotte personnalisée</td></tr>
+[[ship]]<tr class="smallitem"><td>{ship_name}</td><td><input type="text" name="q{ship_id}" size=8 maxlength=8></td></tr>[/ship]]
+</table>
+</td></tr>
+</table>
+</form>
+
+<script>
+function change(obj)
+{
+	var tbl = document.getElementById("custom");
+	if(obj.options[obj.selectedIndex].value == "99")
+	{
+		tbl.style.display="block";
+		tbl.style.visibility="visible";
+	}
+	else
+	{
+		tbl.style.display="none";
+		tbl.style.visibility="hidden";
+	}
+}
+</script>

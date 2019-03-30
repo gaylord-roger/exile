@@ -1,0 +1,26 @@
+<script>function update(obj) {document.getElementById("count").innerHTML=obj.value.length}</script>
+<form method="post" action="notes.asp" name="note">
+	<table class="default">
+	<tr class="title">
+		<td>Notes personnelles (<span id="count">0</span> / {maxlength} caractères)</td>
+	</tr>
+	<tr class="item">
+		<td><textarea id=notes name=notes cols=75 rows=15 onKeyUp="update(this)" onFocus="update(this)">{notes:html}</textarea></td>
+	</tr>
+
+	<tr class="item">
+		<td class=buttons align=center><input type=button name=effacer value=Effacer class=button onclick="javascript:document.getElementById('notes').value=''">&nbsp;<input type="submit" name="submit" id="submit" value="Enregistrer" class="button">
+	</td>
+	</tr>
+
+	[[error]]
+	<tr class="item"><td>
+		<p class=error>
+		[[toolong]]Vos notes dépassent la limite de {maxlength} caractères[/toolong]]
+		[[done]]Notes enregistrées[/done]]</p>
+	</td></tr>
+	[/error]]
+
+	</table>
+</form>
+<script>onload=function() { var o=document.getElementById("notes"); o.focus(); o.value = o.value; }</script>

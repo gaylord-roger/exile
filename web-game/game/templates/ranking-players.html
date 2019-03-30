@@ -1,0 +1,41 @@
+<table class="default">
+
+<tr class="header">
+<td><a href="?col=1[[r1]]&r=1[/r1]][[search_params]]&a={param_a}&n={param_n}[/search_params]]">Nation</a></td>
+<td><a href="?col=2[[r2]]&r=1[/r2]][[search_params]]&a={param_a}&n={param_n}[/search_params]]">Alliance</a></td>
+<td><a href="?col=3[[r3]]&r=1[/r3]][[search_params]]&a={param_a}&n={param_n}[/search_params]]">Développement</a></td>
+<td><a href="?col=4[[r4]]&r=1[/r4]][[search_params]]&a={param_a}&n={param_n}[/search_params]]">Prestige</a></td>
+[[t]]
+<td><a href="?col=5[[r5]]&r=1[/r5]][[search_params]]&a={param_a}&n={param_n}[/search_params]]">Dernière connexion</a></td>
+[/t]]
+</tr>
+
+[[nav]]<tr class="nav"><td colspan="4" align=left>Page {page_displayed}, Nations {page_first}-{page_last}. Aller à
+[[p]]&nbsp;[[link]]<a href="?start={page_link}[[search_params]]&a={param_a}&n={param_n}[/search_params]]&col={sort_column}[[reversed]]&r=1[/reversed]]">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td>
+</tr>[/nav]]
+[[noresult]]<tr><td colspan="4" align="center">Aucune nation trouvée.</td></tr>[/noresult]]
+[[player]]
+<tr class="item[[self]]highlight[/self]][[ally]]ally[/ally]]">
+<td>[[top10avatar]]<p align="center"><a href="/game/nation.asp?name={name}" title="Afficher les informations sur {name}">[[avatar]]<img src="{avatar_url}" width="64" height="64" class="avatar">[/avatar]][[noavatar]]<img src="{PATH_IMAGES}/interface/noavatar.gif" width=64 height=64 class="avatar">[/noavatar]]</a></p>[/top10avatar]]{place}.&nbsp;[[name]]<a href="/game/nation.asp?name={name}" title="Afficher les informations sur {name}">{name}</a>[/name]][[name_na]]Inconnu[/name_na]]</td>
+<td align="right">[[alliance]]<a href="alliance.asp?tag={alliancetag}">[{alliancetag}] {alliancename}</a>[/alliance]][[noalliance]]&nbsp;[/noalliance]]</td>
+<td align="right">{score:n}<br/><span[[plus]] class="plus"[/plus]][[minus]] class="minus"[/minus]]>[[plus]]+[/plus]]{score_delta:n!-}</span></td>
+<td align="right">{score_battle:n}</td>
+[[t]]
+<td align="right">
+[[recently]]<span class="recent">Récemment</span>[/recently]]
+[[1day]]<span class="oneday">1 jour</span>[/1day]]
+[[days]]<span class="threedays">{last_login} jours</span>[/days]]
+[[3daysplus]]<span class="threedaysmore">&gt; 3 jours</span>[/3daysplus]]
+[[1weekplus]]<span class="oneweekmore">&gt; 1 semaine</span>[/1weekplus]]
+[[2weeksplus]]<span class="twoweeksmore">&gt; 2 semaines</span>[/2weeksplus]]
+</td>
+[/t]]
+</tr>
+[/player]]
+
+[[nav]]<tr class="nav"><td colspan="4" align="left">Page {page_displayed}, Nations {page_first}-{page_last}. Aller à
+[[p]]&nbsp;[[link]]<a href="?start={page_link}[[search_params]]&a={param_a}&n={param_n}[/search_params]]&col={sort_column}[[reversed]]&r=1[/reversed]]">[/link]][[selected]]<span class="selected">[/selected]]{page_id}[[selected]]</span>[/selected]][[link]]</a>[/link]][/p]].
+</td>
+</tr>[/nav]]
+</table>
