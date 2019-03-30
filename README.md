@@ -83,9 +83,11 @@ A partir de ce moment, vous pouvez vous connecter à votre serveur sur http://ww
 
 
 # Jobs
-Ouvrez les taches planifiées de Windows `%windir%\system32\taskschd.msc /s` et importez les fichiers .xml présents dans "C:\Exile\jobs".
+Des tâches s'exécutent en permanence pour terminer la construction des bâtiments, l'arrivée des flottes, les différents événements du jeu, etc.  
+Ouvrez les tâches planifiées de Windows `%windir%\system32\taskschd.msc /s` et importez les fichiers .xml présents dans "C:\Exile\jobs".
 
 Sur chaque tâche importée, dans la page "General", cochez "Run whether user is logged in or not"
+Démarrez ensuite les tâches "battles", "events" et "update".
 
 # Https
 Dans IIS, sur chaque site, ajoutez les liaisons https.
