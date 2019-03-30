@@ -63,7 +63,7 @@ Créez 2 nouveaux sites web :
  
 Allez dans la page des pools d'application puis modifiez les paramètres avancés suivant dans chaque pool correspondant aux sites créés précédemment : 
  - .NET Clr version : no managed code
- - Application 32bits : true
+ - Enable 32-Bits Applications : true
  - Managed Pipeline Mode : classic
  
 Ouvrez le site "www.monexile.lan", allez dans la fonctionnalité "ASP" puis modifiez la ligne Script Language de "VBScript" à "JScript", Apply
