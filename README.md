@@ -62,7 +62,7 @@ Créez 2 nouveaux sites web :
  - "s03.monexile.lan" avec comme chemin physique "C:\Exile\web-game" et "s03.monexile.lan" comme nom d'hote
  
 Allez dans la page des pools d'application puis modifiez les paramètres avancés suivant dans chaque pool correspondant aux sites créés précédemment : 
- - .NET Clr version : no managed code
+ - .NET CLR version : no managed code
  - Enable 32-Bits Applications : true
  - Managed Pipeline Mode : classic
  
