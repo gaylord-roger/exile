@@ -70,5 +70,15 @@ A partir de ce moment, vous pouvez vous connecter à votre serveur sur http://ww
 
 
 # Jobs
+Ouvrez les taches planifiées de Windows et importez les fichiers .xml.
+Sur chaque tâche importée, sur la page "General", cochez "Run whether user is logged in or not"
+
 # Https
+Dans IIS, sur chaque site, ajoutez les liaisons https.
+Ouvrez le port 443 dans le parefeu si besoin.
+Dans la base de données exile, modifiez l'entrée de l'univers dans exile_nexus.universes et spécifiez le schéma https:// dans le champ "url"
+Dans "C:\Exile\web-game\lib\config.asp", modifiez urlNexus pour pointer sur l'url en https
+
 # Accès depuis internet
+
+# Notes
