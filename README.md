@@ -1,14 +1,22 @@
 # Exile
 Dans ce guide, nous allons installer Exile sur une nouvelle installation Windows serveur. Vous aurez votre propre serveur pour tester et jouer en local.
- 
-# Serveur SMTP
+
+# Préparation
+## Repository
+Commencez par récupérer le repository sur le serveur web de 2 manières :
+* Depuis le bouton vert "Clone or download" de Github, vous téléchargerez un zip de la dernière version
+* Depuis git avec la commande `git clone https://github.com/gaylord-roger/exile.git C:/Exile`
+
+Pour la suite de la procédure d'installation, on considèrera que vous avez tout récupéré dans C:\Exile
+
+## Serveur SMTP (optionnel)
 Vous avez besoin d'un relais pour envoyer les emails d'inscriptions, modification de mot de passe oublié, et les notifications du jeu.
 
-Vous pouvez utiliser le relais SMTP de votre FAI, installer un hMailServer ou postfix.
+Vous pouvez utiliser le relais SMTP de votre FAI, installer un hMailServer, postfix ou tout autre serveur mail.
 
-Configurez votre serveur mail dans le fichier C:\Exile\web-nexus\lib\Email.asp
+Configurez votre serveur mail dans le fichier "C:\Exile\web-nexus\lib\Email.asp"
 
-# Postgresql
+## Postgresql
 Installez la dernière version de postgresql (v11) depuis https://www.postgresql.org/
 
 Laissez toutes les options d'installation cochées puis finissez l'installation.
@@ -17,14 +25,7 @@ StackBuilder va se lancer, installez les pilotes pgsqlODBC (32 bits) : nous avon
 
 Alternative : vous pouvez installer postgresql sur une installation linux, vous devrez cependant installer les pilotes pgsqlODBC sur le serveur web et modifier toutes les entrées référençant le serveur par le nom ou l'adresse IP de votre postgresql
 
-# Repository
-Vous pouvez récupérer le repository sur le serveur web de 2 manières :
-* Depuis le bouton vert "Clone or download" de Github, vous téléchargerez un zip de la dernière version
-* Depuis git avec la commande `git clone https://github.com/gaylord-roger/exile.git C:/Exile`
-
-Pour la suite de la procédure d'installation, on considèrera que vous avez tout récupéré dans C:\Exile
-
-# COM+
+## COM+
 Le site et les scripts nécessitent l'installation d'objets COM+ 32bits gérant les templates et les combats.
 
 Installez les objets COM+ en exécutant `c:\Exile\libs\reg.bat`. Des boites de dialogue Windows apparaîtront, cliquez sur ok.
@@ -72,8 +73,6 @@ Ouvrez le site "www.monexile.lan", allez dans la fonctionnalité "ASP" puis modi
 
 Pour chaque site, allez dans la fonctionnalité "ASP" puis modifiez la ligne "Debugging Properties/Send Errors To Browser" à True, Apply
 
-# Email
-Pour configurer le serveur d'envoie de mail, modifiez le fichier "C:\Exile\web-nexus\lib\Email.asp"
 
 # DNS local
 Ouvrez le fichier "C:\Windows\System32\drivers\etc\hosts" en tant qu'administrateur et ajoutez ces 2 lignes à la fin :
@@ -86,9 +85,9 @@ A partir de ce moment, vous pouvez vous connecter à votre serveur sur http://ww
 
 
 # Jobs
-Ouvrez les taches planifiées de Windows et importez les fichiers .xml.
+Ouvrez les taches planifiées de Windows `%windir%\system32\taskschd.msc /s` et importez les fichiers .xml présents dans "C:\Exile\jobs".
 
-Sur chaque tâche importée, sur la page "General", cochez "Run whether user is logged in or not"
+Sur chaque tâche importée, dans la page "General", cochez "Run whether user is logged in or not"
 
 # Https
 Dans IIS, sur chaque site, ajoutez les liaisons https.
