@@ -3,7 +3,7 @@
 <%
 
 // check that the query comes from an authorized server address
-var authorizedList = ['127.0.0.1', '10.0.0.116', '10.0.0.119', '87.98.200.116', '87.98.200.117', '87.98.200.119'];
+var authorizedList = ['127.0.0.1'];
 var address = Request.ServerVariables("REMOTE_ADDR");
 var authorized = false;
 for(var i=0; i<authorizedList.length; i++)
