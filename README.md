@@ -22,7 +22,7 @@ StackBuilder va se lancer, installez les pilotes pgsqlODBC (32 bits) : nous avon
 
 Alternative : vous pouvez installer postgresql sur une installation linux, vous devrez cependant installer les pilotes pgsqlODBC sur le serveur web et modifier toutes les entrées référençant le serveur par le nom ou l'adresse IP de votre postgresql
 
-## COM+
+## COM
 Le site et les scripts nécessitent l'installation d'objets COM+ 32bits gérant les templates et les combats.
 
 Installez les objets COM+ en exécutant `c:\Exile\libs\reg.bat`. Des boites de dialogue Windows apparaîtront, cliquez sur ok.
@@ -70,7 +70,6 @@ Ouvrez le site "www.monexile.lan", allez dans la fonctionnalité "ASP" puis modi
 
 Pour chaque site, allez dans la fonctionnalité "ASP" puis modifiez la ligne "Debugging Properties/Send Errors To Browser" à True, Apply
 
-
 # DNS local
 Ouvrez le fichier "C:\Windows\System32\drivers\etc\hosts" en tant qu'administrateur et ajoutez ces 2 lignes à la fin :
 ```
@@ -86,7 +85,7 @@ A partir de ce moment, vous pouvez vous connecter à votre serveur sur http://ww
 Des tâches s'exécutent en permanence pour terminer la construction des bâtiments, l'arrivée des flottes, les différents événements du jeu, etc.  
 Ouvrez les tâches planifiées de Windows `%windir%\system32\taskschd.msc /s` et importez les fichiers .xml présents dans "C:\Exile\jobs".
 
-Sur chaque tâche importée, dans la page "General", cochez "Run whether user is logged in or not"
+Sur chaque tâche importée, dans la page "General", cochez "Run whether user is logged in or not"  
 Démarrez ensuite les tâches "battles", "events" et "update".
 
 # Https
@@ -98,3 +97,8 @@ Dans la base de données exile, modifiez l'entrée de l'univers dans exile_nexus
 
 Dans "C:\Exile\web-game\lib\config.asp", modifiez urlNexus pour pointer sur l'url en https
 
+# Accès internet
+Modifiez les noms et adresses hôtes de vos serveurs web dans IIS.  
+Ouvrez C:\Exile/web-nexus\authenticate.asp et rajoutez l'adresse IP de votre serveur.  
+Installez [win-acme](https://github.com/PKISharp/win-acme) pour générer les certificats SSL et configurer les liaisons https de IIS.  
+Editez les lignes de la table exile_nexus.universes pour mettre à jour le champ url de votre serveur s03
