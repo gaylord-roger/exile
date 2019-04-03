@@ -1,5 +1,6 @@
 # Exile
-Dans ce guide, nous allons installer Exile sur une nouvelle installation Windows serveur. Vous aurez votre propre serveur pour tester et jouer en local.
+Dans ce guide, nous allons installer Exile sur une nouvelle installation Windows serveur. Vous aurez votre propre serveur pour tester et jouer en local.  
+*Attention, il est important d'installer Windows Serveur en anglais/américain (en-US).*
 
 # Préparation
 Commencez par récupérer le repository sur le serveur web. Vous pouvez le faire de 2 manières :
