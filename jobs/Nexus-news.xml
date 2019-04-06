@@ -43,7 +43,7 @@
   <Actions Context="Author">
     <Exec>
       <Command>c:\windows\syswow64\cscript.exe</Command>
-      <Arguments>C:\exile\jobs\bin\nexus_news.vbs</Arguments>
+      <Arguments>C:\exile\jobs\bin\nexus-news.vbs</Arguments>
       <WorkingDirectory>C:\exile\jobs\bin\</WorkingDirectory>
     </Exec>
   </Actions>
