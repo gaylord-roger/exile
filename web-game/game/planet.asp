@@ -188,7 +188,7 @@ sub DisplayPlanet()
 
 
 	' list the fleets near the planet
-	query = "SELECT id, name, attackonsight, engaged, size, signature, commanderid, (SELECT name FROM commanders WHERE id=commanderid)," &_
+	query = "SELECT id, name, attackonsight, engaged, size, signature, commanderid, (SELECT name FROM commanders WHERE id=commanderid) as commandername," &_
 			" action, sp_relation(ownerid, " & UserId & ") AS relation, sp_get_user(ownerid) AS ownername" & _
 			" FROM fleets" & _
 			" WHERE action <> -1 AND action <> 1 AND planetid=" & CurrentPlanet &_
