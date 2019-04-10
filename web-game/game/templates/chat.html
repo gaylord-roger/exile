@@ -5,7 +5,7 @@ var chatDateTime = new Date({now:yyyy},{now:m}-1,{now:d },{now:h },{now:n },{now
 var pageLocation = location.href;
 
 var days=['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-var months=['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+var months=['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'];
 
 function formatDate(dt)
 {
@@ -80,7 +80,7 @@ function formatLine(author,line)
 			}
 		}
 
-		if(words[i].substr(0,7).toLowerCase() == 'https://')
+		if(words[i].substr(0,7).toLowerCase() == 'http://' || words[i].substr(0,8).toLowerCase() == 'https://')
 			words[i] = '<a href="'+words[i]+'" target=_blank>'+addWbr(words[i])+'</a>';
 		else
 			words[i] = addWbr(words[i]);
@@ -166,7 +166,7 @@ Chat.prototype = {
 	},
 
 	close: function() {
-		if(!confirm('Êtes-vous sûr de vouloir fermer le salon ' + this.name + ' ?')) return;
+		if(!confirm('ÃŠtes-vous sÃ»r de vouloir fermer le salon ' + this.name + ' ?')) return;
 
 		this.setInactive();
 
@@ -375,7 +375,7 @@ Chat.prototype = {
 					} catch(e) {
 						//window.location.reload(true);
 						try {
-							c.addLine('', '', null, ':Erreur lors de la réception des données: "' + e.message + '"');
+							c.addLine('', '', null, ':Erreur lors de la rÃ©ception des donnÃ©es: "' + e.message + '"');
 						} catch(e) {
 						}
 					}
@@ -479,7 +479,7 @@ function joinChat2(name,pass) {
 
 	for(var x in chatlist)
 		if(chatlist[x] && chatlist[x].id > 0 && (chatlist[x].name.toLowerCase() == name.toLowerCase())) {
-			alert('Vous êtes déjà sur ce salon.');
+			alert('Vous Ãªtes dÃ©jÃ  sur ce salon.');
 			return;
 		}
 
